@@ -34,12 +34,10 @@ public class UserDaoImpl implements UserDao{
     @Override
     public void updateUser(Long id, User user) {
 
-        // Retrieve the persistent customer from the database using the provided id
         Optional <User> optUser = repository.findById(id);
         User existingUser = optUser.orElse(null);
 
         if (existingUser != null) {
-            // Update user properties...
             existingUser.setFullName(user.getFullName());
             existingUser.setUserName(user.getUserName());
             existingUser.setPassword(user.getPassword());
@@ -54,21 +52,18 @@ public class UserDaoImpl implements UserDao{
     @Override
     public void deleteUser(long id) {
 
-        // Retrieve the persistent customer from the database using the provided id
         Optional <User> optUser = repository.findById(id);
         User userToDelete = optUser.orElse(null);
 
-        // Check if the customer exists before deleting
         if (userToDelete != null) {
-            // Delete the customer from the database
             repository.delete(userToDelete);
         }
     }
 
     @Override
-    public List<User> findAllUser() {
-                List <User> existingUser = repository.findAll();
-                return existingUser;
+    public List <User> findAllUser() {
 
+        List <User> existingUser = repository.findAll();
+        return existingUser;
     }
 }
