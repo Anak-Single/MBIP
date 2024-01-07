@@ -32,7 +32,7 @@ public class WaterData {
     private LocalDateTime updateTime;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "UserId", nullable = false)
     private User user;
 
     // Default Constructor

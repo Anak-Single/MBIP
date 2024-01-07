@@ -18,6 +18,14 @@ public class WaterDao{
         this.repository = repository;
     }
 
+    //find all Water data
+    public List <WaterData> findAllData()
+    {
+        List <WaterData> data = repository.findAll();
+        return data;
+    }
+
+    //find Water data by their id
     public WaterData findBillsByUserId(Long id)
     {
         Optional <WaterData> optData = repository.findById(id);
@@ -26,11 +34,20 @@ public class WaterDao{
         return data;
     }
 
+    //find All Water data based on User Id
+    public List <WaterData> findDataByUserId(Long userId)
+    {
+        List <WaterData> data = repository.findAllByUserId(userId);
+        return data;
+    }
+
+    //save data
     public void saveData(WaterData data)
     {
         repository.save(data);
     }
 
+    //update data
     public void updateData(Long id, WaterData data)
     {
         Optional <WaterData> optData = repository.findById(id);
@@ -47,6 +64,7 @@ public class WaterDao{
         }
     }
 
+    //delete data
     public void deleteData(Long id)
     {
         Optional <WaterData> optData = repository.findById(id);
@@ -55,12 +73,5 @@ public class WaterDao{
         if (oldData != null) {
             repository.delete(oldData);
         }
-    }
-
-    public List <WaterData> findAllData()
-    {
-        List <WaterData> data = repository.findAll();
-        return data;
-    }
-    
+    }    
 }

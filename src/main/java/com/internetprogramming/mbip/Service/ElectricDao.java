@@ -18,7 +18,15 @@ public class ElectricDao{
         this.repository = repository;
     }
 
-    public ElectricData findBillsByUserId(Long id)
+    //find all Electric bills
+    public List <ElectricData> findAllData()
+    {
+        List <ElectricData> data = repository.findAll();
+        return data;
+    }
+
+    //find Electric bills by their id
+    public ElectricData findBillsById(Long id)
     {
         Optional <ElectricData> optData = repository.findById(id);
         ElectricData data = optData.orElse(null);
@@ -26,11 +34,20 @@ public class ElectricDao{
         return data;
     }
 
+    //find all Electric bills based on User id
+    public List <ElectricData> findBillsByUserId(Long userId)
+    {
+        List <ElectricData> data = repository.findAllByUserId(userId);
+        return data;
+    }
+
+    //save data
     public void saveData(ElectricData data)
     {
         repository.save(data);
     }
 
+    //update data
     public void updateData(Long id, ElectricData data)
     {
         Optional <ElectricData> optData = repository.findById(id);
@@ -47,6 +64,7 @@ public class ElectricDao{
         }
     }
 
+    //delete data
     public void deleteData(Long id)
     {
         Optional <ElectricData> optData = repository.findById(id);
@@ -55,12 +73,5 @@ public class ElectricDao{
         if (oldData != null) {
             repository.delete(oldData);
         }
-    }
-
-    public List <ElectricData> findAllData()
-    {
-        List <ElectricData> data = repository.findAll();
-        return data;
-    }
-    
+    }    
 }
