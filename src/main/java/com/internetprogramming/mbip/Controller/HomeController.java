@@ -4,7 +4,7 @@ import jakarta.annotation.Resource;
 
 import com.internetprogramming.mbip.Entity.HomeArea;
 import com.internetprogramming.mbip.Entity.User;
-import com.internetprogramming.mbip.Service.UserDaoImpl;
+import com.internetprogramming.mbip.Service.UserDao;
 
 //import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
-    @Resource(name = "userDaoImpl")
-	private UserDaoImpl userDaoHib;
+    @Resource(name = "userDao")
+	private UserDao userDao;
 
     @GetMapping("/")
     public String index() {
@@ -46,7 +46,7 @@ public class HomeController {
         User user = new User(username, password,  fullname, age, homeaddress, enumhome);
 
         //Sini kena extract table Customer from database
-		List <User> userArray = userDaoHib.findAllUser();
+		List <User> userArray = userDao.findAllUser();
 		
 		for(User tempUser : userArray)
 		{
@@ -55,7 +55,7 @@ public class HomeController {
 				return "Auth/loginfail";
 			}
 		}
-		userDaoHib.saveUser(user);
+		userDao.saveUser(user);
         return "Auth/Login";
     }
 
@@ -65,7 +65,7 @@ public class HomeController {
 						          @RequestParam("password") String password)
     {
         //Sini kena extract table Customer from database
-        List <User> userArray = userDaoHib.findAllUser();
+        List <User> userArray = userDao.findAllUser();
         
         for(User user : userArray)
         {

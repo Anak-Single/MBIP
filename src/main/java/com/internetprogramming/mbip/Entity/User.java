@@ -1,12 +1,15 @@
 package com.internetprogramming.mbip.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.util.List;
 
 @Entity
 @Table(name = "User")
@@ -33,6 +36,18 @@ public class User {
     
     @Column(name = "homearea")
     private String homeArea;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <ElectricData> electricData;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <WaterData> waterData;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <OilData> oilData;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <OilData> rubbishData;
 
     // Default Constructor
     public User(){}
