@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pilih Utiliti</title>
+
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="Masukkandata.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/lamanUtama">Laman Utama</a>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/masukkanData">Masukkan Data</a>
+        <a href="/profile">Profil</a>
+    </div>
+    <div class="section">
+        <div class="content">
+            <h2>Pilih jenis utiliti :</h2>
+            <div class = "utiliti">
+                <div class = "air" href="/masukkanData/air">
+                    <p><b>Bil Air</b></p>
+                </div>
+                <div class = "elektrik" href="/masukkanData/elektrik">
+                    <p><b>Bil Elektrik</b></p>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</body>
+</html>

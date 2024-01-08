@@ -82,14 +82,14 @@ public class HomeController {
         return "Auth/loginfail";
     }
 
+    @GetMapping("/lamanUtama")
+    public String lamanUtama() {
+        return "lamanUtama";
+    }
+
     @GetMapping("/petaKarbon")
     public String petaKarbon() {
         return "petaKarbon";
-    }
-
-    @GetMapping("/masukkanData")
-    public String masukkanData() {
-        return "masukkanData";
     }
 
     @GetMapping("/profile")
