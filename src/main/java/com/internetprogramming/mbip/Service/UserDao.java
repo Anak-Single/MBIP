@@ -37,6 +37,10 @@ public class UserDao implements UserDetailsService{
         return user;
     }
 
+    public User findByUserName(String userName) {
+        return repository.findByUserName(userName);
+    }
+
     public void saveUser(User user) {
         repository.save(user);
     }

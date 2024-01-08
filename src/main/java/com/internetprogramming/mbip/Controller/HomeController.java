@@ -105,8 +105,4 @@ public class HomeController {
         return "masukkanData";
     }
 
-    @GetMapping("/profile")
-    public String profile() {
-        return "profile";
-    }
 }
