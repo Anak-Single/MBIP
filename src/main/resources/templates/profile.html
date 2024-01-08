@@ -7,14 +7,52 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="/">Laman Utama</a>
+        <a href="/utama">Laman Utama</a>
         <a href="/petaKarbon">Peta Karbon</a>
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
     </div>
     <div class="section">
         <h1>Profil</h1>
-        <p>This is the Profil page content.</p>
+        <h2>User Profile</h2>
+
+        <div th:if="${successMessage}" class="alert alert-success">
+            <p th:text="${successMessage}"></p>
+        </div>
+        <div th:if="${errorMessage}" class="alert alert-danger">
+            <p th:text="${errorMessage}"></p>
+        </div>
+
+        <form th:object="${user}" th:action="@{/profile/save}" method="post">
+            <input type="hidden" th:field="*{id}" readonly="readonly" th:value="${user.id}" />
+            <div>
+                <label>Full Name:</label>
+                <input type="text" th:field="*{fullName}" readonly="readonly" th:value="${user.fullName}" />
+            </div>
+            <div>
+                <label>Username:</label>
+                <input type="text" th:field="*{userName}" readonly="readonly" th:value="${user.userName}" />
+            </div>
+
+            <input type="hidden" th:field="*{password}" readonly="readonly" th:value="${user.password}" />
+            
+            <div>
+                <label>Age:</label>
+                <input type="number" th:field="*{age}" th:value="${user.age}" />
+            </div>
+            <div>
+                <label>Home Address:</label>
+                <input type="text" th:field="*{homeAddress}" th:value="${user.homeAddress}" />
+            </div>
+            <div>
+                <label>Home Area:</label>
+                <input type="text" th:field="*{homeArea}" th:value="${user.homeArea}" />
+            </div>
+            <div>
+                <button type="submit">Save</button>
+            </div>
+        </form>
+
     </div>
 </body>
 </html>

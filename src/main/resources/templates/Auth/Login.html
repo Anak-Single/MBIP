@@ -1,29 +1,99 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="UTF-8">
 <title>Login</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: url("/static/images/bg1.jpg") no-repeat center center; 
+        background-size: cover;
+    }
+
+    .login-box {
+        width: 350px;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .login-header img {
+        max-width: 100px;
+        margin: 0 10px;
+    }
+
+    .login-form input[type=text],
+    .login-form input[type=password] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+    }
+
+    .login-form input[type=submit] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border: none;
+        border-radius: 3px;
+        background-color: #5cb85c;
+        color: white;
+        cursor: pointer;
+    }
+
+    .login-form input[type=submit]:hover {
+        background-color: #4cae4c;
+    }
+</style>
 </head>
 <body>
-	<h1>Login Form</h1>
-	
-	<p th:if="${errormessage != null}" th:text="${errormessage}"></p>
 
-    <form action="authentication" method="post">
+<div class="login-container">
+    <div class="login-box">
+        <div class="login-header">
+            <img th:src="@{/images/LCIMS.png}" />
+            <img src="" alt="Logo2"> 
+        </div>
 
-        <label for="username">Username: </label>
-        <input type="text" id="username" name="username">
-        
-        </br></br>
-        <label for="password">Password: </label>
-        <input type="password" id="password" name="password">
-        
-		</br></br></br>
-		<input type = "submit" value = "   Login  ">
-	</form>
-	
-	<form action="registerform" method="get">
-  		<input type = "submit" value = "Register">
-	</form>
+        <div class="login-form">
+            <h1>Login Form</h1>
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                Anda telah Daftar Keluar.
+            </div>
+
+            <form th:action="@{/process-login}" method="post">
+                <label for="username">Username: </label>
+                <input type="text" id="username" name="username">
+                
+                <label for="password">Password: </label>
+                <input type="password" id="password" name="password">
+                
+                <input type="submit" value="Login">
+            </form>
+            
+            <form action="registerform" method="get">
+                <input type="submit" value="Register">
+            </form>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

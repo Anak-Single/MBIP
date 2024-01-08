@@ -1,17 +1,30 @@
 package com.internetprogramming.mbip.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.internetprogramming.mbip.Entity.User;
 import com.internetprogramming.mbip.Repository.UserRepository;
 
 @Service
-public class UserDao{
+public class UserDao implements UserDetailsService{
 
     private UserRepository repository;
+
+     @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = repository.findByUserName(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
+        }
+        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(), new ArrayList<>());
+    }
 
     public UserDao(UserRepository repository)
     {
@@ -22,6 +35,10 @@ public class UserDao{
         Optional <User> optUser = repository.findById(id);
         User user = optUser.orElse(null);
         return user;
+    }
+
+    public User findByUserName(String userName) {
+        return repository.findByUserName(userName);
     }
 
     public void saveUser(User user) {
