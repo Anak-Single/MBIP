@@ -7,9 +7,14 @@
 <body>
 	<h1>Login Form</h1>
 	
-	<p th:if="${errormessage != null}" th:text="${errormessage}"></p>
+	<div th:if="${param.error}">
+        Invalid username and password.
+    </div>
+    <div th:if="${param.logout}">
+        You have been logged out.
+    </div>
 
-    <form action="authentication" method="post">
+    <form th:action="@{/process-login}" method="post">
 
         <label for="username">Username: </label>
         <input type="text" id="username" name="username">
