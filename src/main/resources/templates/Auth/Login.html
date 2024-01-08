@@ -7,7 +7,9 @@
 <body>
 	<h1>Login Form</h1>
 	
-	<p th:if="${errormessage != null}" th:text="${errormessage}"></p>
+	<div th:if="${errorMessage}" class="alert alert-danger">
+        <p th:text="${errorMessage}"></p>
+    </div>
 
     <form action="authentication" method="post">
 

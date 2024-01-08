@@ -28,6 +28,11 @@ public class HomeController {
         return "Auth/Login";
     }
 
+    @GetMapping("/utama")
+    public String utama() {
+        return "Utama";
+    }
+
     @GetMapping("/registerform")
     public String registerform() {
         return "Auth/Register";
@@ -73,13 +78,15 @@ public class HomeController {
             {
                 if(password.equals(user.getPassword()))
                 {
-                    return "petaKarbon";
+                    return "Utama";
                 }
                 else
-                    return "Auth/loginfail";
+                model.addAttribute("errorMessage", "Incorrect Username or Password");
+                return "Auth/login";
             }
         }
-        return "Auth/loginfail";
+        model.addAttribute("errorMessage", "Incorrect Username or Password");
+        return "Auth/login";
     }
 
     @GetMapping("/petaKarbon")
