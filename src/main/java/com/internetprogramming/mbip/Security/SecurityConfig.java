@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -21,9 +23,14 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         )
         .formLogin(form -> form
             .loginPage("/")
+            .loginProcessingUrl("/process-login")
+            .failureUrl("/login?error=true")
             .permitAll().defaultSuccessUrl("/utama", true)
         )
-        .logout(logout -> logout.permitAll());
+        .logout(logout -> logout
+          .logoutSuccessUrl("/login?logout=true")
+          .invalidateHttpSession(true).
+          permitAll());
     
     return http.build();
 }
@@ -31,6 +38,11 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers("/ignore1", "/ignore2");
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
     

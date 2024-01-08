@@ -9,6 +9,8 @@ import com.internetprogramming.mbip.Service.UserDao;
 //import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Resource(name = "userDao")
 	private UserDao userDao;
@@ -60,11 +65,12 @@ public class HomeController {
 				return "Auth/loginfail";
 			}
 		}
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userDao.saveUser(user);
         return "Auth/Login";
     }
 
-    @PostMapping("/authentication")
+    /* @PostMapping("/authentication")
     public String authentication( Model model,
                                   @RequestParam("username") String username,
 						          @RequestParam("password") String password)
@@ -87,7 +93,7 @@ public class HomeController {
         }
         model.addAttribute("errorMessage", "Incorrect Username or Password");
         return "Auth/login";
-    }
+    } */
 
     @GetMapping("/petaKarbon")
     public String petaKarbon() {
