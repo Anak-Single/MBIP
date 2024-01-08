@@ -4,6 +4,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import com.internetprogramming.mbip.Service.UserDao;
+import com.internetprogramming.mbip.Service.WaterDao;
+
+import jakarta.annotation.Resource;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -11,8 +17,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 @RequestMapping("/masukkanData")
 public class MasukDataController {
 
+    @Resource(name = "userDao")
+	private UserDao userDao;
+
+    @Resource(name = "waterDao")
+	private WaterDao waterDao;
+
     @GetMapping("/")
     public String masukkanData() {
+        //this.userDao = 
         return "MasukkanData/masukkanData";
     }
 
@@ -48,8 +61,10 @@ public class MasukDataController {
 
     @PostMapping("/muatnaikbilair")
     public String muatNaikBilAir(@RequestParam("billID") String billID,
-                                 @RequestParam("tarikhBill") String tarikhBill)
+                                 @RequestParam("tarikhBill") String tarikhBill,
+                                 @RequestParam("billAmount") Double billAmount)
     {
+
         return "MasukkanData/Air";
     }
 }
