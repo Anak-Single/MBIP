@@ -1,10 +1,51 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Peta Karbon</title>
     <link rel="stylesheet" href="navbar.css">
+
+    <style>
+        .box {
+            width: max-content;
+            height: 300px;
+            padding: 20px;
+            border: 2px solid black;
+            margin: 20px;
+            text-align: center;
+            background-color: rgb(112, 173, 76);
+            border-radius: 15px;
+        }
+
+        .flex-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            flex-direction: row;
+            margin: 20px;
+
+        }
+
+        button {
+
+            border: 1px solid black;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            font-size: 16px;
+            margin: 15px;
+            cursor: pointer;
+            flex-direction: row;
+            border-radius: 10px;
+            width: 170px;
+        }
+
+    </style>
 </head>
+
 <body>
     <div class="navbar">
         <a href="/utama">Laman Utama</a>
@@ -16,6 +57,24 @@
     <div class="section">
         <h1>Peta Karbon</h1>
         <p>This is the Peta Karbon page content.</p>
+        <div class="flex-container">
+            <p><iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90251.34839580668!2d103.61376090675637!3d1.4253617869019526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0c6d922590e1%3A0x1fa40aaceb8992d2!2sIskandar%20Puteri%2C%20Johor!5e0!3m2!1sen!2smy!4v1704267118758!5m2!1sen!2smy"
+                    width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </p>
+            <div class="box">
+                <button class="button">Kira Jejak Karbon</button>
+                <button class="button">Peta Karbon</button>
+                <h2>Dikemaskini: </h2>
+
+                <p>155 hari</p>
+                <p>43 jam</p>
+                <p>32 minit</p>
+
+            </div>
+        </div>
     </div>
 </body>
+
 </html>
