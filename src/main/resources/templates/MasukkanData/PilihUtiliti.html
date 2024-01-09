@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pilih Utiliti</title>
+
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="Masukkandata.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/utama">Laman Utama</a>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/masukkanData">Masukkan Data</a>
+        <a href="/profile">Profil</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
+    </div>
+    <div class="section">
+        <div class="content">
+            <h2>Pilih jenis utiliti :</h2>
+            <div class = "utiliti">
+                <a href="/masukkanData/air">
+                    <div class = "air">
+                        <p><b>Bil Air</b></p>
+                    </div>
+                </a>
+                <a href = "/masukkanData/elektrik">
+                    <div class = "elektrik">
+                        <p><b>Bil Elektrik</b></p>
+                    </div>
+                </a> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>

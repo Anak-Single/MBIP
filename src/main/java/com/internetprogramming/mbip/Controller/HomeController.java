@@ -95,14 +95,24 @@ public class HomeController {
         return "Auth/login";
     } */
 
+    @GetMapping("/lamanUtama")
+    public String lamanUtama() {
+        return "lamanUtama";
+    }
+
     @GetMapping("/petaKarbon")
     public String petaKarbon() {
         return "petaKarbon";
     }
 
-    @GetMapping("/masukkanData")
-    public String masukkanData() {
-        return "masukkanData";
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
     }
 
+    @GetMapping("/masukkanData")
+    public String masukkanData()
+    {
+        return "masukkanData";
+    }
 }
