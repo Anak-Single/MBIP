@@ -4,12 +4,22 @@ import jakarta.annotation.Resource;
 
 import com.internetprogramming.mbip.Entity.HomeArea;
 import com.internetprogramming.mbip.Entity.User;
+import com.internetprogramming.mbip.Entity.RubbishData;
+import com.internetprogramming.mbip.Entity.OilData;
+import com.internetprogramming.mbip.Entity.WaterData;
+import com.internetprogramming.mbip.Entity.ElectricData;
+import com.internetprogramming.mbip.Service.RubbishDao;
+import com.internetprogramming.mbip.Service.OilDao;
+import com.internetprogramming.mbip.Service.WaterDao;
+import com.internetprogramming.mbip.Service.ElectricDao;
 import com.internetprogramming.mbip.Service.UserDao;
+import com.mysql.cj.protocol.Security;
 
 //import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +34,19 @@ public class HomeController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RubbishDao rubbishDao;
+
+    @Autowired
+    private OilDao oilDao;
+
+    @Autowired
+    private WaterDao waterDao;
+
+    @Autowired
+    private ElectricDao electricDao;
+    
 
     @Resource(name = "userDao")
 	private UserDao userDao;
@@ -96,7 +119,60 @@ public class HomeController {
     } */
 
     @GetMapping("/petaKarbon")
-    public String petaKarbon() {
+    public String petaKarbon(Model model) {
+        // Retrieve userId based on the logged-in user's principal
+     
+       
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userDao.findByUserName(username);
+        // Assuming you want to get the weight of the latest RubbishData for the user
+        List<RubbishData> rubbishDataList = rubbishDao.findDataByUserId(user.getId());
+
+        if (!rubbishDataList.isEmpty()) {
+            RubbishData latestRubbishData = rubbishDataList.get(0); // Assuming the list is ordered by updateTime
+            double weight = latestRubbishData.getWeight();
+            model.addAttribute("weight", weight);
+        } else {
+            // Handle the case where no RubbishData is available for the user
+            model.addAttribute("weight", 0.0);
+        }
+
+         List<OilData> oilDataList = oilDao.findDataByUserId(user.getId());
+
+        if (!oilDataList.isEmpty()) {
+            OilData latestOilData = oilDataList.get(0); // Assuming the list is ordered by updateTime
+            double oilweight = latestOilData.getWeight();
+            model.addAttribute("oilweight", oilweight);
+        } else {
+            // Handle the case where no ElectricData is available for the user
+            model.addAttribute("oilweight", 0.0);
+        }
+
+        List<ElectricData> electricDataList = electricDao.findBillsByUserId(user.getId());
+
+        if (!electricDataList.isEmpty()) {
+            ElectricData latestElectricData = electricDataList.get(0); // Assuming the list is ordered by updateTime
+            double electricbill = latestElectricData.getBillAmount();
+            model.addAttribute("electricbill", electricbill);
+        } else {
+            // Handle the case where no ElectricData is available for the user
+            model.addAttribute("electricbill", 0.0);
+        }
+
+
+           List<WaterData> waterDataList = waterDao.findDataByUserId(user.getId());
+
+        if (!waterDataList.isEmpty()) {
+            WaterData latestWaterData = waterDataList.get(0); // Assuming the list is ordered by updateTime
+            double waterbill = latestWaterData.getBillAmount();
+            model.addAttribute("waterbill", waterbill);
+        } else {
+            // Handle the case where no ElectricData is available for the user
+            model.addAttribute("waterbill", 0.0);
+        }
+
+
         return "petaKarbon";
     }
 
