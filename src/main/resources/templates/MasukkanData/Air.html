@@ -9,10 +9,13 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="/lamanUtama">Laman Utama</a>
+        <a href="/utama">Laman Utama</a>
         <a href="/petaKarbon">Peta Karbon</a>
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     </div>
     <div class="section">
         <div class="content-header">
@@ -24,7 +27,7 @@
             </div>
             <div class = "content-body-muatnaik">
 
-                <form action="/masukkanData/muatnaikbilair" method="post">
+                <form action="/masukkanData/muatnaikbilair" method="get">
 
                     <label for="billID">Bil Id :</label>
                     <input type="text" id="billID" name="billID">
@@ -34,7 +37,7 @@
 
                     <label for="billAmount">Amaun bill :</label>
                     <input type="number" id="billAmount" name="billAmount">
-                    
+
                     <br>
                     <input type="submit" value="Upload">
                 </form>

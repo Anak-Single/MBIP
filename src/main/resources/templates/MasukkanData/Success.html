@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Pilih Sisa</title>
+    <title>Bil Air</title>
 
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="Masukkandata.css">
@@ -18,17 +18,18 @@
         </form>
     </div>
     <div class="section">
-        <div class="content">
-            <h1>Pilih jenis sisa :</h1>
-            <div class = "utiliti">
-                <div class = "sampah" href="/masukkanData/sampah">
-                    <p><b>Bil Sampah</b></p>
-                </div>
-                <div class = "minyak" href="/masukkanData/minyak">
-                    <p><b>Bil Minyak</b></p>
-                </div>
-                
-            </div>
+        <div class="content-header">
+            <h>Data Save Successfull</h>
+            
+            </br>
+            <p>Redirecting to Home page . . .</p>
+
+            <script>
+                setTimeout(function ()
+                {
+                    window.location.replace("masukkanData/pilihUtiliti");
+                }, 4000); // Redirect after 4 seconds
+            </script>    
         </div>
     </div>
 </body>

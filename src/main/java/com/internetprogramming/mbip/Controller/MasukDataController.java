@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.internetprogramming.mbip.Entity.WaterData;
 import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
 
@@ -23,7 +24,7 @@ public class MasukDataController {
     @Resource(name = "waterDao")
 	private WaterDao waterDao;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String masukkanData() {
         //this.userDao = 
         return "MasukkanData/masukkanData";
@@ -59,12 +60,14 @@ public class MasukDataController {
         return "MasukkanData/Minyak";
     }
 
-    @PostMapping("/muatnaikbilair")
+    @RequestMapping("/muatnaikbilair")
     public String muatNaikBilAir(@RequestParam("billID") String billID,
                                  @RequestParam("tarikhBill") String tarikhBill,
                                  @RequestParam("billAmount") Double billAmount)
     {
+        WaterData water = new WaterData(billID, tarikhBill, billAmount);
+        waterDao.saveData(water);
 
-        return "MasukkanData/Air";
+        return "MasukkanData/Success";
     }
 }

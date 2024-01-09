@@ -9,10 +9,13 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="/lamanUtama">Laman Utama</a>
+        <a href="/utama">Laman Utama</a>
         <a href="/petaKarbon">Peta Karbon</a>
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     </div>
     <div class="section">
         <div class="content">
@@ -36,12 +39,16 @@
                 </div>
             </div>
             <div class = "inputData">
-                <div class = "utiliti" href="/masukkanData/pilihUtiliti">
-                    <p><b>Muat naik bil Utiliti</b></p>
-                </div>
-                <div class = "sisa" href="/masukkanData/pilihSisa">
-                    <p><b>Masukkan berat sisa</b></p>
-                </div>
+                <a href="/masukkanData/pilihUtiliti">
+                    <div class = "utiliti">
+                        <p><b>Muat naik bil Utiliti</b></p>
+                    </div>
+                </a>
+                <a href="/masukkanData/pilihSisa">
+                    <div class = "sisa" >
+                        <p><b>Masukkan berat sisa</b></p>
+                    </div>
+                </a>
                 
             </div>
         </div>
