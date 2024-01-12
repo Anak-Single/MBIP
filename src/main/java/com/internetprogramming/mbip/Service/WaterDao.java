@@ -1,7 +1,10 @@
 package com.internetprogramming.mbip.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -41,6 +44,25 @@ public class WaterDao{
         return data;
     }
 
+    //categorize the data from user based on date
+    public Map<LocalDate, List<WaterData>> categorizeOrdersByDay(Long userId) {
+        List<WaterData> allData = repository.findAllByUserId(userId);
+
+        return allData.stream()
+                .collect(Collectors.groupingBy(WaterData::getCreationTime));
+    }
+
+    // New method to get a list of WaterData objects categorized by creation time
+    public List<WaterData> getCategorizedWaterData(Long userId) {
+        Map<LocalDate, List<WaterData>> categorizedDataMap = categorizeOrdersByDay(userId);
+
+        // Combine the lists from the map into a single list
+        return categorizedDataMap.values()
+                .stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
+
     //save data
     public void saveData(WaterData data)
     {
@@ -58,7 +80,6 @@ public class WaterDao{
             oldData.setBillID(data.getBillID());
             oldData.setBillDate(data.getBillDate());
             oldData.setBillAmount(data.getBillAmount());
-            oldData.setUpdateTime();
             
             repository.saveAndFlush(oldData);
         }
