@@ -48,10 +48,13 @@
 
 <body>
     <div class="navbar">
-        <a href="/">Laman Utama</a>
+        <a href="/utama">Laman Utama</a>
         <a href="/petaKarbon">Peta Karbon</a>
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     </div>
 
     <div class="section">

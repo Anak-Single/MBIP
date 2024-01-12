@@ -1,12 +1,16 @@
 package com.internetprogramming.mbip.Entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "User")
@@ -34,6 +38,24 @@ public class User {
     @Column(name = "homearea")
     private String homeArea;
 
+    @Column(name = "houseHold")
+    private int houseHold;
+
+    @Column(name = "creation_time")
+    private LocalDate creationTime;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <ElectricData> electricData;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <WaterData> waterData;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <OilData> oilData;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List <OilData> rubbishData;
+
     // Default Constructor
     public User(){}
 
@@ -44,7 +66,9 @@ public class User {
         this.password = password;
         this.age = age;
         this.homeAddress = homeAddress;
+        this.houseHold = 1;
         this.homeArea = homeArea.getDisplayName();
+        this.creationTime = LocalDate.now();
     }
 
     // Getters
@@ -76,7 +100,14 @@ public class User {
 	{
         return homeArea;
     }
-
+    public int getHouseHold()
+	{
+        return houseHold;
+    }
+    public LocalDate getCreationTime()
+    {
+        return creationTime;
+    }
     public String getAddress()
 	{
         return homeAddress + " " + homeArea;
@@ -107,5 +138,9 @@ public class User {
 	{
 		this.homeArea = homeArea;
 	}
+    public void setHouseHold(int houseHold)
+	{
+        this.houseHold = houseHold;
+    }
 }
 

@@ -4,15 +4,15 @@ import jakarta.annotation.Resource;
 
 import com.internetprogramming.mbip.Entity.HomeArea;
 import com.internetprogramming.mbip.Entity.User;
-import com.internetprogramming.mbip.Service.UserDaoImpl;
+import com.internetprogramming.mbip.Service.UserDao;
 
 //import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 //import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,12 +20,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class HomeController {
 
-    @Resource(name = "userDaoImpl")
-	private UserDaoImpl userDaoHib;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Resource(name = "userDao")
+	private UserDao userDao;
 
     @GetMapping("/")
     public String index() {
         return "Auth/Login";
+    }
+
+    @GetMapping("/utama")
+    public String utama() {
+        return "Utama";
     }
 
     @GetMapping("/registerform")
@@ -46,7 +54,7 @@ public class HomeController {
         User user = new User(username, password,  fullname, age, homeaddress, enumhome);
 
         //Sini kena extract table Customer from database
-		List <User> userArray = userDaoHib.findAllUser();
+		List <User> userArray = userDao.findAllUser();
 		
 		for(User tempUser : userArray)
 		{
@@ -55,17 +63,18 @@ public class HomeController {
 				return "Auth/loginfail";
 			}
 		}
-		userDaoHib.saveUser(user);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+		userDao.saveUser(user);
         return "Auth/Login";
     }
 
-    @PostMapping("/authentication")
+    /* @PostMapping("/authentication")
     public String authentication( Model model,
                                   @RequestParam("username") String username,
 						          @RequestParam("password") String password)
     {
         //Sini kena extract table Customer from database
-        List <User> userArray = userDaoHib.findAllUser();
+        List <User> userArray = userDao.findAllUser();
         
         for(User user : userArray)
         {
@@ -73,27 +82,24 @@ public class HomeController {
             {
                 if(password.equals(user.getPassword()))
                 {
-                    return "petaKarbon";
+                    return "Utama";
                 }
                 else
-                    return "Auth/loginfail";
+                model.addAttribute("errorMessage", "Incorrect Username or Password");
+                return "Auth/login";
             }
         }
-        return "Auth/loginfail";
+        model.addAttribute("errorMessage", "Incorrect Username or Password");
+        return "Auth/login";
+    } */
+
+    @GetMapping("/lamanUtama")
+    public String lamanUtama() {
+        return "lamanUtama";
     }
 
     @GetMapping("/petaKarbon")
     public String petaKarbon() {
         return "petaKarbon";
-    }
-
-    @GetMapping("/masukkanData")
-    public String masukkanData() {
-        return "masukkanData";
-    }
-
-    @GetMapping("/profile")
-    public String profile() {
-        return "profile";
     }
 }
