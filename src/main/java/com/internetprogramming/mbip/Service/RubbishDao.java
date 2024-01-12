@@ -57,7 +57,6 @@ public class RubbishDao
         {
             oldData.setType(data.getType());
             oldData.setWeight(data.getWeight());
-            oldData.setUpdateTime();
             
             repository.saveAndFlush(oldData);
         }

@@ -1,5 +1,6 @@
 package com.internetprogramming.mbip.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -19,14 +20,14 @@ public class OilData
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "Category")
-    private String category;
-
     @Column(name = "Weight")
     private double weight;
 
     @Column(name = "update_Time")
     private LocalDateTime updateTime;
+
+    @Column(name = "creation_time")
+    private LocalDate creationTime;
 
     @ManyToOne
     @JoinColumn(name = "UserId", nullable = false)
@@ -35,34 +36,31 @@ public class OilData
     // Default Constructor
     public OilData(){}
 
-    public OilData(String category, double weight)
+    public OilData( double weight)
     {
-        this.category = category;
         this.weight = weight;
+        this.creationTime = LocalDate.now();
         this.updateTime = LocalDateTime.now();
     }
 
     //Getter
-    public String getCategory()
-    {
-        return category;
-    }
     public double getWeight() 
     {
         return weight;
     }
+    public LocalDate getCreationTime()
+    {
+        return creationTime;
+    }
     
     //Setter
-    public void setCategory(String category)
+    public void setUser(User user)
     {
-        this.category = category;
+        this.user = user;
     }
     public void setWeight(double weight)
     {
-        this.weight = weight;
-    }
-    public void setUpdateTime()
-    {
         this.updateTime = LocalDateTime.now();
+        this.weight = weight;
     }
 }
