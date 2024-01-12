@@ -58,7 +58,6 @@ public class ElectricDao{
             oldData.setBillID(data.getBillID());
             oldData.setBillDate(data.getBillDate());
             oldData.setBillAmount(data.getBillAmount());
-            oldData.setUpdateTime();
             
             repository.saveAndFlush(oldData);
         }

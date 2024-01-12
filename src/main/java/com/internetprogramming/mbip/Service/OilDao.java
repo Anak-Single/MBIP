@@ -55,9 +55,7 @@ public class OilDao{
 
         if (oldData != null)
         {
-            oldData.setCategory(data.getCategory());
             oldData.setWeight(data.getWeight());
-            oldData.setUpdateTime();
             
             repository.saveAndFlush(oldData);
         }

@@ -1,5 +1,6 @@
 package com.internetprogramming.mbip.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -28,6 +29,9 @@ public class RubbishData
     @Column(name = "update_Time")
     private LocalDateTime updateTime;
 
+    @Column(name = "creation_time")
+    private LocalDate creationTime;
+
     @ManyToOne
     @JoinColumn(name = "UserId", nullable = false)
     private User user;
@@ -39,7 +43,7 @@ public class RubbishData
     {
         this.type = type;
         this.weight = weight;
-        this.updateTime = LocalDateTime.now();
+        this.creationTime = LocalDate.now();
     }
 
     //Getter
@@ -53,16 +57,22 @@ public class RubbishData
     }
     
     //Setter
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
     public void setType(String type)
     {
+        this.updateTime = LocalDateTime.now();
         this.type = type;
     }
     public void setWeight(double weight)
     {
+        this.updateTime = LocalDateTime.now();
         this.weight = weight;
     }
-    public void setUpdateTime()
+    public LocalDate getCreationTime()
     {
-        this.updateTime = LocalDateTime.now();
+        return creationTime;
     }
 }

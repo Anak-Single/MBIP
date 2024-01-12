@@ -1,5 +1,6 @@
 package com.internetprogramming.mbip.Entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -31,6 +32,9 @@ public class WaterData {
     @Column(name = "update_Time")
     private LocalDateTime updateTime;
 
+    @Column(name = "creation_time")
+    private LocalDate creationTime;
+
     @ManyToOne
     @JoinColumn(name = "UserId", nullable = false)
     private User user;
@@ -43,6 +47,7 @@ public class WaterData {
         this.billID = billID;
         this.billDate = billDate;
         this.billAmount = billAmount;
+        this.creationTime = LocalDate.now();
         this.updateTime = LocalDateTime.now();
     }
 
@@ -63,23 +68,29 @@ public class WaterData {
     {
         return updateTime;
     }
+    public LocalDate getCreationTime()
+    {
+        return creationTime;
+    }
 
     //Setter
+    public void setUser(User user)
+    {
+        this.user = user;
+    }
     public void setBillID(String billID)
     {
+        this.updateTime = LocalDateTime.now();
         this.billID = billID;
     }
     public void setBillDate(String billDate)
     {
+        this.updateTime = LocalDateTime.now();
         this.billDate = billDate;
     }
     public void setBillAmount(double billAmount)
     {
+        this.updateTime = LocalDateTime.now();
         this.billAmount = billAmount;
     }
-    public void setUpdateTime()
-    {
-        this.updateTime = LocalDateTime.now();
-    }
-    
 }
