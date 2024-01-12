@@ -1,20 +1,126 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Profil</title>
-    <link rel="stylesheet" href="navbar.css">
+    <title>Profile</title>
+    <style>
+        body {
+            background-color: rgb(48, 206, 119);
+            font-family: Arial, sans-serif;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .profile-image-upload {
+            margin: 20px 0;
+        }
+
+        .profile-image-upload input[type="file"] {
+            display: none;
+        }
+
+        .profile-image-upload label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #009688;
+            color: white;
+            cursor: pointer;
+        }
+
+        .profile-image-upload img {
+            max-width: 200px;
+            height: auto;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            background-color: #009688;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .container {
+        display: flex;
+        flex-direction: column;
+        max-width: 300px;
+        }
+
+        label {
+            margin-top: 10px;
+        }
+
+        input[type="text"] {
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        button[type="submit"] {
+            align-self: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
-    <div class="navbar">
-        <a href="/">Laman Utama</a>
-        <a href="/petaKarbon">Peta Karbon</a>
-        <a href="/masukkanData">Masukkan Data</a>
-        <a href="/profile">Profil</a>
-    </div>
-    <div class="section">
-        <h1>Profil</h1>
-        <p>This is the Profil page content.</p>
+    <div class="profile-container">
+        <h1>Edit Profile</h1>
+        <div class="container">  
+            <label for="Nama">Nama Penuh:</label> 
+            <input type="text" id="Nama" name="Nama Penuh">
+            <br>
+            <label for="Emel">Emel:</label> 
+            <input type="email" id="Emel" name="Emel">
+            <br>
+            <label for="phone">Nombor telefon:</label>    
+            <input type="text" id="phone" name="phone">
+            <br>
+            <label for="status">Status Perkahwinan:</label>
+            <input type="text" id="status" name="status">
+            <br>
+            <label for="job">Pekerjaan:</label>
+            <input type="text" id="job" name="job">
+            <br>
+            <label for="instagram">Instagram:</label>
+            <input type="text" id="instagram" name="instagram">
+            <br>
+            <label for="type">Jenis Rumah:</label>
+            <input type="text" id="type" name="type">
+            <br>
+            <label for="address1">Alamat 1:</label>
+            <input type="text" id="address1" name="address1">
+            <br>
+            <label for="address2">Alamat 2:</label>
+            <input type="text" id="address2" name="address2">
+            <br>
+            <label for="postcode">Poskod:</label>
+            <input type="text" id="postcode" name="postcode">
+            <br>
+            <button type="submit">Simpan</button>
+        </div>
+
+
+            <div class="profile-image-upload">
+                <label for="profile-image">Choose Image</label>
+                <input type="file" name="profile-image" id="profile-image" accept="image/*">
+            </div>
+
+            <button type="submit">Update Profile</button>
+        </form>
     </div>
 </body>
 </html>
