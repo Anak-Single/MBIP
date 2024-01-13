@@ -153,6 +153,8 @@
     <div class="section">
         <div class="flex-container">
             <div class="container">
+
+
                 <p><iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90251.34839580668!2d103.61376090675637!3d1.4253617869019526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0c6d922590e1%3A0x1fa40aaceb8992d2!2sIskandar%20Puteri%2C%20Johor!5e0!3m2!1sen!2smy!4v1704267118758!5m2!1sen!2smy"
                         width="1200" height="600" style="border:0;" allowfullscreen="" loading="lazy"
@@ -167,13 +169,14 @@
                     <p>5 minit</p>
                 </div>
 
+
                 <div class="overlay" id="overlay"></div>
 
                 <!-- Popup div -->
                 <div class="popup" id="popup">
                     <form>
                         <label for="jumlahSampah">Jumlah Sampah:</label>
-                        <input type="text" id="jumlahSampah" name="jumlahSampah" placeholder="Enter amount" th:value="${weight}">
+                        <input type="text" id="jumlahSampah" name="jumlahSampah" placeholder="Enter amount" th:value="${totalWeightLimaKedai}">
                         <br>
                         <label for="minyakMasak">Minyak Masak:</label>
                         <input type="text" id="minyakMasak" name="minyakMasak" placeholder="Enter amount" th:value="${oilweight}">

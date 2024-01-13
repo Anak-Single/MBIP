@@ -12,6 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.internetprogramming.mbip.Entity.WaterData;
 import com.internetprogramming.mbip.Entity.ElectricData;
+import com.internetprogramming.mbip.Entity.HomeArea;
 import com.internetprogramming.mbip.Entity.OilData;
 import com.internetprogramming.mbip.Entity.RubbishData;
 import com.internetprogramming.mbip.Entity.User;
@@ -22,6 +23,7 @@ import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
 
 import jakarta.annotation.Resource;
+
 
 @Controller
 @RequestMapping("/masukkanData")
@@ -144,6 +146,7 @@ public class MasukDataController {
 
         RubbishData rubbish = new RubbishData(category, weight);
         rubbish.setUser(user);
+        rubbish.setHomeArea(user.getHomeArea());
 
         rubbishDao.saveData(rubbish);
 

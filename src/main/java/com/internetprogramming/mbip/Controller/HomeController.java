@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,10 +45,9 @@ public class HomeController {
 
     @Autowired
     private ElectricDao electricDao;
-    
 
     @Resource(name = "userDao")
-	private UserDao userDao;
+    private UserDao userDao;
 
     @GetMapping("/")
     public String index() {
@@ -65,56 +65,57 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-    public String register( @RequestParam("fullname") String fullname,
-							@RequestParam("username") String username,
-							@RequestParam("password") String password,
-                            @RequestParam("age") int age,
-                            @RequestParam("homeaddress") String homeaddress,
-                            @RequestParam("homearea") String homearea)
-	{
+    public String register(@RequestParam("fullname") String fullname,
+            @RequestParam("username") String username,
+            @RequestParam("password") String password,
+            @RequestParam("age") int age,
+            @RequestParam("homeaddress") String homeaddress,
+            @RequestParam("homearea") String homearea) {
         HomeArea enumhome = HomeArea.valueOf(homearea);
 
-        User user = new User(username, password,  fullname, age, homeaddress, enumhome);
+        User user = new User(username, password, fullname, age, homeaddress, enumhome);
 
-        //Sini kena extract table Customer from database
-		List <User> userArray = userDao.findAllUser();
-		
-		for(User tempUser : userArray)
-		{
-			if(username.equals(tempUser.getUserName()))
-			{
-				return "Auth/loginfail";
-			}
-		}
+        // Sini kena extract table Customer from database
+        List<User> userArray = userDao.findAllUser();
+
+        for (User tempUser : userArray) {
+            if (username.equals(tempUser.getUserName())) {
+                return "Auth/loginfail";
+            }
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-		userDao.saveUser(user);
+        userDao.saveUser(user);
         return "Auth/Login";
     }
 
-    /* @PostMapping("/authentication")
-    public String authentication( Model model,
-                                  @RequestParam("username") String username,
-						          @RequestParam("password") String password)
-    {
-        //Sini kena extract table Customer from database
-        List <User> userArray = userDao.findAllUser();
-        
-        for(User user : userArray)
-        {
-            if(username.equals(user.getUserName()))
-            {
-                if(password.equals(user.getPassword()))
-                {
-                    return "Utama";
-                }
-                else
-                model.addAttribute("errorMessage", "Incorrect Username or Password");
-                return "Auth/login";
-            }
-        }
-        model.addAttribute("errorMessage", "Incorrect Username or Password");
-        return "Auth/login";
-    } */
+    /*
+     * @PostMapping("/authentication")
+     * public String authentication( Model model,
+     * 
+     * @RequestParam("username") String username,
+     * 
+     * @RequestParam("password") String password)
+     * {
+     * //Sini kena extract table Customer from database
+     * List <User> userArray = userDao.findAllUser();
+     * 
+     * for(User user : userArray)
+     * {
+     * if(username.equals(user.getUserName()))
+     * {
+     * if(password.equals(user.getPassword()))
+     * {
+     * return "Utama";
+     * }
+     * else
+     * model.addAttribute("errorMessage", "Incorrect Username or Password");
+     * return "Auth/login";
+     * }
+     * }
+     * model.addAttribute("errorMessage", "Incorrect Username or Password");
+     * return "Auth/login";
+     * }
+     */
 
     @GetMapping("/lamanUtama")
     public String lamanUtama() {
@@ -123,25 +124,52 @@ public class HomeController {
 
     @GetMapping("/petaKarbon")
     public String petaKarbon(Model model) {
+        
         // Retrieve userId based on the logged-in user's principal
-     
+      
+
+        List<RubbishData> rubbishDataList = rubbishDao.findAllData();
+
+        // Assuming you want to get all RubbishData for users in the same home area
        
 
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        User user = userDao.findByUserName(username);
-        // Assuming you want to get the weight of the latest RubbishData for the user
-        List<RubbishData> rubbishDataList = rubbishDao.findDataByUserId(user.getId());
+        //List<RubbishData> rubbishDataList = rubbishDao.findDataByUserId(user.getId());
+         //List<RubbishData> rubbishDataList = rubbishDao.findDataByHomeArea(HomeArea.SKUDAI.name().replace("_", " "));
+         
+
+        double totalWeightSkudai = 0.0;
+        double totalWeightLimaKedai = 0.0;
 
         if (!rubbishDataList.isEmpty()) {
-            RubbishData latestRubbishData = rubbishDataList.get(0); // Assuming the list is ordered by updateTime
-            double weight = latestRubbishData.getWeight();
-            model.addAttribute("weight", weight);
-        } else {
-            // Handle the case where no RubbishData is available for the user
-            model.addAttribute("weight", 0.0);
-        }
+            for (RubbishData rubbishData : rubbishDataList) {
 
-         List<OilData> oilDataList = oilDao.findDataByUserId(user.getId());
+                if (rubbishData.getHomeArea().equals("SKUDAI")) {
+                    totalWeightSkudai += rubbishData.getWeight();
+
+                   
+                }
+
+                else if(rubbishData.getHomeArea().equals("LIMA KEDAI"))
+                {
+                  totalWeightLimaKedai += rubbishData.getWeight();
+                }
+
+                else if(rubbishData.getHomeArea().equals("ISKANDAR PUTERI"))
+                {
+                  totalWeightLimaKedai += rubbishData.getWeight();
+                }
+            }
+
+            // Now totalWeight contains the sum of weights for all users in the same home
+            // area
+
+            model.addAttribute("totalWeightSkudai", totalWeightSkudai);
+            model.addAttribute("totalWeightLimaKedai", totalWeightLimaKedai);
+            
+
+        } 
+
+       /*  List<OilData> oilDataList = oilDao.findDataByUserId(user.getId());
 
         if (!oilDataList.isEmpty()) {
             OilData latestOilData = oilDataList.get(0); // Assuming the list is ordered by updateTime
@@ -163,8 +191,7 @@ public class HomeController {
             model.addAttribute("electricbill", 0.0);
         }
 
-
-           List<WaterData> waterDataList = waterDao.findDataByUserId(user.getId());
+        List<WaterData> waterDataList = waterDao.findDataByUserId(user.getId());
 
         if (!waterDataList.isEmpty()) {
             WaterData latestWaterData = waterDataList.get(0); // Assuming the list is ordered by updateTime
@@ -174,8 +201,7 @@ public class HomeController {
             // Handle the case where no ElectricData is available for the user
             model.addAttribute("waterbill", 0.0);
         }
-
-
+ */
         return "petaKarbon";
     }
 }
