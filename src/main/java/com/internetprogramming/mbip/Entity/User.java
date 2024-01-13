@@ -37,6 +37,9 @@ public class User {
     @Column(name = "homearea")
     private String homeArea;
 
+    @Column(name = "role") 
+    private String role;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List <ElectricData> electricData;
 
@@ -53,13 +56,14 @@ public class User {
     public User(){}
 
     // Parameterized Constructor
-    public User(String userName, String password, String fullName, int age, String homeAddress, HomeArea homeArea) {
+    public User(String userName, String password, String fullName, int age, String homeAddress, HomeArea homeArea, String role) {
         this.fullName = fullName;
         this.userName = userName;
         this.password = password;
         this.age = age;
         this.homeAddress = homeAddress;
         this.homeArea = homeArea.getDisplayName();
+        this.role = role;
     }
 
     // Getters
@@ -122,5 +126,13 @@ public class User {
 	{
 		this.homeArea = homeArea;
 	}
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 }
 
