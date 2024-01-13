@@ -54,7 +54,7 @@ public class User {
     private List <OilData> oilData;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List <OilData> rubbishData;
+    private List <RubbishData> rubbishData;
 
     // Default Constructor
     public User(){}
