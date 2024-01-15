@@ -6,14 +6,15 @@
 <style>
     body {
         font-family: Arial, sans-serif;
+        margin: 0; /* Remove default margin */
     }
 
     .login-container {
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background: url("/static/images/bg1.jpg") no-repeat center center; 
+        align-items: flex-end; /* Align login box to the right */
+        background: url("/images/bg1.jpg") no-repeat center center; 
         background-size: cover;
     }
 
@@ -22,19 +23,33 @@
         padding: 20px;
         background-color: #f0f0f0;
         border-radius: 5px;
+        height: 100vh;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    .login-header {
-        text-align: center;
-        margin-bottom: 20px;
+    .logos-container {
+        position: absolute; /* Absolute positioning */
+        top: 10px; /* Position from the top */
+        left: 10px; /* Position from the left */
+        ;
     }
 
     .login-header img {
-        max-width: 100px;
-        margin: 0 10px;
+        max-width: 10px;
+        margin-right: 10px;
     }
 
+    .login-box {
+        width: 350px;
+        padding: 20px;
+        /* Match the background color to the screenshot */
+        background-color: rgba(255, 255, 255, 0.5); /* Example for semi-transparent white */
+        border-radius: 5px;
+        /* Adjust the box-shadow as necessary */
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Update form input styles to match the screenshot */
     .login-form input[type=text],
     .login-form input[type=password] {
         width: calc(100% - 20px);
@@ -44,29 +59,38 @@
         border-radius: 3px;
     }
 
+    /* Update button styles to match the screenshot */
     .login-form input[type=submit] {
         width: 100%;
         padding: 10px;
         margin-top: 10px;
         border: none;
         border-radius: 3px;
-        background-color: #5cb85c;
+        background-color: #5cb85c; /* Adjust the color to match */
         color: white;
         cursor: pointer;
     }
 
+    /* Adjust hover effect as needed */
     .login-form input[type=submit]:hover {
-        background-color: #4cae4c;
+        background-color: #4cae4c; /* Adjust the color to match */
     }
+
+    /* Rest of the CSS remains the same */
+
 </style>
 </head>
 <body>
 
+<div class="logos-container">
+    
+    
+</div>
+
 <div class="login-container">
     <div class="login-box">
         <div class="login-header">
-            <img th:src="@{/images/LCIMS.png}" />
-            <img src="" alt="Logo2"> 
+            <img th:src="@{/images/LCIMS.png}" alt="logo3" />
         </div>
 
         <div class="login-form">

@@ -47,11 +47,12 @@ public class HomeController {
 							@RequestParam("password") String password,
                             @RequestParam("age") int age,
                             @RequestParam("homeaddress") String homeaddress,
-                            @RequestParam("homearea") String homearea)
+                            @RequestParam("homearea") String homearea,
+                            @RequestParam("role") String role)
 	{
         HomeArea enumhome = HomeArea.valueOf(homearea);
 
-        User user = new User(username, password,  fullname, age, homeaddress, enumhome);
+        User user = new User(username, password,  fullname, age, homeaddress, enumhome, role);
 
         //Sini kena extract table Customer from database
 		List <User> userArray = userDao.findAllUser();
