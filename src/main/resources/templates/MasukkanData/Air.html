@@ -22,17 +22,20 @@
             <h1>Muat naik bill air. . .</h1>
         </div>
         <div class="content-body">
-            <div class = "content-body-sejarah">
+            <div class="content-body-sejarah">
                 <h1>Sejarah</h1>
-
+            
                 <br/>
-                <h2 th:each="date, index : ${createtime}">
+            
+                <th:block th:each="date, index : ${createtime}" th:unless="${index.index >= 5}">
                     <h2 th:text="${date}"></h2>
                     <!-- Access the corresponding pricePerDate value using the index -->
                     <p>RM </p>
                     <p th:text="${pricePerDate[__${index.index}__]}"></p>
-                </h2>
+                </th:block>
             </div>
+            
+            
             <div class = "content-body-muatnaik">
 
                 <form action="/masukkanData/muatNaikBilAir" method="get">
