@@ -52,6 +52,10 @@ public class OilData
     {
         return creationTime;
     }
+    public LocalDateTime getUpdateTime()
+    {
+        return updateTime;
+    }
     
     //Setter
     public void setUser(User user)
