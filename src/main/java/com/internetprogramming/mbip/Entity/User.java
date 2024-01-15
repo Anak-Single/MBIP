@@ -110,6 +110,10 @@ public class User {
     {
         return creationTime;
     }
+    public String getRole()
+    {
+        return role;
+    }
     public String getAddress()
 	{
         return homeAddress + " " + homeArea;
