@@ -1,81 +1,154 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Profile</title>
     <style>
-        body {
-            background-color: rgb(48, 206, 119);
-            font-family: Arial, sans-serif;
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-        .profile-container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        .profile-image-upload {
-            margin: 20px 0;
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-image: url('bg1.jpg');
+            /* PATUT GAMBAR BACKGROUND */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: aliceblue;
         }
 
-        .profile-image-upload input[type="file"] {
-            display: none;
+        .wrapper {
+            padding: 30px 50px;
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            margin: 10px auto;
+            max-width: 600px;
         }
 
-        .profile-image-upload label {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #009688;
-            color: white;
-            cursor: pointer;
+        h4 {
+            letter-spacing: -1px;
+            font-weight: 400;
         }
 
-        .profile-image-upload img {
-            max-width: 200px;
-            height: auto;
+        .img {
+            width: 70px;
+            height: 70px;
+            border-radius: 6px;
+            object-fit: cover;
         }
 
-        button[type="submit"] {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 20px 0;
-            background-color: #009688;
-            color: white;
-            border: none;
-            cursor: pointer;
+        #img-section p,
+        #deactivate p {
+            font-size: 12px;
+            color: #777;
+            margin-bottom: 10px;
+            text-align: justify;
         }
 
-        .container {
-        display: flex;
-        flex-direction: column;
-        max-width: 300px;
+        #img-section b,
+        #img-section button,
+        #deactivate b {
+            font-size: 14px;
         }
 
         label {
-            margin-top: 10px;
+            margin-bottom: 0;
+            font-size: 14px;
+            font-weight: 500;
+            color: #777;
+            padding-left: 3px;
         }
 
-        input[type="text"] {
-            margin-top: 5px;
-            margin-bottom: 15px;
+        .form-control {
+            border-radius: 10px;
         }
 
-        button[type="submit"] {
-            align-self: center;
-            margin-top: 10px;
+        input[placeholder] {
+            font-weight: 500;
+        }
+
+        .form-control:focus {
+            box-shadow: none;
+            border: 1.5px solid #0779e4;
+        }
+
+        select {
+            display: block;
+            width: 100%;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            height: 40px;
+            padding: 5px 10px;
+        }
+
+        select:focus {
+            outline: none;
+        }
+
+        .button {
+            background-color: #fff;
+            color: #0779e4;
+        }
+
+        .button:hover {
+            background-color: #0779e4;
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #4cd892;
+        }
+
+        .danger {
+            background-color: #fff;
+            color: #e20404;
+            border: 1px solid #ddd;
+        }
+
+        .danger:hover {
+            background-color: #e20404;
+            color: #fff;
+        }
+
+        @media(max-width:576px) {
+            .wrapper {
+                padding: 25px 20px;
+            }
+
+            #deactivate {
+                line-height: 18px;
+            }
+
+            .profile-image-upload {
+                margin: 20px 0;
+            }
+
+            .profile-image-upload input[type="file"] {
+                display: none;
+            }
+
+            .profile-image-upload label {
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: #009688;
+                color: white;
+                cursor: pointer;
+            }
+
+            .profile-image-upload img {
+                max-width: 200px;
+                height: auto;
+            }
+
         }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <a href="/utama">Laman Utama</a>
@@ -83,50 +156,102 @@
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <input type="submit" value="Sign Out" />
         </form>
     </div>
-    <div class="section">
-        <h1>Profil</h1>
-        <h2>User Profile</h2>
-
-        <div th:if="${successMessage}" class="alert alert-success">
-            <p th:text="${successMessage}"></p>
-        </div>
-        <div th:if="${errorMessage}" class="alert alert-danger">
-            <p th:text="${errorMessage}"></p>
-        </div>
-
-        <form th:object="${user}" th:action="@{/profile/save}" method="post">
-            <input type="hidden" th:field="*{id}" readonly="readonly" th:value="${user.id}" />
-            <div>
-                <label>Full Name:</label>
-                <input type="text" th:field="*{fullName}" readonly="readonly" th:value="${user.fullName}" />
-            </div>
-            <div>
-                <label>Username:</label>
-                <input type="text" th:field="*{userName}" readonly="readonly" th:value="${user.userName}" />
+    <div class="wrapper bg-white mt-sm-5">
+        <h4 class="pb-4 border-bottom">Account settings</h4>
+        <div class="d-flex align-items-start py-3 border-bottom">
+            <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+                class="img" alt="">
+            <div class="pl-sm-4 pl-2" id="img-section">
+                <b>Profile Photo</b>
+                <p>Accepted file type .png. Less than 1MB</p>
+                <button class="btn button border" onclick="document.getElementById('profile-image').click();">
+                    <b>Upload</b>
+                </button>
+                <input type="file" name="profile-image" id="profile-image" accept="image/*" style="display:none">
             </div>
 
-            <input type="hidden" th:field="*{password}" readonly="readonly" th:value="${user.password}" />
-            
-            <div>
-                <label>Age:</label>
-                <input type="number" th:field="*{age}" th:value="${user.age}" />
-            </div>
-            <div>
-                <label>Home Address:</label>
-                <input type="text" th:field="*{homeAddress}" th:value="${user.homeAddress}" />
-            </div>
-            <div>
-                <label>Home Area:</label>
-                <input type="text" th:field="*{homeArea}" th:value="${user.homeArea}" />
-            </div>
-            <div>
-                <button type="submit">Save</button>
-            </div>
-        </form>
 
-    </div>
+            <div th:if="${successMessage}" class="alert alert-success">
+                <p th:text="${successMessage}"></p>
+            </div>
+            <div th:if="${errorMessage}" class="alert alert-danger">
+                <p th:text="${errorMessage}"></p>
+            </div>
+
+            <form th:object="${user}" th:action="@{/profile/save}" method="get">
+                <input type="hidden" th:field="*{id}" readonly="readonly" th:value="${user.id}" />
+
+                <div class="py-2">
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label for="Nama">Nama Penuh:</label>
+                            <input type="text" th:field="*{fullName}" readonly="readonly" th:value="${user.fullName}"
+                                class="bg-light form-control" id="Nama" name="Nama Penuh" />
+                        </div>
+
+                        <div class="col-md-6 pt-md-0 pt-3">
+                            <label>Username:</label>
+                            <input type="text" th:field="*{userName}" readonly="readonly" class="bg-light form-control"
+                                th:value="${user.userName}" />
+                        </div>
+                    </div>
+
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label for="Emel">Emel:</label>
+                            <input type="email" id="Emel" class="bg-light form-control" name="Emel">
+                        </div>
+                        <input type="hidden" th:field="*{password}" readonly="readonly" th:value="${user.password}" />
+                    </div>
+                    <div class="row py-2">
+                        <div class="col-md-6">
+                            <label>Age:</label>
+                            <input type="number" th:field="*{age}" th:value="${user.age}" />
+                        </div>
+
+                        <div class="row py-2">
+                            <div class="col-md-6">
+                                <label>Home Address:</label>
+                                <input type="text" th:field="*{homeAddress}" th:value="${user.homeAddress}" />
+                            </div>
+
+                            <div class="row py-2">
+                                <div class="col-md-6">
+                                    <label>Home Area:</label>
+                                    <input type="text" th:field="*{homeArea}" th:value="${user.homeArea}" />
+                                </div>
+
+                                <div class="col-md-6 pt-md-0 pt-3" id="lang">
+                                    <label for="language">Language</label>
+                                    <div class="arrow">
+                                        <select name="language" id="language" class="bg-light">
+                                            <option value="english" selected>English</option>
+                                            <option value="english_us">English (United States)</option>
+                                            <option value="enguk">English UK</option>
+                                            <option value="arab">Arabic</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="py-3 pb-4 border-bottom">
+                                <input type="submit" value="Save Changes" />
+                            </div>
+
+                            <div class="d-sm-flex align-items-center pt-3" id="deactivate">
+                                <div>
+                                    <b>Deactivate your account</b>
+                                    <p>Details about your company account and password</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <button class="btn danger">Deactivate</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
 </body>
+
 </html>
