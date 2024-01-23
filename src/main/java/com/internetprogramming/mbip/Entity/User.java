@@ -71,6 +71,7 @@ public class User {
         this.homeAddress = homeAddress;
         this.houseHold = 1;
         this.homeArea = homeArea.getDisplayName();
+        this.role = role;
     }
 
     // Getters

@@ -15,26 +15,30 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig {
 
     @Bean
-public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http
-        .authorizeHttpRequests(authz -> authz
-            .requestMatchers("/admin/**").hasAuthority("ADMIN")
-            .requestMatchers("/","/registerform", "/register", "/images/**").permitAll()
-            .anyRequest().authenticated()
-        )
-        .formLogin(form -> form
-            .loginPage("/")
-            .loginProcessingUrl("/process-login")
-            .failureUrl("/login?error=true")
-            .permitAll().defaultSuccessUrl("/utama", true)
-        )
-        .logout(logout -> logout
-          .logoutSuccessUrl("/login?logout=true")
-          .invalidateHttpSession(true).
-          permitAll());
-    
-    return http.build();
-}
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(authz -> authz
+                .requestMatchers("/Admin/**").hasAuthority("ADMIN")
+                .requestMatchers("/","/registerform", "/register", "/images/**").permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/")
+                .loginProcessingUrl("/process-login")
+                .failureUrl("/?error=true")
+                .permitAll().defaultSuccessUrl("/utama", true)
+            )
+            .logout(logout -> logout
+                    .logoutSuccessUrl("/?logout=true")
+                    .invalidateHttpSession(true)
+                    .permitAll()
+            )
+            .exceptionHandling(exceptionHandling -> exceptionHandling
+                .accessDeniedPage("/access-denied") // Redirect to a custom access denied page
+            );
+        
+            return http.build();
+    }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {

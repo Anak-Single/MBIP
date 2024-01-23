@@ -13,57 +13,59 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-end; /* Align login box to the right */
+        align-items: flex-end; 
         background: url("/images/bg1.jpg") no-repeat center center; 
         background-size: cover;
     }
 
     .login-box {
-        width: 350px;
-        padding: 20px;
-        background-color: #f0f0f0;
+        width: 500px;
+        padding: 50px;
+        background-color: #AFE1AF;
         border-radius: 5px;
         height: 100vh;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .logos-container {
-        position: absolute; /* Absolute positioning */
-        top: 10px; /* Position from the top */
-        left: 10px; /* Position from the left */
-        ;
+        padding-left: 50px;
+        padding-right: 50px;
+        border-left: 6px solid darkgreen;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
     }
 
     .login-header img {
-        max-width: 10px;
-        margin-right: 10px;
+        max-width: 300px;
+        margin-left: 70px;
+        margin-top: 70px;
+        margin-bottom: 50px;
+       
     }
 
-    .login-box {
-        width: 350px;
-        padding: 20px;
-        /* Match the background color to the screenshot */
-        background-color: rgba(255, 255, 255, 0.5); /* Example for semi-transparent white */
-        border-radius: 5px;
-        /* Adjust the box-shadow as necessary */
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    .login-form p {
+        margin: 0;
+        margin-bottom: 10px;
+        color: #C70039;
+        font-size: 14px;
     }
+
 
     /* Update form input styles to match the screenshot */
     .login-form input[type=text],
     .login-form input[type=password] {
         width: calc(100% - 20px);
         padding: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
         border: 1px solid #ccc;
         border-radius: 3px;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 
     /* Update button styles to match the screenshot */
     .login-form input[type=submit] {
         width: 100%;
         padding: 10px;
-        margin-top: 10px;
+        margin-top: 20px;
         border: none;
         border-radius: 3px;
         background-color: #5cb85c; /* Adjust the color to match */
@@ -71,20 +73,19 @@
         cursor: pointer;
     }
 
-    /* Adjust hover effect as needed */
     .login-form input[type=submit]:hover {
         background-color: #4cae4c; /* Adjust the color to match */
     }
 
-    /* Rest of the CSS remains the same */
+    
 
 </style>
 </head>
 <body>
 
 <div class="logos-container">
-    
-    
+    <img th:src="@{/images/MBIP.png}" alt="logo1" style="max-width: 100px; position:absolute; top: 10px; left: 20px; border-right: 1px solid black; padding-right: 15px;"/>
+    <img th:src="@{/images/UTM.png}" alt="logo2" style="max-width: 200px; position:absolute; top: 25px; left: 150px;"/>
 </div>
 
 <div class="login-container">
@@ -94,20 +95,18 @@
         </div>
 
         <div class="login-form">
-            <h1>Login Form</h1>
             <div th:if="${param.error}">
-                Invalid username and password.
+                <p>Username atau Password tidak sah. </p>
             </div>
             <div th:if="${param.logout}">
-                Anda telah Daftar Keluar.
+                <p>Anda telah Daftar Keluar.</p>
             </div>
 
             <form th:action="@{/process-login}" method="post">
-                <label for="username">Username: </label>
-                <input type="text" id="username" name="username">
                 
-                <label for="password">Password: </label>
-                <input type="password" id="password" name="password">
+                <input type="text" id="username" name="username" placeholder="Username" required>
+                
+                <input type="password" id="password" name="password" placeholder="Password" required>
                 
                 <input type="submit" value="Login">
             </form>
