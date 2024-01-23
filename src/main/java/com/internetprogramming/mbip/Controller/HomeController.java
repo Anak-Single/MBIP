@@ -15,6 +15,7 @@ import com.internetprogramming.mbip.Service.ElectricDao;
 import com.internetprogramming.mbip.Service.UserDao;
 import com.mysql.cj.protocol.Security;
 
+import java.util.ArrayList;
 //import java.util.ArrayList;
 import java.util.List;
 
@@ -122,86 +123,5 @@ public class HomeController {
         return "lamanUtama";
     }
 
-    @GetMapping("/petaKarbon")
-    public String petaKarbon(Model model) {
-        
-        // Retrieve userId based on the logged-in user's principal
-      
-
-        List<RubbishData> rubbishDataList = rubbishDao.findAllData();
-
-        // Assuming you want to get all RubbishData for users in the same home area
-       
-
-        //List<RubbishData> rubbishDataList = rubbishDao.findDataByUserId(user.getId());
-         //List<RubbishData> rubbishDataList = rubbishDao.findDataByHomeArea(HomeArea.SKUDAI.name().replace("_", " "));
-         
-
-        double totalWeightSkudai = 0.0;
-        double totalWeightLimaKedai = 0.0;
-
-        if (!rubbishDataList.isEmpty()) {
-            for (RubbishData rubbishData : rubbishDataList) {
-
-                if (rubbishData.getHomeArea().equals("SKUDAI")) {
-                    totalWeightSkudai += rubbishData.getWeight();
-
-                   
-                }
-
-                else if(rubbishData.getHomeArea().equals("LIMA KEDAI"))
-                {
-                  totalWeightLimaKedai += rubbishData.getWeight();
-                }
-
-                else if(rubbishData.getHomeArea().equals("ISKANDAR PUTERI"))
-                {
-                  totalWeightLimaKedai += rubbishData.getWeight();
-                }
-            }
-
-            // Now totalWeight contains the sum of weights for all users in the same home
-            // area
-
-            model.addAttribute("totalWeightSkudai", totalWeightSkudai);
-            model.addAttribute("totalWeightLimaKedai", totalWeightLimaKedai);
-            
-
-        } 
-
-       /*  List<OilData> oilDataList = oilDao.findDataByUserId(user.getId());
-
-        if (!oilDataList.isEmpty()) {
-            OilData latestOilData = oilDataList.get(0); // Assuming the list is ordered by updateTime
-            double oilweight = latestOilData.getWeight();
-            model.addAttribute("oilweight", oilweight);
-        } else {
-            // Handle the case where no ElectricData is available for the user
-            model.addAttribute("oilweight", 0.0);
-        }
-
-        List<ElectricData> electricDataList = electricDao.findBillsByUserId(user.getId());
-
-        if (!electricDataList.isEmpty()) {
-            ElectricData latestElectricData = electricDataList.get(0); // Assuming the list is ordered by updateTime
-            double electricbill = latestElectricData.getBillAmount();
-            model.addAttribute("electricbill", electricbill);
-        } else {
-            // Handle the case where no ElectricData is available for the user
-            model.addAttribute("electricbill", 0.0);
-        }
-
-        List<WaterData> waterDataList = waterDao.findDataByUserId(user.getId());
-
-        if (!waterDataList.isEmpty()) {
-            WaterData latestWaterData = waterDataList.get(0); // Assuming the list is ordered by updateTime
-            double waterbill = latestWaterData.getBillAmount();
-            model.addAttribute("waterbill", waterbill);
-        } else {
-            // Handle the case where no ElectricData is available for the user
-            model.addAttribute("waterbill", 0.0);
-        }
- */
-        return "petaKarbon";
-    }
+    
 }

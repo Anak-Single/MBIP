@@ -1,7 +1,6 @@
 package com.internetprogramming.mbip.Entity;
 
-public enum HomeArea
-{
+public enum HomeArea {
     SKUDAI,
     LIMA_KEDAI,
     GELANG_PATAH,
@@ -10,6 +9,6 @@ public enum HomeArea
     ULU_CHOH;
 
     public String getDisplayName() {
-        return this.name().replace("_", " ");
+        return this.name();
     }
 }
