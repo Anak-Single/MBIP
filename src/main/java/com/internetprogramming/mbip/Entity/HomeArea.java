@@ -9,6 +9,6 @@ public enum HomeArea {
     ULU_CHOH;
 
     public String getDisplayName() {
-        return this.name();
+        return this.name().replace("_", " ");
     }
 }

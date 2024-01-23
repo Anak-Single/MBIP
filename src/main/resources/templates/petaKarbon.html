@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Peta Karbon</title>
-    <link rel="stylesheet" href="/js/navbar.css" >
+    <link rel="stylesheet" href="/js/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .box {
@@ -170,15 +170,53 @@
                     <p>0 jam</p>
                     <p>5 minit</p>
                 </div>
-                <button class="button" style="font-size:48px; color:red; background: none; border: none; padding: 0; margin: 0;" onclick="openPopup('Skudai')">
-                <i class="fa fa-map-marker"></i>
+                <!-- Skudai -->
+                <button class="button"
+                    style="font-size:48px; color:red; background: none; border: none; padding: 0; margin: 0;"
+                    onclick="openPopup('Skudai')">
+                    <i class="fa fa-map-marker"></i>
                 </button>
-                <button class="button" onclick="openPopup('LimaKedai')">Lima Kedai</button>
-                <button class="button" onclick="openPopup('GelangPatah')">Gelang Patah</button>
-                <button class="button" onclick="openPopup('KangkarPulai')">Kangkar Pulai</button>
-                <button class="button" onclick="openPopup('IskandarPuteri')">Iskandar Puteri</button>
-                <button class="button" onclick="openPopup('UluChoh')">Ulu Choh</button>
+                <p>Skudai</p>
 
+                <!-- Lima Kedai -->
+                <button class="button"
+                    style="font-size:48px; color:red; background: none; border: none; padding: 0; margin: 0;"
+                    onclick="openPopup('LimaKedai')">
+                    <i class="fa fa-map-marker"></i>
+                </button>
+                <p>Lima Kedai</p>
+
+                <!-- Gelang Patah -->
+                <button class="button"
+                    style="font-size:48px; color:red; background: none; border: none; padding: 0; margin: 0;"
+                    onclick="openPopup('GelangPatah')">
+                    <i class="fa fa-map-marker"></i>
+                </button>
+                <p>Gelang Patah</p>
+
+                <!-- Kangkar Pulai -->
+                <button class="button"
+                    style="font-size:48px; color:red; background: none; border: none; padding: 0; margin: 0;"
+                    onclick="openPopup('KangkarPulai')">
+                    <i class="fa fa-map-marker"></i>
+                </button>
+                <p>Kangkar Pulai</p>
+
+                <!-- Iskandar Puteri -->
+                <button class="button"
+                    style="font-size:48px; color:red; background: none; border: none; padding: 0; margin: 0;"
+                    onclick="openPopup('IskandarPuteri')">
+                    <i class="fa fa-map-marker"></i>
+                </button>
+                <p>Iskandar Puteri</p>
+
+                <!-- Ulu Choh -->
+                <button class="button"
+                    style="font-size:48px; color:red; background: none; border: none; padding: 0; margin: 0;"
+                    onclick="openPopup('UluChoh')">
+                    <i class="fa fa-map-marker"></i>
+                </button>
+                <p>Ulu Choh</p>
                 <!--  <div class="popup2" id="popup2">
 
                         <h2>Dikemaskini: </h2>
@@ -207,7 +245,7 @@
                             <input type="text" id="billElektrik" name="billElektrik" placeholder="Enter amount"
                                 th:value="${electricBillSKUDAI}" readonly>
 
-                            <button type="button" onclick="closePopup('Skudai')">Simpan</button>
+                            <button type="button" onclick="closePopup('Skudai')">ok</button>
                         </form>
 
                     </div>
@@ -231,7 +269,7 @@
                             <input type="text" id="billElektrik" name="billElektrik" placeholder="Enter amount"
                                 th:value="${electricBillLIMA_KEDAI}" readonly>
 
-                            <button type="button" onclick="closePopup('LimaKedai')">Simpan</button>
+                            <button type="button" onclick="closePopup('LimaKedai')">ok</button>
                         </form>
                     </div>
 
@@ -255,7 +293,7 @@
                             <input type="text" id="billElektrikGelangPatah" name="billElektrikGelangPatah"
                                 placeholder="Enter amount" th:value="${electricBillGELANG_PATAH}" readonly>
 
-                            <button type="button" onclick="closePopup('GelangPatah')">Simpan</button>
+                            <button type="button" onclick="closePopup('GelangPatah')">ok</button>
                         </form>
                     </div>
 
@@ -278,7 +316,7 @@
                             <input type="text" id="billElektrikKangkarPulai" name="billElektrikKangkarPulai"
                                 placeholder="Enter amount" th:value="${electricBillKANGKAR_PULAI}" readonly>
 
-                            <button type="button" onclick="closePopup('KangkarPulai')">Simpan</button>
+                            <button type="button" onclick="closePopup('KangkarPulai')">ok</button>
                         </form>
                     </div>
 
@@ -301,7 +339,7 @@
                             <input type="text" id="billElektrikIskandarPuteri" name="billElektrikIskandarPuteri"
                                 placeholder="Enter amount" th:value="${electricBillISKANDAR_PUTERI}" readonly>
 
-                            <button type="button" onclick="closePopup('IskandarPuteri')">Simpan</button>
+                            <button type="button" onclick="closePopup('IskandarPuteri')">ok</button>
                         </form>
                     </div>
 
@@ -325,7 +363,7 @@
                             <input type="text" id="billElektrikUluChoh" name="billElektrikUluChoh"
                                 placeholder="Enter amount" th:value="${electricBillULU_CHOH}" readonly>
 
-                            <button type="button" onclick="closePopup('UluChoh')">Simpan</button>
+                            <button type="button" onclick="closePopup('UluChoh')">ok</button>
                         </form>
                     </div>
                 </div>
@@ -335,7 +373,7 @@
     </div>
 
     <script>
-         function openPopup(popupId) {
+        function openPopup(popupId) {
             document.getElementById("overlay").style.display = "block";
             document.getElementById(popupId).style.display = "block";
         }
@@ -353,7 +391,7 @@
             document.getElementById("popup2").style.display = "none";
         }
 
-        
+
     </script>
 </body>
 
