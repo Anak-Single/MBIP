@@ -103,4 +103,10 @@ public class HomeController {
     public String petaKarbon() {
         return "petaKarbon";
     }
+
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "/access-denied";
+    }
+    
 }
