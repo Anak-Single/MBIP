@@ -1,10 +1,7 @@
 package com.internetprogramming.mbip.Service;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -29,7 +26,7 @@ public class WaterDao{
     }
 
     //find Water data by their id
-    public WaterData findBillsByUserId(Long id)
+    public WaterData findBillsById(Long id)
     {
         Optional <WaterData> optData = repository.findById(id);
         WaterData data = optData.orElse(null);
@@ -38,29 +35,10 @@ public class WaterDao{
     }
 
     //find All Water data based on User Id
-    public List <WaterData> findDataByUserId(Long userId)
+    public List <WaterData> findBillsByUserId(Long userId)
     {
         List <WaterData> data = repository.findAllByUserId(userId);
         return data;
-    }
-
-    //categorize the data from user based on date
-    public Map<LocalDate, List<WaterData>> categorizeOrdersByDay(Long userId) {
-        List<WaterData> allData = repository.findAllByUserId(userId);
-
-        return allData.stream()
-                .collect(Collectors.groupingBy(WaterData::getCreationTime));
-    }
-
-    // New method to get a list of WaterData objects categorized by creation time
-    public List<WaterData> getCategorizedWaterData(Long userId) {
-        Map<LocalDate, List<WaterData>> categorizedDataMap = categorizeOrdersByDay(userId);
-
-        // Combine the lists from the map into a single list
-        return categorizedDataMap.values()
-                .stream()
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
     }
 
     //save data
