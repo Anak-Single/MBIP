@@ -1,5 +1,6 @@
 package com.internetprogramming.mbip.Security;
 
+import java.util.Collection;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Set;
@@ -15,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -39,6 +41,15 @@ public class SecurityConfig {
                 .failureUrl("/?error=true")
                 .permitAll()
                 .successHandler((request, response, authentication) -> {
+                    // Get authorities (roles) of the authenticated user
+                    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+                    
+                    // Check if the user has the "ADMIN" role
+                    if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
+                        response.sendRedirect("/Admin/dashboard");
+                    } else {
+                        response.sendRedirect("/utama");
+                    }
                     handleSuccessfulLogin(request, response, authentication);
                 })
             )
