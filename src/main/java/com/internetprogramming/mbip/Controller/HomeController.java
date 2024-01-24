@@ -80,15 +80,4 @@ public class HomeController {
     public String accessDenied() {
         return "/access-denied";
     }
-
-    @GetMapping("/Admin/dashboard")
-    public String dashboard() {
-        return "Admin/utama";
-    }
-
-    @GetMapping("/Admin/laporan")
-    public String laporan() {
-        return "Admin/laporan";
-    }
-    
 }
