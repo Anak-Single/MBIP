@@ -1,5 +1,7 @@
 package com.internetprogramming.mbip.Security;
 
+import java.util.Collection;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -7,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -26,7 +29,18 @@ public class SecurityConfig {
                 .loginPage("/")
                 .loginProcessingUrl("/process-login")
                 .failureUrl("/?error=true")
-                .permitAll().defaultSuccessUrl("/utama", true)
+                .permitAll()
+                .successHandler((request, response, authentication) -> {
+                    // Get authorities (roles) of the authenticated user
+                    Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+                    
+                    // Check if the user has the "ADMIN" role
+                    if (authorities.stream().anyMatch(a -> a.getAuthority().equals("ADMIN"))) {
+                        response.sendRedirect("/Admin/dashboard");
+                    } else {
+                        response.sendRedirect("/utama");
+                    }
+                })
             )
             .logout(logout -> logout
                     .logoutSuccessUrl("/?logout=true")
