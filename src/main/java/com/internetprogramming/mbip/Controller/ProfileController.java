@@ -2,7 +2,6 @@ package com.internetprogramming.mbip.Controller;
 
 import jakarta.annotation.Resource;
 
-import com.internetprogramming.mbip.Entity.HomeArea;
 import com.internetprogramming.mbip.Entity.User;
 import com.internetprogramming.mbip.Service.UserDao;
 
