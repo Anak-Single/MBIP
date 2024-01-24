@@ -1,11 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Utama</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .navbar a:hover {
+            background: #ddd;
+            color: black;
+        }
+        .header {
+            padding: 60px;
+            text-align: center;
+            background: #50c878;
+            color: white;
+        }
+        .section {
+            padding: 60px;
+            background: #f2f2f2;
+        }
+        .section h1 {
+            font-size: 2em;
+            color: #333;
+        }
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background: #333;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    Laporan
+
+<div class="navbar">
+    <a href="/utama">Laman Utama</a>
+    <a href="/Laporan">Laporan</a>
+    <a href="/petaKarbon">Peta Karbon</a>
+    <a href="/masukkanData">Masukkan Data</a>
+    <a href="/profile">Profil</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Daftar Keluar"/>
+    </form>
+</div>
+
+<div class="menu">
+    <form action="/Admin/hasilkanLaporan" method="get">
+        <div class="pilihkawasan">
+            <label for="area">Pilih kawasan :</label>
+            <select id="area" name="area" required>
+                <option value="SKUDAI">SKUDAI</option>
+                <option value="LIMA KEDAI">LIMA KEDAI</option>
+                <option value="GELANG PATAH">GELANG PATAH</option>
+                <option value="KANGKAR PULAI">KANGKAR PULAI</option>
+                <option value="ISKANDAR PUTERI">ISKANDAR PUTERI</option>
+                <option value="ULU CHOH">ULU CHOH</option>
+            </select>
+        </div>
+
+        <div class="dikemaskini">
+            <div class="hari">
+                <p><b><span th:text="${days}"></span></b></p>
+                <p>hari</p>
+            </div>
+            <div class="jam">
+                <p><b><span th:text="${hours}"></span></b></p>
+                <p>jam</p>
+            </div>
+            <div class="minit">
+                <p><b><span th:text="${minutes}"></span></b></p>
+                <p>minit</p>
+            </div>
+            <div class="saat">
+                <p><b><span th:text="${seconds}"></span></b></p>
+                <p>saat</p>
+            </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="Hasilkan Laporan">
+        </div>
+    </form>
+</div>
+
 </body>
 </html>

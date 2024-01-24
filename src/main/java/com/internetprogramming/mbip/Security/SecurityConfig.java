@@ -50,7 +50,6 @@ public class SecurityConfig {
                     } else {
                         response.sendRedirect("/utama");
                     }
-                    handleSuccessfulLogin(request, response, authentication);
                 })
             )
             .logout(logout -> logout
