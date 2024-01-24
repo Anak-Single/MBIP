@@ -12,6 +12,45 @@
             box-sizing: border-box;
         }
 
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #006851;
+            width: 200px;
+            /* adjust width as needed */
+            height: 100%;
+            /* make it full height */
+        }
+
+        .navbar a {
+            display: block;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .navbar a:hover {
+            background-color: #333;
+        }
+
+        .navbar button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .navbar button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             background-image: url('bg1.jpg');
@@ -19,12 +58,12 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            background-color: aliceblue;
+            background-color: rgb(243, 243, 243);
         }
 
         .wrapper {
             padding: 30px 50px;
-            border: 1px solid #ddd;
+            border: 1px solid #006851;
             border-radius: 15px;
             margin: 10px auto;
             max-width: 600px;
@@ -80,7 +119,7 @@
         select {
             display: block;
             width: 100%;
-            border: 1px solid #ddd;
+            border: 1px solid #e8eee8;
             border-radius: 10px;
             height: 40px;
             padding: 5px 10px;
@@ -156,7 +195,7 @@
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out" />
+            <button class="btn btn-link text-white" type="submit">Sign Out</button>
         </form>
     </div>
     <div class="wrapper bg-white mt-sm-5">
