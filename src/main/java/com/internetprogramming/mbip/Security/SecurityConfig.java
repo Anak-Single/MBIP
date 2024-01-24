@@ -1,12 +1,23 @@
 package com.internetprogramming.mbip.Security;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Set;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -26,7 +37,10 @@ public class SecurityConfig {
                 .loginPage("/")
                 .loginProcessingUrl("/process-login")
                 .failureUrl("/?error=true")
-                .permitAll().defaultSuccessUrl("/utama", true)
+                .permitAll()
+                .successHandler((request, response, authentication) -> {
+                    handleSuccessfulLogin(request, response, authentication);
+                })
             )
             .logout(logout -> logout
                     .logoutSuccessUrl("/?logout=true")
@@ -34,7 +48,7 @@ public class SecurityConfig {
                     .permitAll()
             )
             .exceptionHandling(exceptionHandling -> exceptionHandling
-                .accessDeniedPage("/access-denied") // Redirect to a custom access denied page
+                .accessDeniedPage("/access-denied")
             );
         
             return http.build();
@@ -48,6 +62,17 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    private void handleSuccessfulLogin(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        Set<String> roles = AuthorityUtils.authorityListToSet(authorities);
+
+        if (roles.contains("ADMIN")) {
+            response.sendRedirect("/Admin/dashboard"); // Redirect admin to their dashboard
+        } else {
+            response.sendRedirect("/utama"); // Redirect other users to the default page
+        }
     }
 
     

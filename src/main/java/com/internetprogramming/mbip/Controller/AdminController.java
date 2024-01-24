@@ -24,8 +24,5 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 public class AdminController {
     
-    @GetMapping("/Admin/dashboard")
-    public String dashboard() {
-        return "Admin/utama";
-    }
+    
 }

@@ -1,11 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Utama</title>
+    <link rel="stylesheet" href="/css/navbar.css">
 </head>
 <body>
-    Hi admin
+
+<div class="navbar">
+    <a href="/utama">Laman Utama</a>
+    <a href="/Admin/laporan">Hasilkan Laporan</a>
+    <a href="/petaKarbon">Peta Karbon</a>
+    <a href="/masukkanData">Masukkan Data</a>
+    <a href="/profile">Profil</a>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Daftar Keluar"/>
+    </form>
+</div>
+
+<div class="header">
+ <h1>SELAMAT DATANG !</h1>
+ <p>Majlis Bandaraya Iskandar Puteri</p>
+</div>
+
+<div class="section">
+ <h1>Pengurangan Karbon pada semua sektor</h1>
+ <p>...</p>
+</div>
+
+<div class="section">
+ <h1>Mesra Alam Sekitar</h1>
+ <p>...</p>
+</div>
+
+<div class="footer">
+ <p>© 2021 Majlis Bandaraya Iskandar Puteri. All rights reserved.</p>
+</div>
+
 </body>
 </html>
