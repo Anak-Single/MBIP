@@ -66,31 +66,6 @@ public class HomeController {
         return "Auth/Login";
     }
 
-    /* @PostMapping("/authentication")
-    public String authentication( Model model,
-                                  @RequestParam("username") String username,
-						          @RequestParam("password") String password)
-    {
-        //Sini kena extract table Customer from database
-        List <User> userArray = userDao.findAllUser();
-        
-        for(User user : userArray)
-        {
-            if(username.equals(user.getUserName()))
-            {
-                if(password.equals(user.getPassword()))
-                {
-                    return "Utama";
-                }
-                else
-                model.addAttribute("errorMessage", "Incorrect Username or Password");
-                return "Auth/login";
-            }
-        }
-        model.addAttribute("errorMessage", "Incorrect Username or Password");
-        return "Auth/login";
-    } */
-
     @GetMapping("/lamanUtama")
     public String lamanUtama() {
         return "lamanUtama";
@@ -105,5 +80,4 @@ public class HomeController {
     public String accessDenied() {
         return "/access-denied";
     }
-    
 }
