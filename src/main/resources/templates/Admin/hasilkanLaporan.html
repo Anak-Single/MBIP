@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Utama</title>
@@ -7,10 +8,12 @@
         body {
             font-family: Arial, sans-serif;
         }
+
         .navbar {
             overflow: hidden;
             background-color: #333;
         }
+
         .navbar a {
             float: left;
             display: block;
@@ -19,24 +22,29 @@
             padding: 14px 16px;
             text-decoration: none;
         }
+
         .navbar a:hover {
             background: #ddd;
             color: black;
         }
+
         .header {
             padding: 60px;
             text-align: center;
             background: #50c878;
             color: white;
         }
+
         .section {
             padding: 60px;
             background: #f2f2f2;
         }
+
         .section h1 {
             font-size: 2em;
             color: #333;
         }
+
         .footer {
             padding: 20px;
             text-align: center;
@@ -45,87 +53,221 @@
         }
     </style>
 </head>
+
 <body>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function () {
+            Highcharts.setOptions({
+                colors: Highcharts.map(Highcharts.getOptions().colors, function (color) {
+                    return {
+                        radialGradient: {
+                            cx: 0.5,
+                            cy: 0.3,
+                            r: 0.7
+                        },
+                        stops: [
+                            [0, color],
+                            [1, Highcharts.color(color).brighten(-0.3).get('rgb')] // darken
+                        ]
+                    };
+                })
+            });
+            const chart = Highcharts.chart('pie-chart', {
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Carbon Emission by Category',
+                    align: 'center'
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                accessibility: {
+                    point: {
+                        valueSuffix: '%'
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: true,
+                            format: '<span style="font-size: 1.2em"><b>{point.name}</b></span><br>' +
+                                '<span style="opacity: 0.6">{point.percentage:.1f} %</span>',
+                            connectorColor: 'rgba(128,128,128,0.5)'
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Total',
+                    data: [
+                        { name: 'Rubbish', y: /*[[${rubbishWeight}]]*/ 0 },
+                        { name: 'Oil', y: /*[[${oilWeight}]]*/ 0 },
+                        { name: 'Water', y: /*[[${waterBill}]]*/ 0 },
+                        { name: 'Electric', y: /*[[${electricBill}]]*/ 0 }
+                    ]
+                }]
+            });
+        });
+    </script>
+   <!--  <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const chart = Highcharts.chart('line-chart', {
+                chart: {
+                    type: 'spline'
+                },
+                title: {
+                    text: 'Carbon Emission by Month'
+                },
+                xAxis: {
+                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    accessibility: {
+                        description: 'Months of the year'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: 'Temperature'
+                    },
+                    labels: {
+                        format: '{value}°'
+                    }
+                },
+                tooltip: {
+                    crosshairs: true,
+                    shared: true
+                },
+                plotOptions: {
+                    spline: {
+                        marker: {
+                            radius: 4,
+                            lineColor: '#666666',
+                            lineWidth: 1
+                        }
+                    }
+                },
+                series: [{
+                    name: 'Rubbish',
+                    marker: {
+                        symbol: 'square'
+                    },
+                    data: [5.2, 5.7, 8.7, 13.9, 18.2, 21.4, 13.0, 26.4, 22.8, 17.5, 12.1, 7.6]
 
-<div class="navbar">
-    <a href="/utama">Laman Utama</a>
-    <a href="/Laporan">Laporan</a>
-    <a href="/petaKarbon">Peta Karbon</a>
-    <a href="/masukkanData">Masukkan Data</a>
-    <a href="/profile">Profil</a>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Daftar Keluar"/>
-    </form>
-</div>
+                }, {
+                    name: 'Oil',
+                    marker: {
+                        symbol: 'diamond'
+                    },
+                    data: [1.5, 1.6, 3.3, 12, 10.5, 13.5, 14.5, 14.4, 11.5, 8.7, 4.7, 2.6]
+                }, {
+                    name: 'Water',
+                    marker: {
+                        symbol: 'circle'
+                    },
+                    data: [1.5, 1.6, 3.3, 5.9, 10.5, 13.5, 14.5, 14.4, 11.5, 54, 4.7, 2.6]
+                }, {
+                    name: 'Electric',
+                    marker: {
+                        symbol: 'triangle'
+                    },
+                    data: [1.5, 1.6, 3.3, 5.9, 10.5, 13.5, 14.5, 14.4, 11.5, 8.7, 4.7, 2.6]
+                }]
+            });
+        });
+    </script> -->
 
-<div class="content">
-    <div class="content-left">
-        <div class="content-left-top">
-            <div class="kawasan">
-                <h1><b><span th:text="${area}"></span></b></h1>
-            </div>
-            <div class="population">
-                <h1><b>Jumlah Populasi : </b><span th:text="${totalPopulation}"></span> orang</h1>
-            </div>
-        </div>
-
-        <div class="content-left-middle">
-            <div>
-                
-            </div>
-        </div>
-
-        <div class="content-left-bottom">
-            <div>
-                <h1><b>Penghasilan Karbon : </b><span th:text="${carbonEmission}"></span> Kg</h1>
-            </div>
-        </div>
-        
+    <div class="navbar">
+        <a href="/utama">Laman Utama</a>
+        <a href="/Laporan">Laporan</a>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/masukkanData">Masukkan Data</a>
+        <a href="/profile">Profil</a>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Daftar Keluar" />
+        </form>
     </div>
 
-    <div class="content-right">
-        <div class="time">
-            <h3>
-                Dikemaskini : 
-            </h3>
-            <div class="hari">
-                <p><b><span th:text="${days}"></span></b></p>
-                <p>hari</p>
+    <div class="content">
+        <div class="content-left">
+            <div class="content-left-top">
+                <div class="kawasan">
+                    <h1><b><span th:text="${area}"></span></b></h1>
+                </div>
+                <div class="population">
+                    <h1><b>Jumlah Populasi : </b><span th:text="${totalPopulation}"></span> orang</h1>
+                </div>
             </div>
-            <div class="jam">
-                <p><b><span th:text="${hours}"></span></b></p>
-                <p>jam</p>
+
+            <div class="content-left-middle">
+                <div>
+                    <!-- <div id="line-chart">
+
+                    </div> -->
+                    <div id="pie-chart">
+
+                    </div>
+                </div>
             </div>
-            <div class="minit">
-                <p><b><span th:text="${minutes}"></span></b></p>
-                <p>minit</p>
+
+            <div class="content-left-bottom">
+                <div>
+                    <h1><b>Penghasilan Karbon : </b><span th:text="${carbonEmission}"></span> Kg</h1>
+                </div>
             </div>
-            <div class="saat">
-                <p><b><span th:text="${seconds}"></span></b></p>
-                <p>saat</p>
-            </div>
+
         </div>
 
-        <div class="allData">
-            <div class="sampah">
-                <p><b><span th:text="${rubbishWeight}"></span> Kg</b></p>
-                <p>Sampah</p>
+        <div class="content-right">
+            <div class="time">
+                <h3>
+                    Dikemaskini :
+                </h3>
+                <div class="hari">
+                    <p><b><span th:text="${days}"></span></b></p>
+                    <p>hari</p>
+                </div>
+                <div class="jam">
+                    <p><b><span th:text="${hours}"></span></b></p>
+                    <p>jam</p>
+                </div>
+                <div class="minit">
+                    <p><b><span th:text="${minutes}"></span></b></p>
+                    <p>minit</p>
+                </div>
+                <div class="saat">
+                    <p><b><span th:text="${seconds}"></span></b></p>
+                    <p>saat</p>
+                </div>
             </div>
-            <div class="minyakmasak">
-                <p><b><span th:text="${oilWeight}"></span> L</b></p>
-                <p>Minyak Masak</p>
-            </div>
-            <div class="air">
-                <p><b>RM <span th:text="${waterBill}"></span></b></p>
-                <p>Air</p>
-            </div>
-            <div class="elektrik">
-                <p><b>RM <span th:text="${electricBill}"></span></b></p>
-                <p>Elektrik</p>
+
+            <div class="allData">
+                <div class="sampah">
+                    <p><b><span th:text="${rubbishWeight}"></span> Kg</b></p>
+                    <p>Sampah</p>
+                </div>
+                <div class="minyakmasak">
+                    <p><b><span th:text="${oilWeight}"></span> L</b></p>
+                    <p>Minyak Masak</p>
+                </div>
+                <div class="air">
+                    <p><b>RM <span th:text="${waterBill}"></span></b></p>
+                    <p>Air</p>
+                </div>
+                <div class="elektrik">
+                    <p><b>RM <span th:text="${electricBill}"></span></b></p>
+                    <p>Elektrik</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>
