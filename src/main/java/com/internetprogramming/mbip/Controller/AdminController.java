@@ -1,6 +1,17 @@
 package com.internetprogramming.mbip.Controller;
 
-import jakarta.annotation.Resource;
+import java.text.DecimalFormat;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.internetprogramming.mbip.Entity.ElectricData;
 import com.internetprogramming.mbip.Entity.OilData;
@@ -13,25 +24,7 @@ import com.internetprogramming.mbip.Service.RubbishDao;
 import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-//import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.annotation.Resource;
 
 @Controller
 @RequestMapping("Admin")
@@ -146,21 +139,23 @@ public class AdminController {
     
         for (WaterData waterData : waterDataInArea)
         {
-            waterBill += waterData.getBillAmount();
+            waterBill += waterData.getWaterTotal();
         }
     
         for (ElectricData electricData : electricDataInArea)
         {
-            electricBill += electricData.getBillAmount();
+            electricBill += electricData.getElectricTotal();
         }
 
+        DecimalFormat decimalFormat = new DecimalFormat("#.00");
+        
         model.addAttribute("area", area);
         model.addAttribute("totalPopulation", totalPopulation);
 
-        model.addAttribute("rubbishWeight", rubbishWeight);
-        model.addAttribute("oilWeight", oilWeight);
-        model.addAttribute("waterBill", waterBill);
-        model.addAttribute("electricBill", electricBill);
+        model.addAttribute("rubbishWeight", Double.parseDouble(decimalFormat.format(rubbishWeight)));
+        model.addAttribute("oilWeight", Double.parseDouble(decimalFormat.format(oilWeight)));
+        model.addAttribute("waterBill", Double.parseDouble(decimalFormat.format(waterBill)));
+        model.addAttribute("electricBill", Double.parseDouble(decimalFormat.format(electricBill)));
 
         WaterData latestWaterData = waterDataInArea.stream().max(Comparator.comparing(WaterData::getUpdateTime)).orElse(null);
         ElectricData latestElectricData = electricDataInArea.stream().max(Comparator.comparing(ElectricData::getUpdateTime)).orElse(null);
@@ -207,7 +202,7 @@ public class AdminController {
         carbonEmission += (waterBill*0.419);
         carbonEmission += (electricBill*0.584);
 
-        model.addAttribute("carbonEmission", carbonEmission);
+        model.addAttribute("carbonEmission", decimalFormat.format(carbonEmission));
 
         
         return "Admin/hasilkanLaporan";
