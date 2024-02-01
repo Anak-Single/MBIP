@@ -39,7 +39,7 @@ public class ProfileController {
         return "profile";
     }
 
-    @PostMapping("/profile/save")
+    @GetMapping("/profile/save")
     public String saveProfile(@RequestParam("id") Long id, @ModelAttribute User user, RedirectAttributes redirectAttributes) {
         try {
             userDao.updateUser(id, user);
@@ -47,7 +47,7 @@ public class ProfileController {
         } catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", "Error updating profile: " + e.getMessage());
         }
-        return "redirect:/profile";
+        return "Utama";
     }
 }
 
