@@ -20,6 +20,9 @@ public class ElectricData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "electric_Total")
+    private double electricTotal;
+
     @Column(name = "bill_ID")
     private String billID;
 
@@ -42,8 +45,9 @@ public class ElectricData {
     // Default Constructor
     public ElectricData(){}
 
-    public ElectricData(String billID, String billDate, double billAmount)
+    public ElectricData(double electric_Total, String billID, String billDate, double billAmount)
     {
+        this.electricTotal = electric_Total;
         this.billID = billID;
         this.billDate = billDate;
         this.billAmount = billAmount;
@@ -52,6 +56,10 @@ public class ElectricData {
     }
 
     //Getter
+    public double getElectricTotal()
+    {
+        return electricTotal;
+    }
     public String getBillID()
     {
         return billID;
@@ -77,6 +85,11 @@ public class ElectricData {
     public void setUser(User user)
     {
         this.user = user;
+    }
+    public void setElectricTotal(double electricTotal)
+    {
+        this.updateTime = LocalDateTime.now();
+        this.electricTotal = electricTotal;
     }
     public void setBillID(String billID)
     {

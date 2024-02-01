@@ -20,6 +20,9 @@ public class WaterData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "water_Total")
+    private double waterTotal;
+
     @Column(name = "bill_ID")
     private String billID;
 
@@ -42,8 +45,9 @@ public class WaterData {
     // Default Constructor
     public WaterData(){}
 
-    public WaterData(String billID, String billDate, double billAmount)
+    public WaterData(double waterTotal, String billID, String billDate, double billAmount)
     {
+        this.waterTotal = waterTotal;
         this.billID = billID;
         this.billDate = billDate;
         this.billAmount = billAmount;
@@ -52,6 +56,10 @@ public class WaterData {
     }
 
     //Getter
+    public double getWaterTotal()
+    {
+        return waterTotal;
+    }
     public String getBillID()
     {
         return billID;
@@ -77,6 +85,11 @@ public class WaterData {
     public void setUser(User user)
     {
         this.user = user;
+    }
+    public void setWaterTotal(double waterTotal)
+    {
+        this.updateTime = LocalDateTime.now();
+        this.waterTotal = waterTotal;
     }
     public void setBillID(String billID)
     {
