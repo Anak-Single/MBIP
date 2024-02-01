@@ -91,15 +91,12 @@ public class AdminController {
         long minutes = 0;
         long seconds = 0;
 
-        //if (latestDate != null)
-        //{
-            Duration timeDifference = Duration.between(latestDate, LocalDateTime.now());
+        Duration timeDifference = Duration.between(latestDate, LocalDateTime.now());
 
-            days = timeDifference.toDays();
-            hours = timeDifference.toHoursPart();
-            minutes = timeDifference.toMinutesPart();
-            seconds = timeDifference.toSecondsPart();
-        //}
+        days = timeDifference.toDays();
+        hours = timeDifference.toHoursPart();
+        minutes = timeDifference.toMinutesPart();
+        seconds = timeDifference.toSecondsPart();
 
         model.addAttribute("days", days);
         model.addAttribute("hours", hours);
@@ -192,15 +189,12 @@ public class AdminController {
         long minutes = 0;
         long seconds = 0;
 
-        //if (latestDate != null)
-        //{
-            Duration timeDifference = Duration.between(latestDate, LocalDateTime.now());
+        Duration timeDifference = Duration.between(latestDate, LocalDateTime.now());
 
-            days = timeDifference.toDays();
-            hours = timeDifference.toHoursPart();
-            minutes = timeDifference.toMinutesPart();
-            seconds = timeDifference.toSecondsPart();
-        //}
+        days = timeDifference.toDays();
+        hours = timeDifference.toHoursPart();
+        minutes = timeDifference.toMinutesPart();
+        seconds = timeDifference.toSecondsPart();
 
         model.addAttribute("days", days);
         model.addAttribute("hours", hours);
@@ -215,6 +209,7 @@ public class AdminController {
 
         model.addAttribute("carbonEmission", carbonEmission);
 
+        
         return "Admin/hasilkanLaporan";
     }
 }
