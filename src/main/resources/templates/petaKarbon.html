@@ -4,80 +4,212 @@
 <head>
     <meta charset="UTF-8">
     <title>Peta Karbon</title>
-    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLYdWlDYfd3blgwWil69bW3U1xlygH7wc&callback=initMap"
+        async defer>
+        </script>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/PetaKarbon.css">
+    <script src="/js/PetaKarbon.js"></script>
 
-    <style>
-        .box {
-            width: max-content;
-            height: 300px;
-            padding: 20px;
-            border: 2px solid black;
-            margin: 20px;
-            text-align: center;
-            background-color: rgb(112, 173, 76);
-            border-radius: 15px;
-        }
-
-        .flex-container {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            flex-direction: row;
-            margin: 20px;
-
-        }
-
-        button {
-
-            border: 1px solid black;
-            color: black;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: flex;
-            font-size: 16px;
-            margin: 15px;
-            cursor: pointer;
-            flex-direction: row;
-            border-radius: 10px;
-            width: 170px;
-        }
-
-    </style>
 </head>
 
 <body>
+
     <div class="navbar">
-        <a href="/utama">Laman Utama</a>
-        <a href="/petaKarbon">Peta Karbon</a>
-        <a href="/masukkanData">Masukkan Data</a>
-        <a href="/profile">Profil</a>
+
+        <img src="/images/LCIMS.png" alt="logo" width="100">
+
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <input type="submit" value="Daftar Keluar" />
         </form>
+
+        <a href="/profile">Profil Anda</a>
+        <a href="/masukkanData">Masukkan Data</a>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/Admin/laporan">Hasilkan Laporan</a>
+        <a href="/utama">Laman Utama</a>
+
     </div>
-
     <div class="section">
-        <h1>Peta Karbon</h1>
-        <p>This is the Peta Karbon page content.</p>
         <div class="flex-container">
-            <p><iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90251.34839580668!2d103.61376090675637!3d1.4253617869019526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0c6d922590e1%3A0x1fa40aaceb8992d2!2sIskandar%20Puteri%2C%20Johor!5e0!3m2!1sen!2smy!4v1704267118758!5m2!1sen!2smy"
-                    width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-            </p>
-            <div class="box">
-                <button class="button">Kira Jejak Karbon</button>
-                <button class="button">Peta Karbon</button>
-                <h2>Dikemaskini: </h2>
+            <div class="container">
 
-                <p>155 hari</p>
-                <p>43 jam</p>
-                <p>32 minit</p>
+                <div id="map"></div>
+
+                <div class="box" id="box">
+                    <!-- <button class="button" onclick="openPopup()">Kira Jejak Karbon</button> -->
+                    <!--  <button class="button" onclick="openPopup2()">Peta Karbon</button> -->
+
+                    <div class="dikemaskini">
+                        <h2>Dikemaskini :</h2>
+                        <div class="hari">
+                            <h3><b><span th:text="${days}"></span></b> hari</h3>
+                        </div>
+                        <div class="jam">
+                            <h3><b><span th:text="${hours}"></span></b> jam</h3>
+                        </div>
+                        <div class="minit">
+                            <h3><b><span th:text="${minutes}"></span></b> minit</h3>
+                        </div>
+                        <div class="saat">
+                            <h3><b><span th:text="${seconds}"></span></b> saat</h3>
+                        </div>
+                    </div>
+                </div>
 
             </div>
+
+
+            <div class="overlay" id="overlay">
+
+                <!-- Popup SKUDAI-->
+                <div class="popup" id="Skudai">
+                    <form>
+                        <label for="jumlahSampah">Jumlah Sampah:</label>
+                        <input type="text" id="jumlahSampah" name="jumlahSampah" placeholder="Enter amount"
+                            th:value="${totalWeightSKUDAI}" readonly>
+                        <br>
+                        <label for="minyakMasak">Minyak Masak:</label>
+                        <input type="text" id="minyakMasak" name="minyakMasak" placeholder="Enter amount"
+                            th:value="${oilWeightSKUDAI}" readonly>
+                        <br>
+                        <label for="billAir">Bill Air:</label>
+                        <input type="text" id="billAir" name="billAir" placeholder="Enter amount"
+                            th:value="${waterBillSKUDAI}" readonly>
+                        <br>
+                        <label for="billElektrik">Bill Elektrik:</label>
+                        <input type="text" id="billElektrik" name="billElektrik" placeholder="Enter amount"
+                            th:value="${electricBillSKUDAI}" readonly>
+
+                        <button type="button" onclick="closePopup('Skudai')">ok</button>
+                    </form>
+
+                </div>
+
+                <!-- Popup LIMA KEDAI -->
+                <div class="popup" id="LimaKedai">
+                    <form>
+                        <label for="jumlahSampah">Jumlah Sampah:</label>
+                        <input type="text" id="jumlahSampah" name="jumlahSampah" placeholder="Enter amount"
+                            th:value="${totalWeightLIMA_KEDAI}" readonly>
+                        <br>
+                        <label for="minyakMasak">Minyak Masak:</label>
+                        <input type="text" id="minyakMasak" name="minyakMasak" placeholder="Enter amount"
+                            th:value="${oilWeightLIMA_KEDAI}" readonly>
+                        <br>
+                        <label for="billAir">Bill Air:</label>
+                        <input type="text" id="billAir" name="billAir" placeholder="Enter amount"
+                            th:value="${waterBillLIMA_KEDAI}" readonly>
+                        <br>
+                        <label for="billElektrik">Bill Elektrik:</label>
+                        <input type="text" id="billElektrik" name="billElektrik" placeholder="Enter amount"
+                            th:value="${electricBillLIMA_KEDAI}" readonly>
+
+                        <button type="button" onclick="closePopup('LimaKedai')">ok</button>
+                    </form>
+                </div>
+
+
+                <!-- Popup GELANG PATAH -->
+                <div class="popup" id="GelangPatah">
+                    <form>
+                        <label for="jumlahSampah">Jumlah Sampah:</label>
+                        <input type="text" id="jumlahSampahGelangPatah" name="jumlahSampahGelangPatah"
+                            placeholder="Enter amount" th:value="${totalWeightGELANG_PATAH}" readonly>
+                        <br>
+                        <label for="minyakMasak">Minyak Masak:</label>
+                        <input type="text" id="minyakMasakGelangPatah" name="minyakMasakGelangPatah"
+                            placeholder="Enter amount" th:value="${oilWeightGELANG_PATAH}" readonly>
+                        <br>
+                        <label for="billAir">Bill Air:</label>
+                        <input type="text" id="billAirGelangPatah" name="billAirGelangPatah" placeholder="Enter amount"
+                            th:value="${waterBillGELANG_PATAH}" readonly>
+                        <br>
+                        <label for="billElektrik">Bill Elektrik:</label>
+                        <input type="text" id="billElektrikGelangPatah" name="billElektrikGelangPatah"
+                            placeholder="Enter amount" th:value="${electricBillGELANG_PATAH}" readonly>
+
+                        <button type="button" onclick="closePopup('GelangPatah')">ok</button>
+                    </form>
+                </div>
+
+                <!-- Popup KANGKAR PULAI -->
+                <div class="popup" id="KangkarPulai">
+                    <form>
+                        <label for="jumlahSampah">Jumlah Sampah:</label>
+                        <input type="text" id="jumlahSampahKangkarPulai" name="jumlahSampahKangkarPulai"
+                            placeholder="Enter amount" th:value="${totalWeightKANGKAR_PULAI}" readonly>
+                        <br>
+                        <label for="minyakMasak">Minyak Masak:</label>
+                        <input type="text" id="minyakMasakKangkarPulai" name="minyakMasakKangkarPulai"
+                            placeholder="Enter amount" th:value="${oilWeightKANGKAR_PULAI}" readonly>
+                        <br>
+                        <label for="billAir">Bill Air:</label>
+                        <input type="text" id="billAirKangkarPulai" name="billAirKangkarPulai"
+                            placeholder="Enter amount" th:value="${waterBillKANGKAR_PULAI}" readonly>
+                        <br>
+                        <label for="billElektrik">Bill Elektrik:</label>
+                        <input type="text" id="billElektrikKangkarPulai" name="billElektrikKangkarPulai"
+                            placeholder="Enter amount" th:value="${electricBillKANGKAR_PULAI}" readonly>
+
+                        <button type="button" onclick="closePopup('KangkarPulai')">ok</button>
+                    </form>
+                </div>
+
+                <!-- Popup ISKANDAR PUTERI -->
+                <div class="popup" id="IskandarPuteri">
+                    <form>
+                        <label for="jumlahSampah">Jumlah Sampah:</label>
+                        <input type="text" id="jumlahSampahIskandarPuteri" name="jumlahSampahIskandarPuteri"
+                            placeholder="Enter amount" th:value="${totalWeightISKANDAR_PUTERI}" readonly>
+                        <br>
+                        <label for="minyakMasak">Minyak Masak:</label>
+                        <input type="text" id="minyakMasakIskandarPuteri" name="minyakMasakIskandarPuteri"
+                            placeholder="Enter amount" th:value="${oilWeightISKANDAR_PUTERI}" readonly>
+                        <br>
+                        <label for="billAir">Bill Air:</label>
+                        <input type="text" id="billAirIskandarPuteri" name="billAirIskandarPuteri"
+                            placeholder="Enter amount" th:value="${waterBillISKANDAR_PUTERI}" readonly>
+                        <br>
+                        <label for="billElektrik">Bill Elektrik:</label>
+                        <input type="text" id="billElektrikIskandarPuteri" name="billElektrikIskandarPuteri"
+                            placeholder="Enter amount" th:value="${electricBillISKANDAR_PUTERI}" readonly>
+
+                        <button type="button" onclick="closePopup('IskandarPuteri')">ok</button>
+                    </form>
+                </div>
+
+
+                <!-- Popup ULU CHOH -->
+                <div class="popup" id="UluChoh">
+                    <form>
+                        <label for="jumlahSampah">Jumlah Sampah:</label>
+                        <input type="text" id="jumlahSampahUluChoh" name="jumlahSampahUluChoh"
+                            placeholder="Enter amount" th:value="${totalWeightULU_CHOH}" readonly>
+                        <br>
+                        <label for="minyakMasak">Minyak Masak:</label>
+                        <input type="text" id="minyakMasakUluChoh" name="minyakMasakUluChoh" placeholder="Enter amount"
+                            th:value="${oilWeightULU_CHOH}" readonly>
+                        <br>
+                        <label for="billAir">Bill Air:</label>
+                        <input type="text" id="billAirUluChoh" name="billAirUluChoh" placeholder="Enter amount"
+                            th:value="${waterBillULU_CHOH}" readonly>
+                        <br>
+                        <label for="billElektrik">Bill Elektrik:</label>
+                        <input type="text" id="billElektrikUluChoh" name="billElektrikUluChoh"
+                            placeholder="Enter amount" th:value="${electricBillULU_CHOH}" readonly>
+
+                        <button type="button" onclick="closePopup('UluChoh')">ok</button>
+                    </form>
+                </div>
+            </div>
+
         </div>
     </div>
+    </div>
+
+    
 </body>
 
 </html>

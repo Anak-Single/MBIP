@@ -16,13 +16,13 @@ import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
 
 import java.text.DecimalFormat;
-//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 //import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +33,18 @@ public class HomeController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+   /*  @Autowired
+    private RubbishDao rubbishDao;
+
+    @Autowired
+    private OilDao oilDao;
+
+    @Autowired
+    private WaterDao waterDao;
+
+    @Autowired
+    private ElectricDao electricDao; */
 
     @Resource(name = "userDao")
     private UserDao userDao;
@@ -121,18 +133,16 @@ public class HomeController {
 	{
         User user = new User(username, password,  fullname, age, homeaddress, homearea, role);
 
-        //Sini kena extract table Customer from database
-		List <User> userArray = userDao.findAllUser();
-		
-		for(User tempUser : userArray)
-		{
-			if(username.equals(tempUser.getUserName()))
-			{
-				return "Auth/loginfail";
-			}
-		}
+        // Sini kena extract table Customer from database
+        List<User> userArray = userDao.findAllUser();
+
+        for (User tempUser : userArray) {
+            if (username.equals(tempUser.getUserName())) {
+                return "Auth/loginfail";
+            }
+        }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-		userDao.saveUser(user);
+        userDao.saveUser(user);
         return "Auth/Login";
     }
 

@@ -1,0 +1,145 @@
+.box {
+    width: 250px;
+    padding-top: 40px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    padding-left: 30px;
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    background-color: #50c878;
+    border-style: solid;
+    border-radius: 25px;
+    border-width: 5px;
+    border-color: black;
+    text-align: center;
+
+}
+
+/* .box2 {
+    width: max-content;
+    height: 100px;
+    padding: 20px;
+    border: 2px solid black;
+    text-align: center;
+    background-color: rgb(133, 189, 101);
+    border-radius: 15px;
+    position: absolute;
+    right: 75px;
+
+    top: 50px;
+    
+} */
+
+.flex-container {
+    width: 100%;
+    height: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button {
+    border: 1px solid black;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+    margin: 15px;
+    cursor: pointer;
+    flex-direction: row;
+    border-radius: 10px;
+    width: 170px;
+
+}
+
+/* .container {
+     border: 2px solid black; 
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+   
+} */
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+   
+}
+
+
+.popup {
+    width: 350px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    background-color: #50c878;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1001;
+    text-align: end;
+
+}
+
+/* .popup2 {
+    width: 350px;
+    display: none;
+    position: absolute;
+    right: 75px;
+    top: 50px;
+    transform: translate(-50%, -50%);
+    color: rgb(54, 88, 33);
+    background-color: rgb(133, 189, 101);
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1001;
+    text-align: end;
+  
+} */
+
+
+
+.popup button {
+
+    background-color: rgb(54, 88, 33);
+    color: white;
+    margin-left: auto;
+    padding: 5px 10px 5px 10px;
+    display: flex;
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid black;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 15px;
+    margin-left: 15px;
+}
+
+#map {
+    height: 640px;
+    width: 1515px;
+}
+
+h3 {
+    text-decoration-color: #333;
+    font-size: 20px;
+}
+
+b {
+    font-size: 30px;
+}
