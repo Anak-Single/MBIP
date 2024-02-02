@@ -232,13 +232,14 @@ public class MasukDataController {
 
     @GetMapping("/muatNaikBilAir")
     public String muatNaikBilAir(Model model,
+                                 @RequestParam("waterTotal") Double waterTotal,
                                  @RequestParam("billID") String billID,
                                  @RequestParam("tarikhBill") String tarikhBill,
                                  @RequestParam("billAmount") Double billAmount) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userDao.findByUserName(username);
 
-        WaterData water = new WaterData(billID, tarikhBill, billAmount);
+        WaterData water = new WaterData(waterTotal, billID, tarikhBill, billAmount);
         water.setUser(user);
         waterDao.saveData(water);
 
@@ -279,13 +280,14 @@ public class MasukDataController {
 
     @GetMapping("/muatNaikBilElektrik")
     public String muatNaikBilElektrik(Model model,
+                                      @RequestParam("ElectricTotal") Double electricTotal,
                                       @RequestParam("billID") String billID,
                                       @RequestParam("tarikhBill") String tarikhBill,
                                       @RequestParam("billAmount") Double billAmount) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userDao.findByUserName(username);
 
-        ElectricData electric = new ElectricData(billID, tarikhBill, billAmount);
+        ElectricData electric = new ElectricData(electricTotal, billID, tarikhBill, billAmount);
         electric.setUser(user);
 
         electricDao.saveData(electric);

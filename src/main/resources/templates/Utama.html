@@ -3,73 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <title>Utama</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        .navbar a:hover {
-            background: #ddd;
-            color: black;
-        }
-        .header {
-            padding: 60px;
-            text-align: center;
-            background: #50c878;
-            color: white;
-        }
-        .section {
-            padding: 60px;
-            background: #f2f2f2;
-        }
-        .section h1 {
-            font-size: 2em;
-            color: #333;
-        }
-        .footer {
-            padding: 20px;
-            text-align: center;
-            background: #333;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/navbar.css">
 </head>
 <body>
 
 <div class="navbar">
-    <a href="/utama">Laman Utama</a>
-    <a href="/petaKarbon">Peta Karbon</a>
+    <img src="/images/LCIMS.png" alt="logo" width="100">
+    
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Daftar Keluar"/>
+        </form>
+    
+    <a href="/profile">Profil Anda</a>
     <a href="/masukkanData">Masukkan Data</a>
-    <a href="/profile">Profil</a>
-    <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Daftar Keluar"/>
-    </form>
+    <a href="/petaKarbon">Peta Karbon</a>
+    <a href="/utama">Laman Utama</a>
 </div>
 
 <div class="header">
  <h1>SELAMAT DATANG !</h1>
  <p>Majlis Bandaraya Iskandar Puteri</p>
+ <p>Low Carbon Inititative Monitoring System</p>
 </div>
 
-<div class="section">
- <h1>Pengurangan Karbon pada semua sektor</h1>
- <p>...</p>
+<div class = "content">
+    <div class="section">
+        <p>Pengurangan Karbon </p>
+        <img src="/images/factory.jpg">
+    </div>
+    <div class="section">
+        <p>Ke arah gaya hidup yang mudah</p>
+        <img src="/images/nature.jpg">
+    </div>
+    <div class="section">
+        <p>Mesra Alam Sekitar<br></p>
+        <img src="/images/turtle.jpg">
+    </div>
 </div>
 
-<div class="section">
- <h1>Mesra Alam Sekitar</h1>
- <p>...</p>
+<div class = "summary">
+    <div class = "tajuk">
+        <h1>Impak Keseluruhan</h1>
+        <p>Kami berdedikasi untuk meningkatkan dan menambah baik alam sekitar</p>
+    </div>
+    <div class = "ringkasan">
+        <div class="data">
+            <div class="simbol">
+                <img src="/images/water.png">
+            </div>
+            <div class="keterangan">
+                <p> <td th:text="${totalWater}"></td> L </p>
+                <h2>Penggunaan <br>Air </h2>
+                
+            </div>
+        </div>
+        <div class="data">
+            <div class="simbol">
+                <img src="/images/electric.png">
+            </div>
+            <div class="keterangan">
+                <p> RM <td th:text="${totalElectric}"></td></p>
+                <h2>Penggunaan Elektrik</h2>
+                
+            </div>
+        </div>
+        <div class="data">
+            <div class="simbol">
+                <img src="/images/waste.png">
+            </div>
+            <div class="keterangan">
+                <p> <td th:text="${totalRubbish}"></td> KG </p>
+                <h2>Sampah yang terhasil</h2>
+                
+            </div>
+        </div>
+        <div class="data">
+            <div class="simbol">
+                <img src="/images/oil.png">
+            </div>
+            <div class="keterangan">
+                <p> <td th:text="${totalOil}"></td> L </p>
+                <h2>Penggunaan Minyak Masak</h2>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="info">
+    <div class="kandungan">
+        <h1>01.</h1>
+        <h2>Apa yang kami buat ?</h2>
+        <ul>
+            <li>Lesen dan Permit</li>
+            <li>Penguatkuasaan Alam sekitar</li>
+        </ul>
+    </div>
+    <div class="kandungan">
+        <h1>02.</h1>
+        <h2>Sumber untuk</h2>
+        <ul>
+            <li>Penduduk</li>
+            <li>Pendidik</li>
+        </ul>
+    </div>
+    <div class="kandungan">
+        <h1>03.</h1>
+        <h2>Program</h2>
+        <ul>
+            <li>Pendidikan Alam sekitar</li>
+            <li>Pengurusan sisa mampan</li>
+        </ul>
+    </div>
 </div>
 
 <div class="footer">

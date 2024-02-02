@@ -12,3 +12,4 @@ public enum HomeArea {
         return this.name();
     }
 }
+

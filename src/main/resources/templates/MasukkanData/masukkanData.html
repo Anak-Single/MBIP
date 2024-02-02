@@ -1,12 +1,124 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Masukkan Data</title>
 
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            background-color: #333;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .section {
+            padding: 80px;
+            text-align: center;
+            background: #f4f4f4;
+            height: 100vh;
+        }
+
+        .content {
+            display: inline-block;
+            text-align: left;
+            margin: 0 auto;
+            width: 50%;
+        }
+
+        h1 {
+            font-size: 2rem;
+            color: #333;
+        }
+
+        .timer {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 2rem;
+        }
+
+        .timer div {
+            border: 1px solid #333;
+            border-radius: 50%;
+            width: 8rem;
+            height: 8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 1rem;
+        }
+
+        .timer div p {
+            margin: 0;
+            line-height: 1.5;
+            font-size: 2rem;
+        }
+
+        .inputData {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .utiliti,
+        .sisa {
+            background-color: #333;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+
+        .utiliti:hover,
+        .sisa:hover {
+            background-color: #444;
+        }
+
+        .navbar button[type="submit"] {
+            position: absolute;
+            right: 1rem;
+            top: 1%;
+            bottom: 5000;
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 511px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="Masukkandata.css">
 </head>
+
 <body>
     <div class="navbar">
         <a href="/utama">Laman Utama</a>
@@ -14,7 +126,7 @@
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <button type="submit">Sign Out</button>
         </form>
     </div>
     <div class="section">
@@ -38,20 +150,21 @@
                     <p>saat</p>
                 </div>
             </div>
-            <div class = "inputData">
+            <div class="inputData">
                 <a href="/masukkanData/pilihUtiliti">
-                    <div class = "utiliti">
+                    <div class="utiliti">
                         <p><b>Muat naik bil Utiliti</b></p>
                     </div>
                 </a>
                 <a href="/masukkanData/pilihSisa">
-                    <div class = "sisa" >
+                    <div class="sisa">
                         <p><b>Masukkan berat sisa</b></p>
                     </div>
                 </a>
-                
+
             </div>
         </div>
     </div>
 </body>
+
 </html>
