@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Peta Karbon</title>
-    <link rel="stylesheet" href="/js/navbar.css">
+    <link rel="stylesheet" href="/css/navbar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .box {
@@ -157,18 +157,17 @@
             <div class="container">
 
 
-                <p><iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90251.34839580668!2d103.61376090675637!3d1.4253617869019526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0c6d922590e1%3A0x1fa40aaceb8992d2!2sIskandar%20Puteri%2C%20Johor!5e0!3m2!1sen!2smy!4v1704267118758!5m2!1sen!2smy"
-                        width="1200" height="600" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <p>
+                    <img src="/images/IP.png" alt="Iskandar Puteri Map" width="1200" height="600"  loading="lazy">
+
                 </p>
                 <div class="box" id="box">
                     <!-- <button class="button" onclick="openPopup()">Kira Jejak Karbon</button> -->
                     <button class="button" onclick="openPopup2()">Peta Karbon</button>
                     <h2>Dikemaskini: </h2>
-                    <p>0 hari</p>
-                    <p>0 jam</p>
-                    <p>5 minit</p>
+                    <p th:text="${days} + ' hari'"></p>
+                    <p th:text="${hours} + ' jam'"></p>
+                    <p th:text="${minutes} + ' minit'"></p>
                 </div>
                 <!-- Skudai -->
                 <button class="button"

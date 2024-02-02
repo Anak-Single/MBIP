@@ -94,7 +94,7 @@ public class PetaKarbonController {
         List<WaterData> waterDataInArea = new ArrayList<>();
     
         for (User user : usersInArea) {
-            waterDataInArea.addAll(waterDao.findDataByUserId(user.getId()));
+            waterDataInArea.addAll(waterDao.findBillsByUserId(user.getId()));
         }
     
         for (WaterData waterData : waterDataInArea) {

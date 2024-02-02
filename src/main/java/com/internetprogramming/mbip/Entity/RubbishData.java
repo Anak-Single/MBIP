@@ -65,6 +65,8 @@ public class RubbishData
     {
         return updateTime;
     }
+
+    
     
     //Setter
     public void setUser(User user)
