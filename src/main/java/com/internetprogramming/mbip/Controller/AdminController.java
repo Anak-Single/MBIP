@@ -27,7 +27,7 @@ import com.internetprogramming.mbip.Service.WaterDao;
 import jakarta.annotation.Resource;
 
 @Controller
-@RequestMapping("Admin")
+@RequestMapping("/Admin")
 public class AdminController {
     
     @Resource(name = "userDao")
@@ -46,7 +46,44 @@ public class AdminController {
     private RubbishDao rubbishDao;
 
     @GetMapping("/dashboard")
-    public String dashboard() {
+    public String dashboard(Model model) {
+
+        List <WaterData> water = waterDao.findAllData();
+        List <ElectricData> electric = electricDao.findAllData();
+        List <OilData> oil = oilDao.findAllData();
+        List <RubbishData> rubbish = rubbishDao.findAllData();
+
+        double totalWater = 0;
+        for(WaterData tempWater : water)
+        {
+            totalWater += tempWater.getWaterTotal();
+        }
+
+        double totalElectric = 0;
+        for(ElectricData tempElectric : electric)
+        {   
+            totalElectric += tempElectric.getElectricTotal();
+        }
+
+        double totalOil = 0;
+        for(OilData tempOil : oil)
+        {
+            totalOil += tempOil.getWeight();
+        }
+
+        double totalRubbish = 0;
+        for(RubbishData tempRubbish : rubbish)
+        {
+            totalRubbish += tempRubbish.getWeight();
+        }
+
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
+
+        model.addAttribute("totalWater", decimalFormat.format(totalWater));
+        model.addAttribute("totalElectric", decimalFormat.format(totalElectric));
+        model.addAttribute("totalOil", decimalFormat.format(totalOil));
+        model.addAttribute("totalRubbish", decimalFormat.format(totalRubbish));
+
         return "Admin/utama";
     }
 
