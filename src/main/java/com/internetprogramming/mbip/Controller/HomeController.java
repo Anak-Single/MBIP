@@ -2,8 +2,18 @@ package com.internetprogramming.mbip.Controller;
 
 import jakarta.annotation.Resource;
 
+import org.springframework.ui.Model;
+
+import com.internetprogramming.mbip.Entity.ElectricData;
+import com.internetprogramming.mbip.Entity.OilData;
+import com.internetprogramming.mbip.Entity.RubbishData;
 import com.internetprogramming.mbip.Entity.User;
+import com.internetprogramming.mbip.Entity.WaterData;
+import com.internetprogramming.mbip.Service.ElectricDao;
+import com.internetprogramming.mbip.Service.OilDao;
+import com.internetprogramming.mbip.Service.RubbishDao;
 import com.internetprogramming.mbip.Service.UserDao;
+import com.internetprogramming.mbip.Service.WaterDao;
 
 //import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +33,19 @@ public class HomeController {
     private PasswordEncoder passwordEncoder;
 
     @Resource(name = "userDao")
-	private UserDao userDao;
+    private UserDao userDao;
+
+    @Resource(name = "waterDao")
+    private WaterDao waterDao;
+
+    @Resource(name = "electricDao")
+    private ElectricDao electricDao;
+
+    @Resource(name = "oilDao")
+    private OilDao oilDao;
+
+    @Resource(name = "rubbishDao")
+    private RubbishDao rubbishDao;
 
     @GetMapping("/")
     public String index() {
@@ -31,7 +53,41 @@ public class HomeController {
     }
 
     @GetMapping("/utama")
-    public String utama() {
+    public String utama(Model model) {
+        List <WaterData> water = waterDao.findAllData();
+        List <ElectricData> electric = electricDao.findAllData();
+        List <OilData> oil = oilDao.findAllData();
+        List <RubbishData> rubbish = rubbishDao.findAllData();
+
+        double totalWater = 0;
+        for(WaterData tempWater : water)
+        {
+            totalWater += tempWater.getBillAmount();
+        }
+
+        double totalElectric = 0;
+        for(ElectricData tempElectric : electric)
+        {
+            totalElectric += tempElectric.getBillAmount();
+        }
+
+        double totalOil = 0;
+        for(OilData tempOil : oil)
+        {
+            totalOil += tempOil.getWeight();
+        }
+
+        double totalRubbish = 0;
+        for(RubbishData tempRubbish : rubbish)
+        {
+            totalRubbish += tempRubbish.getWeight();
+        }
+
+        model.addAttribute("totalWater", totalWater);
+        model.addAttribute("totalElectric", totalElectric);
+        model.addAttribute("totalOil", totalOil);
+        model.addAttribute("totalRubbish", totalRubbish);
+
         return "Utama";
     }
 
