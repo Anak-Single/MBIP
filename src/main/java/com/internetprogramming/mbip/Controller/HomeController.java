@@ -66,15 +66,17 @@ public class HomeController {
     }
 
     @GetMapping("/register")
-    public String register(@RequestParam("fullname") String fullname,
-            @RequestParam("username") String username,
-            @RequestParam("password") String password,
-            @RequestParam("age") int age,
-            @RequestParam("homeaddress") String homeaddress,
-            @RequestParam("homearea") String homearea) {
+    public String register( @RequestParam("fullname") String fullname,
+							@RequestParam("username") String username,
+							@RequestParam("password") String password,
+                            @RequestParam("age") int age,
+                            @RequestParam("homeaddress") String homeaddress,
+                            @RequestParam("homearea") String homearea,
+                            @RequestParam("role") String role)
+	{
         HomeArea enumhome = HomeArea.valueOf(homearea);
 
-        User user = new User(username, password, fullname, age, homeaddress, enumhome);
+        User user = new User(username, password,  fullname, age, homeaddress, enumhome, role);
 
         // Sini kena extract table Customer from database
         List<User> userArray = userDao.findAllUser();
@@ -123,5 +125,14 @@ public class HomeController {
         return "lamanUtama";
     }
 
+    @GetMapping("/petaKarbon")
+    public String petaKarbon() {
+        return "petaKarbon";
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "/access-denied";
+    }
     
 }

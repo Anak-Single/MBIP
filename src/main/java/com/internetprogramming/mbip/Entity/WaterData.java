@@ -47,7 +47,7 @@ public class WaterData {
         this.billID = billID;
         this.billDate = billDate;
         this.billAmount = billAmount;
-        this.creationTime = LocalDate.now();
+        this.creationTime = LocalDate.parse(billDate);
         this.updateTime = LocalDateTime.now();
     }
 

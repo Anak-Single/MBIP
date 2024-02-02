@@ -49,6 +49,7 @@ public class RubbishData
         this.type = type;
         this.weight = weight;
         this.creationTime = LocalDate.now();
+        this.updateTime = LocalDateTime.now();
     }
 
     //Getter
@@ -60,9 +61,9 @@ public class RubbishData
     {
         return weight;
     }
-
-    public String getHomeArea() {
-        return homeArea;
+    public LocalDateTime getUpdateTime()
+    {
+        return updateTime;
     }
     
     //Setter
