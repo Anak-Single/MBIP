@@ -1,12 +1,118 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Pilih Sisa</title>
 
+    <style>
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #006851;
+            width: 200px;
+            height: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            display: block;
+            color: #fff;
+            padding: 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #333;
+        }
+
+        .navbar form {
+            margin-top: auto;
+        }
+
+        .navbar button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .navbar::before {
+            content: "";
+            position: absolute;
+            top: 5;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            filter: brightness(70%);
+            z-index: -1;
+        }
+
+        .container {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f8f8f8;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 80px;
+        }
+
+        .content {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 0;
+        }
+
+        .utiliti {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .utiliti a {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .utiliti div {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            flex-basis: calc(50% - 10px);
+            transition: transform 0.3s ease;
+        }
+
+        .utiliti div:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+
     <link rel="stylesheet" href="navbar.css">
     <link rel="stylesheet" href="Masukkandata.css">
 </head>
+
 <body>
     <div class="navbar">
         <a href="/utama">Laman Utama</a>
@@ -14,26 +120,27 @@
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/profile">Profil</a>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <button type="submit">Sign Out</button>
         </form>
     </div>
-    <div class="section">
+    <div class="container">
         <div class="content">
             <h1>Pilih jenis sisa :</h1>
-            <div class = "utiliti">
+            <div class="utiliti">
                 <a href="/masukkanData/sampah">
-                    <div class = "sampah">
+                    <div class="sampah">
                         <p><b>Bil Sampah</b></p>
                     </div>
                 </a>
                 <a href="/masukkanData/minyak">
-                    <div class = "minyak"></div>
-                        <p><b>Bil Minyak</b></p>
-                    </div>
-                </a>
-                
+                    <div class="minyak"></div>
+                    <p><b>Bil Minyak</b></p>
             </div>
+            </a>
+
         </div>
     </div>
+    </div>
 </body>
+
 </html>
