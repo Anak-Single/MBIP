@@ -35,7 +35,7 @@ public class HomeController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Autowired
+   /*  @Autowired
     private RubbishDao rubbishDao;
 
     @Autowired
@@ -45,7 +45,7 @@ public class HomeController {
     private WaterDao waterDao;
 
     @Autowired
-    private ElectricDao electricDao;
+    private ElectricDao electricDao; */
 
     @Resource(name = "userDao")
     private UserDao userDao;
