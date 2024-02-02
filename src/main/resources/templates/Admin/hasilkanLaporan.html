@@ -51,6 +51,59 @@
             background: #333;
             color: white;
         }
+
+        .content {
+            height: 670px;
+            background-color: #73ac66;
+            display: flex;
+            justify-content: center;
+        }
+        .content-left {
+            margin-right: 100px;
+            width: 60%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .content-left-top {
+            display: flex;
+            justify-content: center;
+        }
+        .kawasan {
+            text-align: center;
+            margin: 5px;
+            width: 30%;
+            background-color: #d4decf;
+        }
+        .population {
+            text-align: center;
+            margin-bottom: 5px;
+            width: 70%;
+        }
+        .content-left-middle {
+            margin: 5px;
+        }
+        .content-left-bottom {
+            margin: 5px;
+            text-align: center;
+        }
+        .content-right {
+            width: 20%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+        }
+        .time {
+            margin-top: 50px;
+            margin-bottom: 5px;
+            background-color: #d4decf;
+        }
+        .allData {
+            background-color: #d4decf;
+        }
+        b {
+            font-size: 30px;
+        }
     </style>
 </head>
 
@@ -230,20 +283,13 @@
                     Dikemaskini :
                 </h3>
                 <div class="hari">
-                    <p><b><span th:text="${days}"></span></b></p>
-                    <p>hari</p>
+                    <h3><b><span th:text="${days}"></span></b> hari</h3>
                 </div>
                 <div class="jam">
-                    <p><b><span th:text="${hours}"></span></b></p>
-                    <p>jam</p>
+                    <h3><b><span th:text="${hours}"></span></b> jam</h3>
                 </div>
                 <div class="minit">
-                    <p><b><span th:text="${minutes}"></span></b></p>
-                    <p>minit</p>
-                </div>
-                <div class="saat">
-                    <p><b><span th:text="${seconds}"></span></b></p>
-                    <p>saat</p>
+                    <h3><b><span th:text="${minutes}"></span></b> minit</h3>
                 </div>
             </div>
 
