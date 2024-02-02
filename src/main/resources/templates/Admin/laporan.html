@@ -43,54 +43,6 @@
             background: #333;
             color: white;
         }
-        .menu {
-            width: 100%;
-            height: 100%;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .option {
-            width: 250px;
-            padding-top: 40px;
-            padding-right:30px;
-            padding-bottom: 30px;
-            padding-left:30px;
-            position: absolute;
-            top: 20%;
-            right: 5%;
-            background-color: #50c878;
-            border-style: solid;
-            border-radius: 25px;
-            border-width: 5px;
-            border-color: black;
-            text-align: center;
-        }
-        .pilihkawasan {
-            font-size: 25px;
-        }
-        .dikemaskini {
-            padding-bottom: 15px;
-        }
-        h2, h3 {
-            text-decoration-color: #333;
-            font-size: 20px;
-        }
-        b {
-            font-size: 30px;
-        }
-        input {
-            background-color: darkolivegreen;
-            color: aliceblue;
-            border-radius: 10px;
-            padding: 15px;
-        }
-        #area {
-            text-decoration: solid;
-            text-align: center;
-            border-radius: 15px;
-            padding: 10px;
-        }
     </style>
 </head>
 <body>
@@ -107,47 +59,41 @@
 </div>
 
 <div class="menu">
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d90251.34839580668!2d103.61376090675637!3d1.4253617869019526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da0c6d922590e1%3A0x1fa40aaceb8992d2!2sIskandar%20Puteri%2C%20Johor!5e0!3m2!1sen!2smy!4v1704267118758!5m2!1sen!2smy"
-        width="1520" height="670" style="border:0;" allowfullscreen="" loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+    <form action="/Admin/hasilkanLaporan" method="get">
+        <div class="pilihkawasan">
+            <label for="area">Pilih kawasan :</label>
+            <select id="area" name="area" required>
+                <option value="SKUDAI">SKUDAI</option>
+                <option value="LIMA KEDAI">LIMA KEDAI</option>
+                <option value="GELANG PATAH">GELANG PATAH</option>
+                <option value="KANGKAR PULAI">KANGKAR PULAI</option>
+                <option value="ISKANDAR PUTERI">ISKANDAR PUTERI</option>
+                <option value="ULU CHOH">ULU CHOH</option>
+            </select>
+        </div>
 
-    <div class="option">
-        <form action="/Admin/hasilkanLaporan" method="get">
-            <div class="pilihkawasan">
-                <h2>Pilih kawasan :</h2>
-                <label for="area"></label>
-                <select id="area" name="area" required>
-                    <option value="SKUDAI">SKUDAI</option>
-                    <option value="LIMA KEDAI">LIMA KEDAI</option>
-                    <option value="GELANG PATAH">GELANG PATAH</option>
-                    <option value="KANGKAR PULAI">KANGKAR PULAI</option>
-                    <option value="ISKANDAR PUTERI">ISKANDAR PUTERI</option>
-                    <option value="ULU CHOH">ULU CHOH</option>
-                </select>
+        <div class="dikemaskini">
+            <div class="hari">
+                <p><b><span th:text="${days}"></span></b></p>
+                <p>hari</p>
             </div>
-
-            <div class="dikemaskini">
-                <h2>Dikemaskini :</h2>
-                <div class="hari">
-                    <h3><b><span th:text="${days}"></span></b> hari</h3>
-                </div>
-                <div class="jam">
-                    <h3><b><span th:text="${hours}"></span></b> jam</h3>
-                </div>
-                <div class="minit">
-                    <h3><b><span th:text="${minutes}"></span></b> minit</h3>
-                </div>
-                <div class="saat">
-                    <h3><b><span th:text="${seconds}"></span></b> saat</h3>
-                </div>
+            <div class="jam">
+                <p><b><span th:text="${hours}"></span></b></p>
+                <p>jam</p>
             </div>
-            <div class="button">
-                <input type="submit" value="Hasilkan Laporan">
+            <div class="minit">
+                <p><b><span th:text="${minutes}"></span></b></p>
+                <p>minit</p>
             </div>
-        </form>
-    </div>
+            <div class="saat">
+                <p><b><span th:text="${seconds}"></span></b></p>
+                <p>saat</p>
+            </div>
+        </div>
+        <div class="button">
+            <input type="submit" value="Hasilkan Laporan">
+        </div>
+    </form>
 </div>
 
 </body>
