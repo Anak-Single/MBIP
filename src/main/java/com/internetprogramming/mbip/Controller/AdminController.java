@@ -50,7 +50,7 @@ public class AdminController {
         return "Admin/utama";
     }
 
-    @GetMapping("/Laporan")
+    @GetMapping("/laporan")
     public String laporan(Model model) {
         List<WaterData> water = waterDao.findAllData();
         List<ElectricData> electric = electricDao.findAllData();

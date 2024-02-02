@@ -4,107 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Utama</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .navbar {
-            overflow: hidden;
-            background-color: #333;
-        }
-
-        .navbar a {
-            float: left;
-            display: block;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            background: #ddd;
-            color: black;
-        }
-
-        .header {
-            padding: 60px;
-            text-align: center;
-            background: #50c878;
-            color: white;
-        }
-
-        .section {
-            padding: 60px;
-            background: #f2f2f2;
-        }
-
-        .section h1 {
-            font-size: 2em;
-            color: #333;
-        }
-
-        .footer {
-            padding: 20px;
-            text-align: center;
-            background: #333;
-            color: white;
-        }
-
-        .content {
-            height: 670px;
-            background-color: #73ac66;
-            display: flex;
-            justify-content: center;
-        }
-        .content-left {
-            margin-right: 100px;
-            width: 60%;
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .content-left-top {
-            display: flex;
-            justify-content: center;
-        }
-        .kawasan {
-            text-align: center;
-            margin: 5px;
-            width: 30%;
-            background-color: #d4decf;
-        }
-        .population {
-            text-align: center;
-            margin-bottom: 5px;
-            width: 70%;
-        }
-        .content-left-middle {
-            margin: 5px;
-        }
-        .content-left-bottom {
-            margin: 5px;
-            text-align: center;
-        }
-        .content-right {
-            width: 20%;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-        }
-        .time {
-            margin-top: 50px;
-            margin-bottom: 5px;
-            background-color: #d4decf;
-        }
-        .allData {
-            background-color: #d4decf;
-        }
-        b {
-            font-size: 30px;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/hasilkanLaporan.css">
 </head>
 
 <body>
@@ -237,14 +138,18 @@
     </script> -->
 
     <div class="navbar">
-        <a href="/utama">Laman Utama</a>
-        <a href="/Laporan">Laporan</a>
-        <a href="/petaKarbon">Peta Karbon</a>
+  
+        <img src="/images/LCIMS.png" alt="logo" width="100">
+        
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Daftar Keluar"/>
+            </form>
+        
+        <a href="/profile">Profil Anda</a>
         <a href="/masukkanData">Masukkan Data</a>
-        <a href="/profile">Profil</a>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Daftar Keluar" />
-        </form>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/Admin/laporan">Hasilkan Laporan</a>
+        <a href="/utama">Laman Utama</a>
     </div>
 
     <div class="content">
