@@ -129,9 +129,10 @@ public class HomeController {
                             @RequestParam("age") int age,
                             @RequestParam("homeaddress") String homeaddress,
                             @RequestParam("homearea") String homearea,
+                            @RequestParam("HouseHold") int houseHold,
                             @RequestParam("role") String role)
 	{
-        User user = new User(username, password,  fullname, age, homeaddress, homearea, role);
+        User user = new User(username, password,  fullname, age, homeaddress, homearea, houseHold, role);
 
         // Sini kena extract table Customer from database
         List<User> userArray = userDao.findAllUser();

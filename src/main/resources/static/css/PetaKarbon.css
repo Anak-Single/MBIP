@@ -131,8 +131,9 @@ label {
 }
 
 #map {
-    height: 640px;
-    width: 1515px;
+    max-width: 100%; /* Set a maximum width */
+    height: 86vh;    /* 60% of the viewport height */
+    width: 100%;     /* 100% of the viewport width */
 }
 
 h3 {

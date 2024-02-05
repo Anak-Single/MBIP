@@ -32,7 +32,7 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/Admin/**").hasAuthority("ADMIN")
-                .requestMatchers("/","/registerform", "/register", "/images/**").permitAll()
+                .requestMatchers("/","/registerform", "/register", "/images/**", "/css/**").permitAll()
                 .anyRequest().authenticated()
             )
             .formLogin(form -> form
