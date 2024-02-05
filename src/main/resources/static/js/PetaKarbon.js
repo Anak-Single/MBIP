@@ -8,13 +8,6 @@ function closePopup(popupId) {
     document.getElementById(popupId).style.display = "none";
 }
 
-/*   function openPopup2() {
-      document.getElementById("popup2").style.display = "block";
-  }
-
-  function closePopup2() {
-      document.getElementById("popup2").style.display = "none";
-  } */
 
 function initMap() {
     const options = {
