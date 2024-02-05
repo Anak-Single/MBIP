@@ -3,7 +3,7 @@
 
 <head>
     <title>Profile</title>
-    <style>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
         body {
@@ -338,14 +338,15 @@
 
         }
     </style>
+
 </head>
 
 <body>
     <div class="navbar">
-        <a href="/utama">Laman Utama</a>
-        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/profile">Profil Anda</a>
         <a href="/masukkanData">Masukkan Data</a>
-        <a href="/profile">Profil</a>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/utama">Laman Utama</a>
         <form th:action="@{/logout}" method="post">
             <input type="submit" value="Daftar Keluar" />
         </form>
