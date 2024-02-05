@@ -53,7 +53,7 @@ public class PetaKarbonController {
         processArea("KANGKAR_PULAI", model);
         processArea("ISKANDAR_PUTERI", model);
         processArea("ULU_CHOH", model);
-
+        
         List<WaterData> water = waterDao.findAllData();
         List<ElectricData> electric = electricDao.findAllData();
         List<RubbishData> rubbish = rubbishDao.findAllData();
@@ -168,5 +168,6 @@ public class PetaKarbonController {
 
         model.addAttribute("electricBill" + area, electricBill);
     }
-
+        
 }
+
