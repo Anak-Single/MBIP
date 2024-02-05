@@ -15,8 +15,7 @@ import com.internetprogramming.mbip.Service.RubbishDao;
 import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
 
-import java.util.ArrayList;
-//import java.util.ArrayList;
+import java.text.DecimalFormat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,13 +76,13 @@ public class HomeController {
         double totalWater = 0;
         for(WaterData tempWater : water)
         {
-            totalWater += tempWater.getBillAmount();
+            totalWater += tempWater.getWaterTotal();
         }
 
         double totalElectric = 0;
         for(ElectricData tempElectric : electric)
         {
-            totalElectric += tempElectric.getBillAmount();
+            totalElectric += tempElectric.getElectricTotal();
         }
 
         double totalOil = 0;
@@ -98,12 +97,24 @@ public class HomeController {
             totalRubbish += tempRubbish.getWeight();
         }
 
-        model.addAttribute("totalWater", totalWater);
-        model.addAttribute("totalElectric", totalElectric);
-        model.addAttribute("totalOil", totalOil);
-        model.addAttribute("totalRubbish", totalRubbish);
+         DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
-        return "Utama";
+        model.addAttribute("totalWater", decimalFormat.format(totalWater));
+        model.addAttribute("totalElectric", decimalFormat.format(totalElectric));
+        model.addAttribute("totalOil", decimalFormat.format(totalOil));
+        model.addAttribute("totalRubbish", decimalFormat.format(totalRubbish));
+
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userDao.findByUserName(username);
+        if(user.getRole().equals("ADMIN"))
+        {
+            return "redirect:/Admin/dashboard";
+        }
+        else
+        {
+            return "Utama";
+        }
+
     }
 
     @GetMapping("/registerform")
@@ -135,12 +146,10 @@ public class HomeController {
         return "Auth/Login";
     }
 
-    @GetMapping("/lamanUtama")
-    public String lamanUtama() {
-        return "lamanUtama";
+    @GetMapping("/petaKarbon")
+    public String petaKarbon() {
+        return "petaKarbon";
     }
-
-
 
     @GetMapping("/access-denied")
     public String accessDenied() {
