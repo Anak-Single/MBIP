@@ -146,11 +146,6 @@ public class HomeController {
         return "Auth/Login";
     }
 
-    @GetMapping("/petaKarbon")
-    public String petaKarbon() {
-        return "petaKarbon";
-    }
-
     @GetMapping("/access-denied")
     public String accessDenied() {
         return "/access-denied";
