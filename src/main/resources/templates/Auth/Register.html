@@ -57,20 +57,26 @@
 
             </br></br>
             <div>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required>
+                <label for="age">Age:</label><br>
+                <input type="number" id="age" name="age" required>
             </div>
 
             </br></br>
             <div>
-                <label for="age">Age:</label><br>
-                <input type="number" id="age" name="age" required>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required>
             </div>
             
             </br></br>
             <div>
                 <label for="homeaddress">Address:</label><br>
                 <input type="text" id="homeaddress" name="homeaddress" required>
+            </div>
+
+            </br></br>
+            <div>
+                <label for="confirmpassword">Confirm Password:</label><br>
+                <input type="password" id="confirmpassword" name="confirmpassword" required>
             </div>
 
             </br></br>
@@ -87,23 +93,26 @@
                 </select>
             </div>
 
+        </br></br>
+        <div>
+            <label for="role">Select Role:</label><br>
+            <select id="role" name="role" required>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
+        </div>
+
             </br></br>
             <div>
                 <label for="role">No. of Household :</label><br>
                 <input type="number" id="houseHold" name="houseHold" required>
             </div>
 
-            </br></br>
-            <div>
-                <label for="role">Select Role:</label><br>
-                <select id="role" name="role" required>
-                    <option value="USER">USER</option>
-                    <option value="ADMIN">ADMIN</option>
-                </select>
-            </div>
             
             </br></br></br>
-            <input type = "submit" value = "Register">
+            <div class="submit">
+                <input type = "submit" value = "Register">
+            </div>
         </form>
     </div>
 </body>
