@@ -22,6 +22,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.internetprogramming.mbip.Entity.WaterData;
 import com.internetprogramming.mbip.Entity.ElectricData;
+import com.internetprogramming.mbip.Entity.HomeArea;
 import com.internetprogramming.mbip.Entity.OilData;
 import com.internetprogramming.mbip.Entity.RubbishData;
 import com.internetprogramming.mbip.Entity.User;
@@ -32,6 +33,7 @@ import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
 
 import jakarta.annotation.Resource;
+
 
 @Controller
 @RequestMapping("/masukkanData")
@@ -230,13 +232,14 @@ public class MasukDataController {
 
     @GetMapping("/muatNaikBilAir")
     public String muatNaikBilAir(Model model,
+                                 @RequestParam("waterTotal") Double waterTotal,
                                  @RequestParam("billID") String billID,
                                  @RequestParam("tarikhBill") String tarikhBill,
                                  @RequestParam("billAmount") Double billAmount) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userDao.findByUserName(username);
 
-        WaterData water = new WaterData(billID, tarikhBill, billAmount);
+        WaterData water = new WaterData(waterTotal, billID, tarikhBill, billAmount);
         water.setUser(user);
         waterDao.saveData(water);
 
@@ -277,13 +280,14 @@ public class MasukDataController {
 
     @GetMapping("/muatNaikBilElektrik")
     public String muatNaikBilElektrik(Model model,
+                                      @RequestParam("ElectricTotal") Double electricTotal,
                                       @RequestParam("billID") String billID,
                                       @RequestParam("tarikhBill") String tarikhBill,
                                       @RequestParam("billAmount") Double billAmount) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userDao.findByUserName(username);
 
-        ElectricData electric = new ElectricData(billID, tarikhBill, billAmount);
+        ElectricData electric = new ElectricData(electricTotal, billID, tarikhBill, billAmount);
         electric.setUser(user);
 
         electricDao.saveData(electric);
@@ -329,6 +333,7 @@ public class MasukDataController {
 
         RubbishData rubbish = new RubbishData(category, weight);
         rubbish.setUser(user);
+        rubbish.setHomeArea(user.getHomeArea());
 
         rubbishDao.saveData(rubbish);
 

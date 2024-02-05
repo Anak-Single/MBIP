@@ -79,9 +79,9 @@ public class SecurityConfig {
         Set<String> roles = AuthorityUtils.authorityListToSet(authorities);
 
         if (roles.contains("ADMIN")) {
-            response.sendRedirect("/Admin/dashboard"); // Redirect admin to their dashboard
+            response.sendRedirect("/Admin/dashboard"); 
         } else {
-            response.sendRedirect("/utama"); // Redirect other users to the default page
+            response.sendRedirect("/utama"); 
         }
     }
 
