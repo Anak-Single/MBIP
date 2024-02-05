@@ -129,7 +129,7 @@ public class HomeController {
                             @RequestParam("age") int age,
                             @RequestParam("homeaddress") String homeaddress,
                             @RequestParam("homearea") String homearea,
-                            @RequestParam("HouseHold") int houseHold,
+                            @RequestParam("houseHold") int houseHold,
                             @RequestParam("role") String role)
 	{
         User user = new User(username, password,  fullname, age, homeaddress, homearea, houseHold, role);

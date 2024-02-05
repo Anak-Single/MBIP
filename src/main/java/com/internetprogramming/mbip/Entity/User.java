@@ -69,7 +69,7 @@ public class User {
         this.password = password;
         this.age = age;
         this.homeAddress = homeAddress;
-        this.houseHold = 1;
+        this.houseHold = houseHold;
         this.homeArea = homeArea;
         this.houseHold = houseHold;
         this.role = role;
