@@ -1,0 +1,141 @@
+
+.content-header {
+
+    background: #5cb85c;
+    width: auto;
+    border-radius: 15px;
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.content-header h1 {
+    font-size: 3rem;
+    color: #333;
+    text-align: center;
+    padding-left: 3rem;
+}
+
+h1 {
+    font-size: 3rem;
+    color: #333;
+    text-align: center;
+  
+}
+
+.simbol img {
+    width: 9rem;
+    /* Adjust the width as needed */
+    height: auto;
+    /* Maintain the aspect ratio */
+
+    align-items: center;
+    
+}
+
+.content-body {
+
+    display: flex;
+    
+
+
+}
+
+.content-body-sejarah {
+
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Add padding as needed */
+  
+
+}
+
+.content-body-muatnaik {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+}
+
+.box {
+    background-color: rgb(167, 167, 167);
+    width: 30rem;
+    height: 30rem;
+    border-radius: 30px;
+    margin-top: 2rem;
+}
+
+.box img{
+    width: 25rem;
+    /* Adjust the width as needed */
+    height: auto;
+    /* Maintain the aspect ratio */
+
+    align-items: center;
+}
+.sejarah {
+
+    background-color: gray;
+    
+    
+}
+
+a {
+    text-decoration: none;
+}
+
+b {
+    font-size: 30px;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+   
+}
+
+.popup {
+    width: 350px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    background-color: #50c878;
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1001;
+    text-align: end;
+
+}
+
+/* .content-body-muatnaik {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: 1rem;
+    background: #5cb85c;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+} */
