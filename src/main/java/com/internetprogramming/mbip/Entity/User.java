@@ -73,6 +73,7 @@ public class User {
         this.homeArea = homeArea;
         this.houseHold = houseHold;
         this.role = role;
+        this.creationTime = LocalDate.now();
     }
 
     // Getters
