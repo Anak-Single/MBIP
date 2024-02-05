@@ -42,7 +42,7 @@
     <div class="container">
 	
         <h1>Register Form</h1>
-        <form action="register" method="post" onsubmit="return validatePassword();">
+        <form action="register" method="get" onsubmit="return validatePassword();">
             
             <div>
                 <label for="fullname">Full Name:</label><br>
@@ -54,18 +54,6 @@
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username" required>
             </div>
-            
-            </br></br>
-            <div>
-                <label for="emel">Email:</label><br>
-                <input type="email" id="emel" name="emel" required>
-            </div>
-
-            </br></br>
-            <div>
-                <label for="password">Password:</label><br>
-                <input type="password" id="password" name="password" required>
-            </div>
 
             </br></br>
             <div>
@@ -75,8 +63,8 @@
 
             </br></br>
             <div>
-                <label for="confirmpassword">Confirm Password:</label><br>
-                <input type="password" id="confirmpassword" name="confirmpassword" required>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required>
             </div>
             
             </br></br>
@@ -86,18 +74,33 @@
             </div>
 
             </br></br>
+            <div>
+                <label for="confirmpassword">Confirm Password:</label><br>
+                <input type="password" id="confirmpassword" name="confirmpassword" required>
+            </div>
+
+            </br></br>
 
             <div>
                 <label for="homearea">Select Home Area:</label><br>
                 <select id="homearea" name="homearea" required>
                     <option value="SKUDAI">SKUDAI</option>
-                    <option value="LIMA KEDAI">LIMA KEDAI</option>
-                    <option value="GELANG PATAH">GELANG PATAH</option>
-                    <option value="KANGKAR PULAI">KANGKAR PULAI</option>
-                    <option value="ISKANDAR PUTERI">ISKANDAR PUTERI</option>
-                    <option value="ULU CHOH">ULU CHOH</option>
+                    <option value="LIMA_KEDAI">LIMA KEDAI</option>
+                    <option value="GELANG_PATAH">GELANG PATAH</option>
+                    <option value="KANGKAR_PULAI">KANGKAR PULAI</option>
+                    <option value="ISKANDAR_PUTERI">ISKANDAR PUTERI</option>
+                    <option value="ULU_CHOH">ULU CHOH</option>
                 </select>
             </div>
+
+        </br></br>
+        <div>
+            <label for="role">Select Role:</label><br>
+            <select id="role" name="role" required>
+                <option value="USER">USER</option>
+                <option value="ADMIN">ADMIN</option>
+            </select>
+        </div>
 
             </br></br>
             <div>
@@ -105,17 +108,11 @@
                 <input type="number" id="houseHold" name="houseHold" required>
             </div>
 
-            </br></br>
-            <div>
-                <label for="role">Select Role:</label><br>
-                <select id="role" name="role" required>
-                    <option value="USER">USER</option>
-                    <option value="ADMIN">ADMIN</option>
-                </select>
-            </div>
             
             </br></br></br>
-            <input type = "submit" value = "Register">
+            <div class="submit">
+                <input type = "submit" value = "Register">
+            </div>
         </form>
     </div>
 </body>
