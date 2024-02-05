@@ -1,53 +1,123 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<title>Register</title>
+    <meta charset="ISO-8859-1">
+    <title>Register</title>
+
+    <link rel="stylesheet" href="/css/register.css">
+
+    <script>
+        function validatePassword() {
+            var password = document.getElementById("password");
+            var confirmPassword = document.getElementById("confirmpassword");
+
+            if (password.value !== confirmPassword.value) {
+                alert("Passwords do not match!");
+                password.classList.add("password-mismatch");
+                confirmPassword.classList.add("password-mismatch");
+                return false;
+            }
+
+            // Reset the style if passwords match
+            password.classList.remove("password-mismatch");
+            confirmPassword.classList.remove("password-mismatch");
+
+            // Clear the value of the confirm password field
+            confirmPassword.value = "";
+
+            return true;
+        }
+    </script>
 </head>
 <body>
-	<h1>Register Form</h1>
+
+    <div class="navbar">
+  
+        <img src="/images/LCIMS.png" alt="logo" width="100">
+
+        <a href="/login">Log Masuk</a>
+
+    </div>
+
+    <div class="container">
 	
-    <form action="register" method="get">
-        </br></br>
-        <label for="fullname">Full Name:</label>
-        <input type="text" id="fullname" name="fullname" required>
+        <h1>Register Form</h1>
+        <form action="register" method="post" onsubmit="return validatePassword();">
+            
+            <div>
+                <label for="fullname">Full Name:</label><br>
+                <input type="text" id="fullname" name="fullname" required>
+            </div>
 
-        </br></br>
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        
-		</br></br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        
-        </br></br>
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required>
-           
-        </br></br>
-        <label for="homeaddress">Address:</label>
-        <input type="text" id="homeaddress" name="homeaddress" required>
+            </br></br>
+            <div>
+                <label for="username">Username:</label><br>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            </br></br>
+            <div>
+                <label for="emel">Email:</label><br>
+                <input type="email" id="emel" name="emel" required>
+            </div>
 
-        </br></br>
-        <label for="homearea">Select Home Area:</label>
-        <select id="homearea" name="homearea" required>
-            <option value="SKUDAI">SKUDAI</option>
-            <option value="LIMA_KEDAI">LIMA KEDAI</option>
-            <option value="GELANG_PATAH">GELANG PATAH</option>
-            <option value="KANGKAR_PULAI">KANGKAR PULAI</option>
-            <option value="ISKANDAR_PUTERI">ISKANDAR PUTERI</option>
-            <option value="ULU_CHOH">ULU CHOH</option>
-        </select>
+            </br></br>
+            <div>
+                <label for="password">Password:</label><br>
+                <input type="password" id="password" name="password" required>
+            </div>
 
-        </br></br>
-        <label for="role">Select Role:</label>
-        <select id="role" name="role" required>
-            <option value="USER">USER</option>
-            <option value="ADMIN">ADMIN</option>
-        </select>
-        
-		</br></br></br>
-  		<input type = "submit" value = "Register">
-	</form>
+            </br></br>
+            <div>
+                <label for="age">Age:</label><br>
+                <input type="number" id="age" name="age" required>
+            </div>
+
+            </br></br>
+            <div>
+                <label for="confirmpassword">Confirm Password:</label><br>
+                <input type="password" id="confirmpassword" name="confirmpassword" required>
+            </div>
+            
+            </br></br>
+            <div>
+                <label for="homeaddress">Address:</label><br>
+                <input type="text" id="homeaddress" name="homeaddress" required>
+            </div>
+
+            </br></br>
+
+            <div>
+                <label for="homearea">Select Home Area:</label><br>
+                <select id="homearea" name="homearea" required>
+                    <option value="SKUDAI">SKUDAI</option>
+                    <option value="LIMA KEDAI">LIMA KEDAI</option>
+                    <option value="GELANG PATAH">GELANG PATAH</option>
+                    <option value="KANGKAR PULAI">KANGKAR PULAI</option>
+                    <option value="ISKANDAR PUTERI">ISKANDAR PUTERI</option>
+                    <option value="ULU CHOH">ULU CHOH</option>
+                </select>
+            </div>
+
+            </br></br>
+            <div>
+                <label for="role">No. of Household :</label><br>
+                <input type="number" id="houseHold" name="houseHold" required>
+            </div>
+
+            </br></br>
+            <div>
+                <label for="role">Select Role:</label><br>
+                <select id="role" name="role" required>
+                    <option value="USER">USER</option>
+                    <option value="ADMIN">ADMIN</option>
+                </select>
+            </div>
+            
+            </br></br></br>
+            <input type = "submit" value = "Register">
+        </form>
+    </div>
 </body>
+
 </html>
