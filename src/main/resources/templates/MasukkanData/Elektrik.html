@@ -30,15 +30,15 @@
     <div class="section">
         <div class="content-body">
             <div class="content-body-sejarah">
-                <h2>Sejarah</h2>
-                <div class="sejarah">
+                <h1>Sejarah anda</h1>
                     <th:block th:each="date, index : ${createtime}" th:unless="${index.index >= 5}">
-                        <h2 th:text="${date}"></h2>
-                        <!-- Access the corresponding pricePerDate value using the index -->
-                        <p>Jumlah Harga Penggunaan Elektrik</p>
-                        <p th:text="'RM ' + ${pricePerDate[__${index.index}__]}"></p>
+                        <div class="sejarah">
+                            <h2 th:text="${date}"></h2>
+                            <!-- Access the corresponding pricePerDate value using the index -->
+                            <p>Jumlah Harga Penggunaan Elektrik</p>
+                            <p th:text="'RM ' + ${pricePerDate[__${index.index}__]}"></p>
+                        </div>
                     </th:block>
-                </div>
             </div>
             <div class="content-body-muatnaik">
                 <div class="box">
@@ -57,10 +57,12 @@
 
                     <label for="billID">Bil Id :</label>
                     <input type="text" id="billID" name="billID">
-
-                    <label for="ElektricTotal">Jumlah penggunaan elektrik :</label>
-                    <input type="number" id="ElektricTotal" name="ElektricTotal">
-
+                    <br>
+                    <br>
+                    <label for="ElectricTotal">Jumlah penggunaan :</label>
+                    <input type="number" id="ElectricTotal" name="ElectricTotal">
+                    <br>
+                    <br>
                     <label for="tarikhBill">Tarikh bill :</label>
                     <input type="date" id="tarikhBill" name="tarikhBill">
                     <br>

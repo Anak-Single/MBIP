@@ -31,15 +31,9 @@
     <div class="section">
         <div class="content-body">
             <div class="content-body-sejarah">
-                <h2>Sejarah</h2>
+                <h2>Jumlah Sampah yang telah dihasilkan</h2>
                 <div class="sejarah">
-                    <th:block th:each="date, index : ${createtime}" th:unless="${index.index >= 5}">
-                        <h2 th:text="${date}"></h2>
-                        <p>Jumlah Berat Sampah</p>
-                        <p th:text="'RM ' + ${weightPerDate[__${index.index}__]}"></p>
-                    </th:block>
-                    <br />
-                    <p>Total Weight: <span th:text="${totalweight}"></span> kg</p>
+                    <h3>Total Weight: <span th:text="${totalweight}"></span> kg</h3>
                     </h2>
                 </div>
             </div>
