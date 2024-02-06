@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
+}
+
+.navbar {
+    overflow: hidden;
+    background-color: white;
+    height: 100px;
+    padding-right: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar img {
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.navbar a {
+    float: right;
+    width: 80px;
+    height: 80px;
+    display: block;
+    color: darkgreen;
+    font-weight: bolder;
+    text-align: center;
+    padding: 30px 16px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background: #5cb85c;
+}
+
+.container {
+    width: 50%;
+    background-color: #fff;
+    padding: 15px 40px;
+    border-radius: 5px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.container h1 {
+    text-align: center;
+    margin-bottom: 50px;
+    color: darkgreen;
+    border-bottom: solid 3px #097969;
+    padding-bottom: 25px;
+}
+
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+form input {
+    width: 330px; 
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+
+form select {
+    width: 350px; 
+    margin-top: 10px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+form input[type=""] {
+    width: 100%;
+}
+
+form label {
+    width: 25%;
+    margin-bottom: 10px;
+    color: darkgreen;
+} 
+
+
+form input[type="submit"] {
+    background-color: darkgreen;
+    color: white;
+    font-weight: bolder;
+    text-align: center;
+    padding: 15px;
+    border-radius: 25px;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 30px
+}
+
+.submit {
+    width: 100%;
+    text-align: center;
+}
+
+
+form input[type="submit"]:hover {
+    background: #5cb85c;
+}

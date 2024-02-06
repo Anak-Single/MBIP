@@ -63,15 +63,17 @@ public class User {
     public User(){}
 
     // Parameterized Constructor
-    public User(String userName, String password, String fullName, int age, String homeAddress, String homeArea, String role) {
+    public User(String userName, String password, String fullName, int age, String homeAddress, String homeArea, int houseHold, String role) {
         this.fullName = fullName;
         this.userName = userName;
         this.password = password;
         this.age = age;
         this.homeAddress = homeAddress;
-        this.houseHold = 1;
+        this.houseHold = houseHold;
         this.homeArea = homeArea;
+        this.houseHold = houseHold;
         this.role = role;
+        this.creationTime = LocalDate.now();
     }
 
     // Getters
