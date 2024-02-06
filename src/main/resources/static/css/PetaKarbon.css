@@ -16,20 +16,6 @@
 
 }
 
-/* .box2 {
-    width: max-content;
-    height: 100px;
-    padding: 20px;
-    border: 2px solid black;
-    text-align: center;
-    background-color: rgb(133, 189, 101);
-    border-radius: 15px;
-    position: absolute;
-    right: 75px;
-
-    top: 50px;
-    
-} */
 
 .flex-container {
     width: 100%;
@@ -55,13 +41,6 @@
 
 }
 
-/* .container {
-     border: 2px solid black; 
-    margin: 0px;
-    padding: 0px;
-    position: relative;
-   
-} */
 
 .overlay {
     display: none;
@@ -90,24 +69,12 @@
     border-radius: 10px;
     z-index: 1001;
     text-align: end;
-
+    border-color: black;
+    border-width: 3px;
+    border-style: solid;
 }
 
-/* .popup2 {
-    width: 350px;
-    display: none;
-    position: absolute;
-    right: 75px;
-    top: 50px;
-    transform: translate(-50%, -50%);
-    color: rgb(54, 88, 33);
-    background-color: rgb(133, 189, 101);
-    padding: 20px;
-    border-radius: 10px;
-    z-index: 1001;
-    text-align: end;
-  
-} */
+
 
 
 

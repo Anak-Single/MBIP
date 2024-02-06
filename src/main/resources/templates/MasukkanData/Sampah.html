@@ -1,47 +1,73 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>Sisa Sampah</title>
 
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="Masukkandata.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/DataPage.css">
+    <script src="/js/MasukkanData.js"></script>
 </head>
+
 <body>
     <div class="navbar">
-        <a href="/utama">Laman Utama</a>
-        <a href="/petaKarbon">Peta Karbon</a>
-        <a href="/masukkanData">Masukkan Data</a>
-        <a href="/profile">Profil</a>
+        <img src="/images/LCIMS.png" alt="logo" width="100">
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <input type="submit" value="Daftar Keluar" />
         </form>
+        <a href="/profile">Profil Anda</a>
+        <a href="/masukkanData">Masukkan Data</a>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/utama">Laman Utama</a>
+    </div>
+
+    <div class="content-header">
+        <div class="simbol">
+            <img src="/images/sampah.png">
+        </div>
+        <h1>Memuat naik sisa Sampah. . .</h1>
     </div>
     <div class="section">
-        <div class="content-header">
-            <h1>Muat naik sisa sampah. . .</h1>
-        </div>
         <div class="content-body">
-            <div class = "content-body-sejarah">
+            <div class="content-body-sejarah">
                 <h2>Sejarah</h2>
-
-                <br/>
-                <p>Total Weight: <span th:text="${totalweight}"></span> kg</p>
-                </h2>
+                <div class="sejarah">
+                    <th:block th:each="date, index : ${createtime}" th:unless="${index.index >= 5}">
+                        <h2 th:text="${date}"></h2>
+                        <p>Jumlah Berat Sampah</p>
+                        <p th:text="'RM ' + ${weightPerDate[__${index.index}__]}"></p>
+                    </th:block>
+                    <br />
+                    <p>Total Weight: <span th:text="${totalweight}"></span> kg</p>
+                    </h2>
+                </div>
             </div>
-            <div class = "content-body-muatnaik">
+            <div class="content-body-muatnaik">
 
+                <div class="box">
+                    <div class="simbol">
+                        <a href="#" class="button" onclick="openPopup()">
+                            <img src="/images/insert.png" alt="Insert">
+                        </a>
+                    </div>
+                    <h2>Muat Naik Bill di sini</h2>
+                </div>
+            </div>
+        </div>
+        <div class="overlay" id="overlay">
+            <div class="popup" id="popup">
                 <form action="/masukkanData/muatNaikDataSampah" method="get">
 
-                </br></br>
-                <label for="Category">Select Home Area:</label>
-                <select id="Category" name="Category" required>
-                    <option value="Organik">Organik</option>
-                    <option value="Kertas">Kertas</option>
-                    <option value="Kaca">Kaca</option>
-                    <option value="Plastik">Plastik</option>
-                    <option value="lain-lain">lain-lain</option>
-                </select>
+                    </br></br>
+                    <label for="Category">Select Home Area:</label>
+                    <select id="Category" name="Category" required>
+                        <option value="Organik">Organik</option>
+                        <option value="Kertas">Kertas</option>
+                        <option value="Kaca">Kaca</option>
+                        <option value="Plastik">Plastik</option>
+                        <option value="lain-lain">lain-lain</option>
+                    </select>
 
                     <label for="Weight">Berat :</label>
                     <input type="number" step="any" id="Weight" name="Weight">
@@ -52,5 +78,7 @@
             </div>
         </div>
     </div>
+
 </body>
-</html> 
+
+</html>

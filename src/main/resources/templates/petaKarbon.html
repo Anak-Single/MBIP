@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Peta Karbon</title>
-    <link rel="stylesheet" href="/css/navbar.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCLYdWlDYfd3blgwWil69bW3U1xlygH7wc&callback=initMap"
         async defer>
         </script>
@@ -37,23 +36,16 @@
                 <div id="map"></div>
 
                 <div class="box" id="box">
-                    <!-- <button class="button" onclick="openPopup()">Kira Jejak Karbon</button> -->
-                    <!--  <button class="button" onclick="openPopup2()">Peta Karbon</button> -->
 
                     <div class="dikemaskini">
                         <h2>Dikemaskini :</h2>
-                        <div class="hari">
-                            <h3><b><span th:text="${days}"></span></b> hari</h3>
-                        </div>
-                        <div class="jam">
+                      
+                            <h3><b><span th:text="${days}"></span></b> hari</h3>        
+                        
                             <h3><b><span th:text="${hours}"></span></b> jam</h3>
-                        </div>
-                        <div class="minit">
+
                             <h3><b><span th:text="${minutes}"></span></b> minit</h3>
-                        </div>
-                        <div class="saat">
-                            <h3><b><span th:text="${seconds}"></span></b> saat</h3>
-                        </div>
+                        
                     </div>
                 </div>
 
