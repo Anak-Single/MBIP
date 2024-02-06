@@ -3,62 +3,214 @@
 
 <head>
     <title>Profile</title>
-    <style>
+<style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            background-color: #E5E4E2;
         }
 
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #006851;
-            width: 200px;
-            /* adjust width as needed */
-            height: 100%;
-            /* make it full height */
+            overflow: hidden;
+            background-color: white;
+            height: 100px;
+            padding-right: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
+        .navbar img {
+            float: left;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+
+        .navbar form input {
+            float: right;
+            color: white;
+            background-color: darkgreen;
+            font-weight: bolder;
+            text-align: center;
+            margin: 25px;
+            padding: 15px;
+            border-radius: 25px;
+        }
+
+
         .navbar a {
+            float: right;
+            width: 80px;
+            height: 80px;
             display: block;
-            color: #fff;
-            padding: 10px;
+            color: darkgreen;
+            font-weight: bolder;
+            text-align: center;
+            padding: 30px 16px;
             text-decoration: none;
-            border-radius: 5px;
         }
 
         .navbar a:hover {
-            background-color: #333;
+            background: #5cb85c;
         }
 
-        .navbar button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
+        .navbar form input:hover {
+            background: #5cb85c;
         }
 
-        .navbar button[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-image: url('bg1.jpg');
-            /* PATUT GAMBAR BACKGROUND */
+        .header {
+            padding-top: 30px;
+            padding-bottom: 80px;
+            text-align: center;
+            background: url("/images/bg1.jpg") no-repeat center center fixed;
             background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-color: rgb(243, 243, 243);
+            height: 450px;
+            color: white;
+        }
+
+        .header h1 {
+            text-shadow: black 2px 2px 4px;
+            font-size: 80px;
+        }
+
+        .header p {
+            text-shadow: black 2px 2px 4px;
+            font-size: 40px;
+        }
+
+        .content {
+            flex-direction: row;
+            display: flex;
+            justify-content: center;
+            margin: 50px;
+            position: relative;
+            top: -177px;
+        }
+
+        .content .section {
+            margin: 40px;
+            width: 15%;
+            height: 225px;
+            background: #5cb85c;
+            border-radius: 25px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .content .section p {
+            color: white;
+            padding-left: 20px;
+            padding-right: 20px;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .content .section img {
+            width: 100%;
+            height: 150px;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+        }
+
+        .summary {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 50px;
+            margin-top: 100px;
+            position: relative;
+            top: -250px;
+        }
+
+        .summary .ringkasan {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin: 20px;
+            width: 80%;
+        }
+
+        .summary .ringkasan .data .simbol {
+            width: 100px;
+            height: 100px;
+            background: lightgreen;
+            border-radius: 50px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            margin-left: 60px;
+            position: relative;
+            top: -50px;
+        }
+
+        .summary .ringkasan .data .simbol img {
+            width: 55px;
+            padding-top: 20px;
+        }
+
+        .summary .tajuk {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary .ringkasan .data {
+            margin: 20px;
+            width: 20%;
+            height: 175px;
+            background: #f9f9f9;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .summary .ringkasan .data .keterangan {
+            position: relative;
+            top: -50px;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            margin-top: -250px;
+            position: relative;
+            background-color: #F9F6EE;
+        }
+
+        .info .kandungan {
+            margin: 20px;
+            width: 300px;
+            height: 220px;
+            padding: 40px;
+        }
+
+        .info .kandungan h1 {
+            font-weight: 900;
+            color: darkgreen;
+        }
+
+        .info .kandungan ul {
+            font-size: 18px;
+            padding: 0;
+            margin-left: 20px;
+        }
+
+        .info .kandungan ul li {
+            margin-bottom: 10px;
+        }
+
+        .info .kandungan h2 {
+            padding-bottom: 8px;
+            border-bottom: solid black 1px;
+        }
+
+        .footer {
+            padding: 20px;
+            text-align: center;
+            background: #333;
+            color: white;
         }
 
         .wrapper {
@@ -186,16 +338,17 @@
 
         }
     </style>
+
 </head>
 
 <body>
     <div class="navbar">
-        <a href="/utama">Laman Utama</a>
-        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/profile">Profil Anda</a>
         <a href="/masukkanData">Masukkan Data</a>
-        <a href="/profile">Profil</a>
+        <a href="/petaKarbon">Peta Karbon</a>
+        <a href="/utama">Laman Utama</a>
         <form th:action="@{/logout}" method="post">
-            <button class="btn btn-link text-white" type="submit">Sign Out</button>
+            <input type="submit" value="Daftar Keluar" />
         </form>
     </div>
     <div class="wrapper bg-white mt-sm-5">
