@@ -38,8 +38,6 @@ public class RubbishData
     @JoinColumn(name = "UserId", nullable = false)
     private User user;
 
-    @Column(name = "HomeArea")
-    private String homeArea;
 
     // Default Constructor
     public RubbishData(){}
@@ -74,11 +72,6 @@ public class RubbishData
         this.user = user;
         
     }
-
-    public void setHomeArea(String homeArea) {
-        this.homeArea = homeArea;
-    }
-
     
     
     public void setType(String type)

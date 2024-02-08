@@ -32,14 +32,14 @@
         <div class="content-body">
             <div class="content-body-sejarah">
                 <h1>Sejarah anda</h1>
-                    <th:block th:each="date, index : ${createtime}" th:unless="${index.index >= 5}">
-                        <div class="sejarah">
-                            <h2 th:text="${date}"></h2>
-                            <!-- Access the corresponding pricePerDate value using the index -->
-                            <p>Jumlah Harga Penggunaan Air</p>
-                            <p th:text="'RM ' + ${pricePerDate[__${index.index}__]}"></p>
-                        </div>
-                    </th:block>
+                <th:block th:each="date, index : ${createtime}" th:unless="${index.index >= 5}">
+                    <div class="sejarah">
+                        <h2 th:text="${date}"></h2>
+                        <!-- Access the corresponding pricePerDate value using the index -->
+                        <p>Jumlah Harga Penggunaan Air</p>
+                        <p th:text="'RM ' + ${pricePerDate[__${index.index}__]}"></p>
+                    </div>
+                </th:block>
             </div>
 
             <div class="content-body-muatnaik">
@@ -59,22 +59,22 @@
             <div class="popup" id="popup">
                 <form action="/masukkanData/muatNaikBilAir" method="get">
                     <label for="billID">Bil Id :</label>
-                    <input type="text" id="billID" name="billID">
+                    <input type="text" id="billID" name="billID" required>
                     <br>
                     <br>
-                    <label for="waterTotal"> penggunaan air :</label>
-                    <input type="number" id="waterTotal" name="waterTotal">
+                    <label for="waterTotal">Jumlah penggunaan air :</label>
+                    <input type="number" id="waterTotal" name="waterTotal" required>
                     <br>
                     <br>
                     <label for="tarikhBill">Tarikh bill :</label>
-                    <input type="date" id="tarikhBill" name="tarikhBill">
+                    <input type="date" id="tarikhBill" name="tarikhBill" required>
                     <br>
                     <br>
                     <label for="billAmount">Amaun bill :</label>
-                    <input type="number" step="any" id="billAmount" name="billAmount">
+                    <input type="number" step="any" id="billAmount" name="billAmount" required>
                     <br>
                     <br>
-                    <input type="submit" onclick="closePopup()" value="Upload">
+                    <input type="submit" value="Upload">
                 </form>
             </div>
         </div>

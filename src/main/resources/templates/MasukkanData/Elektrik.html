@@ -56,23 +56,23 @@
                 <form action="/masukkanData/muatNaikBilElektrik" method="get">
 
                     <label for="billID">Bil Id :</label>
-                    <input type="text" id="billID" name="billID">
+                    <input type="text" id="billID" name="billID" required>
                     <br>
                     <br>
-                    <label for="ElektricTotal">Jumlah penggunaan elektrik :</label>
-                    <input type="number" id="ElektricTotal" name="ElektricTotal">
+                    <label for="ElectricTotal">Jumlah penggunaan elektrik :</label>
+                    <input type="number" step="any" id="ElectricTotal" name="ElectricTotal" required>
                     <br>
                     <br>
                     <label for="tarikhBill">Tarikh bill :</label>
-                    <input type="date" id="tarikhBill" name="tarikhBill">
+                    <input type="date" id="tarikhBill" name="tarikhBill" required>
                     <br>
                     <br>
                     <label for="billAmount">Amaun bill :</label>
-                    <input type="number" step="any" id="billAmount" name="billAmount">
+                    <input type="number" step="any" id="billAmount" name="billAmount" required>
                     <br>
                     <br>
                     <br>
-                    <input type="submit" onclick="closePopup()" value="Upload">
+                    <input type="submit" value="Upload">
                 </form>
             </div>
         </div>

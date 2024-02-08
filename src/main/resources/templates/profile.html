@@ -343,13 +343,13 @@
 
 <body>
     <div class="navbar">
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Daftar Keluar" />
+        </form>
         <a href="/profile">Profil Anda</a>
         <a href="/masukkanData">Masukkan Data</a>
         <a href="/petaKarbon">Peta Karbon</a>
         <a href="/utama">Laman Utama</a>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Daftar Keluar" />
-        </form>
     </div>
     <div class="wrapper bg-white mt-sm-5">
         <h4 class="pb-4 border-bottom">Account settings</h4>

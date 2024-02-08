@@ -54,7 +54,7 @@
                 <form action="/masukkanData/muatNaikDataSampah" method="get">
 
                     </br></br>
-                    <label for="Category">Select Home Area:</label>
+                    <label for="Category">Pilih Jenis Sampah:</label>
                     <select id="Category" name="Category" required>
                         <option value="Organik">Organik</option>
                         <option value="Kertas">Kertas</option>
@@ -62,10 +62,12 @@
                         <option value="Plastik">Plastik</option>
                         <option value="lain-lain">lain-lain</option>
                     </select>
-
+                    <br>
+                    <br>
                     <label for="Weight">Berat :</label>
-                    <input type="number" step="any" id="Weight" name="Weight">
-
+                   
+                    <input type="number" step="any" id="Weight" name="Weight" required>
+                    <br>
                     <br>
                     <input type="submit" value="Upload">
                 </form>
