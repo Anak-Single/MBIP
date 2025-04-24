@@ -1,0 +1,50 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                echo '📥 Checkout stage: Simulating code checkout from Git...'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo '🏗️ Build stage: Simulating code compilation...'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo '🧪 Test stage: Simulating unit tests...'
+            }
+        }
+
+        stage('Package') {
+            steps {
+                echo '📦 Package stage: Simulating application packaging...'
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo '🚀 Deploy stage: Simulating deployment process...'
+            }
+        }
+
+        stage('Notify') {
+            steps {
+                echo '📧 Notify stage: Simulating sending notifications...'
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Pipeline completed successfully!'
+        }
+        failure {
+            echo '❌ Pipeline failed!'
+        }
+    }
+}
