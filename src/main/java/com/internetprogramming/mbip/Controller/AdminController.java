@@ -87,52 +87,13 @@ public class AdminController {
         return "Admin/utama";
     }
 
+    @GetMapping("/users")
+    public String viewUsers() {
+        return "Admin/viewUsers";
+    }
+
     @GetMapping("/laporan")
-    public String laporan(Model model) {
-        List<WaterData> water = waterDao.findAllData();
-        List<ElectricData> electric = electricDao.findAllData();
-        List<RubbishData> rubbish = rubbishDao.findAllData();
-        List<OilData> oil = oilDao.findAllData();
-
-        WaterData latestWaterData = water.stream().max(Comparator.comparing(WaterData::getUpdateTime)).orElse(null);
-        ElectricData latestElectricData = electric.stream().max(Comparator.comparing(ElectricData::getUpdateTime)).orElse(null);
-        RubbishData latestRubbishData = rubbish.stream().max(Comparator.comparing(RubbishData::getUpdateTime)).orElse(null);
-        OilData latestOilData = oil.stream().max(Comparator.comparing(OilData::getUpdateTime)).orElse(null);
-
-        LocalDateTime latestDate = null;
-
-        if (latestWaterData != null && (latestDate == null || latestWaterData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestWaterData.getUpdateTime();
-        }
-        if (latestElectricData != null
-                && (latestDate == null || latestElectricData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestElectricData.getUpdateTime();
-        }
-        if (latestRubbishData != null
-                && (latestDate == null || latestRubbishData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestRubbishData.getUpdateTime();
-        }
-        if (latestOilData != null && (latestDate == null || latestOilData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestOilData.getUpdateTime();
-        }
-
-        long days = 0;
-        long hours = 0;
-        long minutes = 0;
-        long seconds = 0;
-
-        Duration timeDifference = Duration.between(latestDate, LocalDateTime.now());
-
-        days = timeDifference.toDays();
-        hours = timeDifference.toHoursPart();
-        minutes = timeDifference.toMinutesPart();
-        seconds = timeDifference.toSecondsPart();
-
-        model.addAttribute("days", days);
-        model.addAttribute("hours", hours);
-        model.addAttribute("minutes", minutes);
-        model.addAttribute("seconds", seconds);
-
+    public String laporan() {
         return "Admin/Laporan";
     }
 

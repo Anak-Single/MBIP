@@ -9,6 +9,8 @@ import com.internetprogramming.mbip.Service.UserDao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -39,15 +41,14 @@ public class ProfileController {
         return "profile";
     }
 
-    @GetMapping("/profile/save")
-    public String saveProfile(@RequestParam("id") Long id, @ModelAttribute User user, RedirectAttributes redirectAttributes) {
+    @PostMapping("/profile/save")
+    public String saveProfile(@RequestParam("id") Long id, @ModelAttribute User user) {
         try {
             userDao.updateUser(id, user);
-            redirectAttributes.addFlashAttribute("successMessage", "Profile updated successfully!");
+            return "redirect:/profile";
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("errorMessage", "Error updating profile: " + e.getMessage());
+            return "redirect:/profile?error=" + e.getMessage();
         }
-        return "Utama";
     }
 }
 

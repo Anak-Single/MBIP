@@ -56,7 +56,7 @@ public class UserDao implements UserDetailsService{
         repository.save(user);
     }
 
-    public void updateUser(Long id, User user) {
+    public User updateUser(Long id, User user) {
 
         Optional <User> optUser = repository.findById(id);
         User existingUser = optUser.orElse(null);
@@ -69,8 +69,9 @@ public class UserDao implements UserDetailsService{
             existingUser.setHomeAddress(user.getHomeAddress());
             existingUser.setHomeArea(user.getHomeArea());
             
-            repository.saveAndFlush(existingUser);
+            return repository.saveAndFlush(existingUser);
         }
+        return null;
     }
 
     public void deleteUser(long id) {

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lihat Pengguna</title>
+    <link rel="stylesheet" href="/css/navbar.css">
+    <link rel="stylesheet" href="/css/users.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"> -->
+</head>
+<body>
+
+<div class="navbar">
+    <img src="/images/LCIMS.png" alt="logo" width="100">
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Daftar Keluar"/>
+    </form>
+    <a href="/profile">Profil Anda</a>
+    <a href="/masukkanData">Masukkan Data</a>
+    <a href="/petaKarbon">Peta Karbon</a>
+    <a href="/Admin/laporan">Hasilkan Laporan</a>
+    <a href="/Admin/users">Lihat Pengguna</a>
+    <a href="/Admin/dashboard">Laman Utama</a>
+</div>
+
+<div class="container mt-5">
+    <h1 class="mb-4">Senarai Pengguna</h1>
+    
+    <div class="row mb-4">
+        <div class="col">
+            <input type="text" id="searchInput" class="form-control" placeholder="Cari pengguna...">
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nama Penuh</th>
+                    <th>Username</th>
+                    <th>Umur</th>
+                    <th>Alamat Rumah</th>
+                    <th>Daerah</th>
+                    <th>Bil. Rumah Tangga</th>
+                    <th>Peranan</th>
+                </tr>
+            </thead>
+            <tbody id="usersTable">
+                <!-- Data will be populated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Fetch users data from API
+    fetch('/api/users')
+        .then(response => response.json())
+        .then(users => {
+            const tableBody = document.getElementById('usersTable');
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.id}</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.fullName}</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.userName}</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.age}</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.homeAddress}</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.homeArea}</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.houseHold}</td>
+                    <td style="padding: 12px; border: 1px solid #ddd;">${user.role}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching users:', error));
+
+    // Search functionality
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const rows = document.querySelectorAll('#usersTable tr');
+        
+        rows.forEach(row => {
+            const fullName = row.cells[1].textContent.toLowerCase();
+            const userName = row.cells[2].textContent.toLowerCase();
+            const homeArea = row.cells[5].textContent.toLowerCase();
+            
+            if (fullName.includes(searchTerm) || userName.includes(searchTerm) || homeArea.includes(searchTerm)) {
+                row.style.display = '';
+            } else {
+                row.style.display = 'none';
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
