@@ -14,7 +14,7 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-        bat 'docker build -t irhamhakim02/mbip.'
+        bat 'docker build -t irhamhakim02/mbip .'
       }
     }
     stage('Push Docker Image') {
