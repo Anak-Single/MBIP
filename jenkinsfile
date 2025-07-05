@@ -21,7 +21,7 @@ pipeline {
         bat 'docker-compose down --remove-orphans'
         bat 'docker-compose up --build -d'
         echo 'Waiting for services to be ready...'
-        bat 'timeout /t 30'
+        powershell 'Start-Sleep 30'
       }
     }
     stage('Health Check') {
@@ -37,7 +37,7 @@ pipeline {
               break
             } catch (Exception e) {
               echo "Health check attempt ${i+1}/${retries} failed, retrying in 10 seconds..."
-              bat 'timeout /t 10'
+              powershell 'Start-Sleep 10'
             }
           }
           if (!appReady) {
@@ -58,7 +58,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
           bat '''
             echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-            docker tag mbip-1-app:latest irhamhakim02/mbip:latest
+            docker tag scdevopsakita-app:latest irhamhakim02/mbip:latest
             docker push irhamhakim02/mbip:latest
           '''
         }
