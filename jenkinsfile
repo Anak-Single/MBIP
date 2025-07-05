@@ -10,32 +10,77 @@ pipeline {
       steps {
         echo 'Checking if Docker is installed and accessible...'
         bat 'docker --version'
+        bat 'docker-compose --version'
       }
     }
-    stage('Build Docker Image') {
+    stage('Build and Start Services') {
       steps {
-        bat 'docker build -t irhamhakim02/mbip .'
+        echo 'Building and starting services with Docker Compose...'
+        bat 'docker-compose down --remove-orphans'
+        bat 'docker-compose up --build -d'
+        echo 'Waiting for services to be ready...'
+        bat 'timeout /t 30'
       }
     }
-    stage('Push Docker Image') {
+    stage('Health Check') {
       steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-          bat '''
-            echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-            docker push irhamhakim02/mbip
-          '''
+        echo 'Checking if application is ready...'
+        script {
+          def retries = 12
+          def appReady = false
+          for (int i = 0; i < retries; i++) {
+            try {
+              bat 'curl -f http://localhost:8000/login || exit 1'
+              appReady = true
+              break
+            } catch (Exception e) {
+              echo "Health check attempt ${i+1}/${retries} failed, retrying in 10 seconds..."
+              bat 'timeout /t 10'
+            }
+          }
+          if (!appReady) {
+            error "Application failed to start within expected time"
+          }
         }
       }
     }
     stage('Run JMeter Test') {
       steps {
-        bat 'jmeter -n -t test.jmx -l result.jtl'
+        echo 'Running JMeter performance tests...'
+        bat 'jmeter -n -t test.jmx -l result.jtl -f'
+      }
+    }
+    stage('Push Docker Image') {
+      steps {
+        echo 'Pushing Docker image to DockerHub...'
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+          bat '''
+            echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+            docker tag mbip-1-app:latest irhamhakim02/mbip:latest
+            docker push irhamhakim02/mbip:latest
+          '''
+        }
       }
     }
     stage('Publish Report') {
       steps {
+        echo 'Publishing JMeter performance report...'
         perfReport sourceDataFiles: 'result.jtl'
       }
+    }
+  }
+  post {
+    always {
+      echo 'Cleaning up Docker containers...'
+      bat 'docker-compose down --remove-orphans --volumes'
+      echo 'Cleaning up Docker images to save space...'
+      bat 'docker system prune -f'
+    }
+    success {
+      echo 'Pipeline completed successfully!'
+    }
+    failure {
+      echo 'Pipeline failed! Check the logs for details.'
     }
   }
 }
