@@ -1,144 +1,230 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Profile</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/navbar.css">
-    <link rel="stylesheet" href="/css/profile.css">
-</head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="/css/navbar.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+  </head>
 
-<body>
+  <body>
     <div class="navbar">
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Daftar Keluar" />
-        </form>
-        <a href="/profile">Profil Anda</a>
-        <a href="/masukkanData">Masukkan Data</a>
-        <a href="/petaKarbon">Peta Karbon</a>
-        <a href="/utama">Laman Utama</a>
+      <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Daftar Keluar" />
+      </form>
+      <a href="/profile">Profil Anda</a>
+      <a href="/masukkanData">Masukkan Data</a>
+      <a href="/petaKarbon">Peta Karbon</a>
+      <a href="/utama">Laman Utama</a>
     </div>
 
     <div class="wrapper">
-        <h4>Account Settings</h4>
+      <h4>Account Settings</h4>
 
-        <div class="profile-header">
-            <img src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-                class="img" alt="Profile Photo">
-            <div>
-                <label><b>Profile Photo</b></label>
-                <p>Accepted file type: .png. Max size: 1MB</p>
-                <button type="button" class="btn-primary" onclick="document.getElementById('profile-image').click();">
-                    Upload
-                </button>
-                <input type="file" name="profile-image" id="profile-image" accept="image/*" style="display:none">
-            </div>
+      <div class="profile-header">
+        <img
+          src="https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+          class="img"
+          alt="Profile Photo"
+        />
+        <div>
+          <label><b>Profile Photo</b></label>
+          <p>Accepted file type: .png. Max size: 1MB</p>
+          <button
+            type="button"
+            class="btn-primary"
+            onclick="document.getElementById('profile-image').click();"
+          >
+            Upload
+          </button>
+          <input
+            type="file"
+            name="profile-image"
+            id="profile-image"
+            accept="image/*"
+            style="display: none"
+          />
+        </div>
+      </div>
+
+      <form
+        id="profileForm"
+        th:object="${user}"
+        th:action="@{/profile/save}"
+        method="post"
+      >
+        <input
+          type="hidden"
+          th:field="*{id}"
+          readonly="readonly"
+          th:value="${user.id}"
+        />
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="Nama">Nama Penuh:</label>
+            <input
+              type="text"
+              th:field="*{fullName}"
+              th:value="${user.fullName}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Username:</label>
+            <input
+              type="text"
+              th:field="*{userName}"
+              readonly="readonly"
+              th:value="${user.userName}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="Emel">Emel:</label>
+            <input
+              type="email"
+              id="Emel"
+              name="Emel"
+              placeholder="Masukkan emel anda"
+            />
+          </div>
+
+          <input
+            type="hidden"
+            th:field="*{password}"
+            readonly="readonly"
+            th:value="${user.password}"
+          />
+
+          <div class="form-group">
+            <label>Age:</label>
+            <input type="number" th:field="*{age}" th:value="${user.age}" />
+          </div>
+
+          <div class="form-group">
+            <label>Home Address:</label>
+            <input
+              type="text"
+              th:field="*{homeAddress}"
+              th:value="${user.homeAddress}"
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Home Area:</label>
+            <input
+              type="text"
+              th:field="*{homeArea}"
+              th:value="${user.homeArea}"
+            />
+          </div>
         </div>
 
-        <form id="profileForm" th:object="${user}" th:action="@{/profile/save}" method="post">
-            <input type="hidden" th:field="*{id}" readonly="readonly" th:value="${user.id}" />
-
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="Nama">Nama Penuh:</label>
-                    <input type="text" th:field="*{fullName}" th:value="${user.fullName}" />
-                </div>
-
-                <div class="form-group">
-                    <label>Username:</label>
-                    <input type="text" th:field="*{userName}" readonly="readonly" th:value="${user.userName}" />
-                </div>
-
-                <div class="form-group">
-                    <label for="Emel">Emel:</label>
-                    <input type="email" id="Emel" name="Emel" placeholder="Masukkan emel anda">
-                </div>
-
-                <input type="hidden" th:field="*{password}" readonly="readonly" th:value="${user.password}" />
-
-                <div class="form-group">
-                    <label>Age:</label>
-                    <input type="number" th:field="*{age}" th:value="${user.age}" />
-                </div>
-
-                <div class="form-group">
-                    <label>Home Address:</label>
-                    <input type="text" th:field="*{homeAddress}" th:value="${user.homeAddress}" />
-                </div>
-
-                <div class="form-group">
-                    <label>Home Area:</label>
-                    <input type="text" th:field="*{homeArea}" th:value="${user.homeArea}" />
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <input type="submit" value="Save Changes" class="btn-primary" />
-                <button type="button" class="danger">Deactivate</button>
-            </div>
-        </form>
+        <div class="form-actions">
+          <input type="submit" value="Save Changes" class="btn-primary" />
+          <button type="button" class="danger">Deactivate</button>
+        </div>
+      </form>
     </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast" class="toast hidden">
+      <p id="toast-message"></p>
+    </div>
+
     <script>
-        document.getElementById('profile-image').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.querySelector('.img').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
+      // ✅ Profile image preview on upload
+      document
+        .getElementById("profile-image")
+        .addEventListener("change", function (e) {
+          const file = e.target.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+              document.querySelector(".img").src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+          }
         });
 
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form data
-            const formData = new FormData(this);
-            const userId = formData.get('id');
-            const user = {
-                fullName: formData.get('fullName'),
-                userName: formData.get('userName'),
-                age: formData.get('age'),
-                homeAddress: formData.get('homeAddress'),
-                homeArea: formData.get('homeArea')
-            };
+      // ✅ Toast utility
+      function showToast(message, isError = false) {
+        console.log("Showing toast:", message, "Error:", isError);
+        const toast = document.getElementById("toast");
+        const messageEl = document.getElementById("toast-message");
 
-            // Make API call
-            fetch(`/api/users/${userId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                body: JSON.stringify(userData)
+        if (!toast || !messageEl) {
+          console.error("Toast elements not found");
+          return;
+        }
+
+        toast.classList.remove("hidden", "error", "show");
+        if (isError) {
+          toast.classList.add("error");
+        }
+
+        messageEl.textContent = message;
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+          setTimeout(() => {
+            toast.classList.add("hidden");
+          }, 500);
+        }, 3000); // Show for 3 seconds
+      }
+
+      // ✅ Handle form submission
+      document
+        .getElementById("profileForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const formData = new FormData(this);
+          const userId = formData.get("id");
+
+          const user = {
+            fullName: formData.get("fullName"),
+            userName: formData.get("userName"),
+            age: formData.get("age"),
+            homeAddress: formData.get("homeAddress"),
+            homeArea: formData.get("homeArea"),
+          };
+
+          fetch(`/api/users/${userId}`, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest",
+            },
+            body: JSON.stringify(user),
+          })
+            .then((response) => {
+              console.log("Response status:", response.status);
+              if (!response.ok) {
+                throw new Error("Gagal menyimpan perubahan");
+              }
+              return response.json();
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
+            .then((data) => {
+              console.log("Data received:", data);
+              showToast("Profil berjaya dikemaskini!");
+              setTimeout(() => window.location.reload(), 1500);
             })
-            .then(data => {
-                alert('Profile updated successfully!');
-                // Refresh the page to show updated data
-                window.location.reload();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error updating profile: ' + error.message);
+            .catch((error) => {
+              console.log("Error:", error);
+              showToast("Ralat semasa mengemaskini profil.", true);
             });
         });
 
-        // Deactivate button handler
-        document.querySelector('.danger').addEventListener('click', function() {
-            if (confirm('Are you sure you want to deactivate your account?')) {
-                // Implement deactivation logic here
-                // For now, just redirect to a different page
-                window.location.href = '/';
-            }
-        });
+      // ✅ Handle deactivate button
+      document.querySelector(".danger").addEventListener("click", function () {
+        if (confirm("Adakah anda pasti mahu nyahaktif akaun anda?")) {
+          // Redirect or call API to deactivate
+          window.location.href = "/";
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>

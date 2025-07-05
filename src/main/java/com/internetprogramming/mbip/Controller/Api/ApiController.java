@@ -41,9 +41,9 @@ public class ApiController {
     public ResponseEntity<List<User>> getAllUsers() {
         return ResponseEntity.ok(userDao.findAllUser());
     }
-
+        
     @GetMapping("/users/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') ")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userDao.findUserById(id);
         return ResponseEntity.ok(user);
