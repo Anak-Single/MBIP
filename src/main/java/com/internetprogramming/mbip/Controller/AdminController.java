@@ -1,8 +1,6 @@
 package com.internetprogramming.mbip.Controller;
 
 import java.text.DecimalFormat;
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -23,6 +21,7 @@ import com.internetprogramming.mbip.Service.OilDao;
 import com.internetprogramming.mbip.Service.RubbishDao;
 import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
+import com.internetprogramming.mbip.Service.CalculationService;
 
 import jakarta.annotation.Resource;
 
@@ -45,37 +44,22 @@ public class AdminController {
     @Resource(name = "rubbishDao")
     private RubbishDao rubbishDao;
 
+    @Resource(name = "calculationService")
+    private CalculationService calculationService;
+
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
 
-        List <WaterData> water = waterDao.findAllData();
-        List <ElectricData> electric = electricDao.findAllData();
-        List <OilData> oil = oilDao.findAllData();
-        List <RubbishData> rubbish = rubbishDao.findAllData();
+        List<WaterData> water = waterDao.findAllData();
+        List<ElectricData> electric = electricDao.findAllData();
+        List<OilData> oil = oilDao.findAllData();
+        List<RubbishData> rubbish = rubbishDao.findAllData();
 
-        double totalWater = 0;
-        for(WaterData tempWater : water)
-        {
-            totalWater += tempWater.getWaterTotal();
-        }
-
-        double totalElectric = 0;
-        for(ElectricData tempElectric : electric)
-        {   
-            totalElectric += tempElectric.getElectricTotal();
-        }
-
-        double totalOil = 0;
-        for(OilData tempOil : oil)
-        {
-            totalOil += tempOil.getWeight();
-        }
-
-        double totalRubbish = 0;
-        for(RubbishData tempRubbish : rubbish)
-        {
-            totalRubbish += tempRubbish.getWeight();
-        }
+        // Use calculation service to calculate totals
+        double totalWater = calculationService.calculateTotalWater(water);
+        double totalElectric = calculationService.calculateTotalElectric(electric);
+        double totalOil = calculationService.calculateTotalOil(oil);
+        double totalRubbish = calculationService.calculateTotalRubbish(rubbish);
 
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
@@ -125,25 +109,11 @@ public class AdminController {
             }
         }
     
-        for (RubbishData rubbishData : rubbishDataInArea)
-        {
-            rubbishWeight += rubbishData.getWeight();
-        }
-    
-        for (OilData oilData : oilDataInArea)
-        {
-            oilWeight += oilData.getWeight();
-        }
-    
-        for (WaterData waterData : waterDataInArea)
-        {
-            waterBill += waterData.getWaterTotal();
-        }
-    
-        for (ElectricData electricData : electricDataInArea)
-        {
-            electricBill += electricData.getElectricTotal();
-        }
+        // Use calculation service to calculate totals
+        rubbishWeight = calculationService.calculateTotalRubbish(rubbishDataInArea);
+        oilWeight = calculationService.calculateTotalOil(oilDataInArea);
+        waterBill = calculationService.calculateTotalWater(waterDataInArea);
+        electricBill = calculationService.calculateTotalElectric(electricDataInArea);
 
         DecimalFormat decimalFormat = new DecimalFormat("#.00");
         
@@ -155,50 +125,17 @@ public class AdminController {
         model.addAttribute("waterBill", Double.parseDouble(decimalFormat.format(waterBill)));
         model.addAttribute("electricBill", Double.parseDouble(decimalFormat.format(electricBill)));
 
-        WaterData latestWaterData = waterDataInArea.stream().max(Comparator.comparing(WaterData::getUpdateTime)).orElse(null);
-        ElectricData latestElectricData = electricDataInArea.stream().max(Comparator.comparing(ElectricData::getUpdateTime)).orElse(null);
-        RubbishData latestRubbishData = rubbishDataInArea.stream().max(Comparator.comparing(RubbishData::getUpdateTime)).orElse(null);
-        OilData latestOilData = oilDataInArea.stream().max(Comparator.comparing(OilData::getUpdateTime)).orElse(null);
+        // Use calculation service to find latest update time and calculate time difference
+        var latestDate = calculationService.findLatestUpdateTime(waterDataInArea, electricDataInArea, rubbishDataInArea, oilDataInArea);
+        var timeDiff = calculationService.calculateTimeDifference(latestDate);
 
-        LocalDateTime latestDate = null;
-
-        if (latestWaterData != null && (latestDate == null || latestWaterData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestWaterData.getUpdateTime();
-        }
-        if (latestElectricData != null
-                && (latestDate == null || latestElectricData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestElectricData.getUpdateTime();
-        }
-        if (latestRubbishData != null
-                && (latestDate == null || latestRubbishData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestRubbishData.getUpdateTime();
-        }
-        if (latestOilData != null && (latestDate == null || latestOilData.getUpdateTime().isAfter(latestDate))) {
-            latestDate = latestOilData.getUpdateTime();
-        }
-
-        long days = 0;
-        long hours = 0;
-        long minutes = 0;
-        long seconds = 0;
-
-        Duration timeDifference = Duration.between(latestDate, LocalDateTime.now());
-
-        days = timeDifference.toDays();
-        hours = timeDifference.toHoursPart();
-        minutes = timeDifference.toMinutesPart();
-        seconds = timeDifference.toSecondsPart();
-
-        model.addAttribute("days", days);
-        model.addAttribute("hours", hours);
-        model.addAttribute("minutes", minutes);
-        model.addAttribute("seconds", seconds);
+        model.addAttribute("days", timeDiff.getDays());
+        model.addAttribute("hours", timeDiff.getHours());
+        model.addAttribute("minutes", timeDiff.getMinutes());
+        model.addAttribute("seconds", timeDiff.getSeconds());
         
-        double carbonEmission = 0.0;
-
-        carbonEmission += (rubbishWeight*2.86);
-        carbonEmission += (waterBill*0.419);
-        carbonEmission += (electricBill*0.584);
+        // Use calculation service to calculate carbon emission
+        double carbonEmission = calculationService.calculateCarbonEmission(rubbishWeight, waterBill, electricBill);
 
         model.addAttribute("carbonEmission", decimalFormat.format(carbonEmission));
 
