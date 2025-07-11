@@ -5,6 +5,7 @@ import com.internetprogramming.mbip.Service.RubbishDao;
 import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
 import com.internetprogramming.mbip.Service.ElectricDao;
+import com.internetprogramming.mbip.Service.CalculationService;
 import com.internetprogramming.mbip.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -34,6 +35,9 @@ public class ApiController {
 
     @Autowired
     private RubbishDao rubbishDao;
+
+    @Autowired
+    private CalculationService calculationService;
 
     // User Management API
     @GetMapping("/users")
@@ -135,24 +139,14 @@ public class ApiController {
             }
         }
 
-        // Calculate totals
-        for (RubbishData data : rubbishDataInArea) {
-            rubbishWeight += data.getWeight();
-        }
-        for (OilData data : oilDataInArea) {
-            oilWeight += data.getWeight();
-        }
-        for (WaterData data : waterDataInArea) {
-            waterBill += data.getBillAmount();
-        }
-        for (ElectricData data : electricDataInArea) {
-            electricBill += data.getBillAmount();
-        }
+        // Use calculation service to calculate totals
+        rubbishWeight = calculationService.calculateTotalRubbish(rubbishDataInArea);
+        oilWeight = calculationService.calculateTotalOil(oilDataInArea);
+        waterBill = calculationService.calculateTotalWater(waterDataInArea);
+        electricBill = calculationService.calculateTotalElectric(electricDataInArea);
 
-        // Calculate carbon emission
-        double carbonEmission = (rubbishWeight * 2.86) + 
-                               (waterBill * 0.419) + 
-                               (electricBill * 0.584);
+        // Use calculation service to calculate carbon emission
+        double carbonEmission = calculationService.calculateCarbonEmission(rubbishWeight, waterBill, electricBill);
 
         return ResponseEntity.ok(Map.of(
             "area", area,
