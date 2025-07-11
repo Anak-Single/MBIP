@@ -14,6 +14,7 @@ import com.internetprogramming.mbip.Service.OilDao;
 import com.internetprogramming.mbip.Service.RubbishDao;
 import com.internetprogramming.mbip.Service.UserDao;
 import com.internetprogramming.mbip.Service.WaterDao;
+import com.internetprogramming.mbip.Service.CalculationService;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -61,6 +62,9 @@ public class HomeController {
     @Resource(name = "rubbishDao")
     private RubbishDao rubbishDao;
 
+    @Resource(name = "calculationService")
+    private CalculationService calculationService;
+
     @GetMapping("/")
     public String index() {
         return "Auth/Login";
@@ -73,31 +77,13 @@ public class HomeController {
         List <OilData> oil = oilDao.findAllData();
         List <RubbishData> rubbish = rubbishDao.findAllData();
 
-        double totalWater = 0;
-        for(WaterData tempWater : water)
-        {
-            totalWater += tempWater.getWaterTotal();
-        }
+        // Use calculation service to calculate totals
+        double totalWater = calculationService.calculateTotalWater(water);
+        double totalElectric = calculationService.calculateTotalElectric(electric);
+        double totalOil = calculationService.calculateTotalOil(oil);
+        double totalRubbish = calculationService.calculateTotalRubbish(rubbish);
 
-        double totalElectric = 0;
-        for(ElectricData tempElectric : electric)
-        {
-            totalElectric += tempElectric.getElectricTotal();
-        }
-
-        double totalOil = 0;
-        for(OilData tempOil : oil)
-        {
-            totalOil += tempOil.getWeight();
-        }
-
-        double totalRubbish = 0;
-        for(RubbishData tempRubbish : rubbish)
-        {
-            totalRubbish += tempRubbish.getWeight();
-        }
-
-         DecimalFormat decimalFormat = new DecimalFormat("#.##");
+        DecimalFormat decimalFormat = new DecimalFormat("#.##");
 
         model.addAttribute("totalWater", decimalFormat.format(totalWater));
         model.addAttribute("totalElectric", decimalFormat.format(totalElectric));
